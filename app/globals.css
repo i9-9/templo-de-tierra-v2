@@ -1,26 +1,65 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Roslindale Display Condensed';
+  src: url('/fonts/RoslindaleDisplayCondensed-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roslindale Display Condensed';
+  src: url('/fonts/RoslindaleDisplayCondensed-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Neue Haas Grotesk';
+  src: url('/fonts/NHaasGroteskTXPro-55Rg.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  --background: #ffffff;
+  --background: #F5DC90;
   --foreground: #171717;
+  
+  /* Main Colors */
+  --warm-sand: #F5DC90;
+  --olive-green: #918E46;
+  --earth-brown: #6F4C21;
+  
+  /* Secondary Colors */
+  --terracotta: #CC835F;
+  --burnt-sienna: #BA692D;
+  --deep-slate: #1D1E1E;
+
+  /* Typography Scale */
+  --text-xs: 0.694rem;
+  --text-sm: 0.833rem;
+  --text-base: 1rem;
+  --text-lg: 1.2rem;
+  --text-xl: 1.44rem;
+  --text-2xl: 1.728rem;
+  --text-3xl: 2.074rem;
+  --text-4xl: 2.488rem;
+  --text-5xl: 2.986rem;
 }
 
 @theme inline {
-  --color-background: var(--background);
+  --color-background: #F5DC90;
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --font-sans: 'Neue Haas Grotesk', sans-serif;
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-heading: 'Roslindale Display Condensed', serif;
 }
 
 body {
-  background: var(--background);
+  background: #F5DC90;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
