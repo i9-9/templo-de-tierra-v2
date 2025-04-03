@@ -9,9 +9,14 @@ interface ImageCarouselProps {
     alt: string
   }[]
   interval?: number
+  imageClassName?: string
 }
 
-export default function ImageCarousel({ images, interval = 5000 }: ImageCarouselProps) {
+export default function ImageCarousel({ 
+  images, 
+  interval = 5000,
+  imageClassName = "object-cover"
+}: ImageCarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
 
   useEffect(() => {
@@ -36,7 +41,7 @@ export default function ImageCarousel({ images, interval = 5000 }: ImageCarousel
               src={image.src}
               alt={image.alt}
               fill
-              className="object-cover"
+              className={imageClassName}
               priority={index === 0}
               sizes="(max-width: 768px) 100vw, 50vw"
             />
