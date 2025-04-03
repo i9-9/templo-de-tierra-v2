@@ -38,7 +38,7 @@
   --burnt-sienna: #BA692D;
   --deep-slate: #1D1E1E;
 
-  /* Typography Scale */
+  /* Typography Scale - Desktop (Base 16px) */
   --text-xs: 0.694rem;
   --text-sm: 0.833rem;
   --text-base: 1rem;
@@ -48,6 +48,25 @@
   --text-3xl: 2.074rem;
   --text-4xl: 2.488rem;
   --text-5xl: 2.986rem;
+  --text-6xl: 3.583rem;
+  --text-7xl: 4.3rem;
+
+  /* Typography Scale - Mobile (Base 14px) */
+  --text-mobile-xs: 0.607rem;
+  --text-mobile-sm: 0.729rem;
+  --text-mobile-base: 0.875rem;
+  --text-mobile-lg: 1.05rem;
+  --text-mobile-xl: 1.26rem;
+  --text-mobile-2xl: 1.512rem;
+  --text-mobile-3xl: 1.814rem;
+  --text-mobile-4xl: 2.177rem;
+  --text-mobile-5xl: 2.613rem;
+  --text-mobile-6xl: 3.135rem;
+  --text-mobile-7xl: 3.763rem;
+
+  /* Colors */
+  --main-color: #6F4C21;
+  --secondary-color: #F5DC90;
 }
 
 @theme inline {
@@ -62,4 +81,24 @@ body {
   background: #F5DC90;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer base {
+  html {
+    font-size: 16px;
+  }
+
+  @media (max-width: 768px) {
+    html {
+      font-size: 14px;
+    }
+  }
+
+  body {
+    @apply font-sans text-base text-[#6F4C21];
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
+  }
 }

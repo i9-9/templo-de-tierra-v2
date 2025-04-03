@@ -1,8 +1,9 @@
+'use client'
+
 import Link from 'next/link'
-import { ReactNode } from 'react'
 
 interface ButtonProps {
-  children: ReactNode
+  children: React.ReactNode
   href?: string
   variant?: 'primary' | 'secondary'
   className?: string
@@ -16,29 +17,26 @@ export default function Button({
   className = '',
   onClick 
 }: ButtonProps) {
-  const baseStyles = 'inline-block font-sans text-lg px-8 py-3 rounded-lg transition-colors'
+  const baseStyles = 'inline-flex items-center justify-center rounded-lg border border-[#6F4C21]/20 px-6 py-3 text-center font-sans transition-colors'
   
   const variants = {
     primary: 'bg-[#6F4C21] text-[#F5DC90] hover:bg-[#5A3D1A]',
-    secondary: 'border-2 border-[#6F4C21] text-[#6F4C21] hover:bg-[#6F4C21] hover:text-[#F5DC90]'
+    secondary: 'bg-[#F5DC90]/40 backdrop-blur-sm text-[#6F4C21] hover:bg-[#F5DC90]/60'
   }
 
-  const button = (
-    <button 
-      onClick={onClick}
-      className={`${baseStyles} ${variants[variant]} ${className}`}
-    >
-      {children}
-    </button>
-  )
+  const buttonStyles = `${baseStyles} ${variants[variant]} ${className}`
 
   if (href) {
     return (
-      <Link href={href} className={className}>
-        {button}
+      <Link href={href} className={buttonStyles}>
+        {children}
       </Link>
     )
   }
 
-  return button
+  return (
+    <button onClick={onClick} className={buttonStyles}>
+      {children}
+    </button>
+  )
 } 
