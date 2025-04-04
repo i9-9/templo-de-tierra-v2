@@ -13,7 +13,7 @@ export default function MobileMenu({ isOpen, setIsOpen }: MobileMenuProps) {
       <Button 
         variant="secondary" 
         onClick={() => setIsOpen(!isOpen)}
-        className="text-[1rem] bg-[#F5DC90]"
+        className="text-[1rem] bg-[#F5DC90] px-3 py-2"
       >
         {isOpen ? 'Cerrar' : 'Menú'}
       </Button>

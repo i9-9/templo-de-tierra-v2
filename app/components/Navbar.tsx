@@ -39,7 +39,7 @@ export default function Navbar() {
               height={40}
               className="w-10 h-10"
             />
-            <span className="font-heading text-[2.177rem] md:text-[2.074rem] text-[#6F4C21]">
+            <span className="font-heading text-[1.8rem] md:text-[1.8rem] text-[#6F4C21]">
               Templo de Tierra
             </span>
           </Link>
