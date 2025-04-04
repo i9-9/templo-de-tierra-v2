@@ -3,6 +3,25 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { getAllTemplos } from '@/lib/data'
 import Card from '@/app/components/ui/Card'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: "Templo de Tierra | Alojamientos Sostenibles en Bioconstrucción",
+  description: "Templo de Tierra ofrece alojamientos únicos construidos con técnicas ancestrales de bioconstrucción en Argentina. Vive una experiencia sostenible en armonía con la naturaleza.",
+  keywords: ["bioconstrucción", "alojamiento sostenible", "arquitectura natural", "construcción con tierra", "Argentina", "ecoturismo", "templos", "hospedaje ecológico"],
+  openGraph: {
+    title: "Templo de Tierra | Alojamientos Sostenibles en Bioconstrucción",
+    description: "Templo de Tierra ofrece alojamientos únicos construidos con técnicas ancestrales de bioconstrucción en Argentina. Vive una experiencia sostenible en armonía con la naturaleza.",
+    images: [
+      {
+        url: "/tdt/DSC02909.png", 
+        width: 1200,
+        height: 630,
+        alt: "Templo de Tierra - Vista principal"
+      }
+    ]
+  }
+};
 
 export default function Home() {
   const templos = getAllTemplos().slice(0, 3); // Solo mostrar 3 templos en la página principal
