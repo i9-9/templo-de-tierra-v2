@@ -44,18 +44,18 @@ export default function ContactoPage() {
               <div className="space-y-4">
                 <div>
                   <p className="font-medium text-[#6F4C21]">Correo electrónico</p>
-                  <p className="text-[#6F4C21]/80">info@templodetierraarg.com</p>
+                  <p className="text-[#6F4C21]/80">info@templodetierrauy.com</p>
                 </div>
                 
                 <div>
                   <p className="font-medium text-[#6F4C21]">Teléfono</p>
-                  <p className="text-[#6F4C21]/80">+52 123 456 7890</p>
+                  <p className="text-[#6F4C21]/80">+598 123 456 7890</p>
                 </div>
                 
                 <div>
                   <p className="font-medium text-[#6F4C21]">Ubicación</p>
                   <p className="text-[#6F4C21]/80">
-                    Argentina<br />
+                    Uruguay<br />
                     (La ubicación exacta se proporciona después de la reserva)
                   </p>
                 </div>

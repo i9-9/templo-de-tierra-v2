@@ -2,7 +2,7 @@ import { getAllTemplos } from '@/lib/data';
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://templodetierraarg.com';
+  const baseUrl = 'https://templodetierrauy.com';
   const templos = getAllTemplos();
 
   // URLs estáticas

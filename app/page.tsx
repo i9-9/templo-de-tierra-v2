@@ -7,11 +7,11 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: "Templo de Tierra | Alojamientos Sostenibles en Bioconstrucción",
-  description: "Templo de Tierra ofrece alojamientos únicos construidos con técnicas ancestrales de bioconstrucción en Argentina. Vive una experiencia sostenible en armonía con la naturaleza.",
-  keywords: ["bioconstrucción", "alojamiento sostenible", "arquitectura natural", "construcción con tierra", "Argentina", "ecoturismo", "templos", "hospedaje ecológico"],
+  description: "Templo de Tierra ofrece alojamientos únicos construidos con técnicas ancestrales de bioconstrucción en Uruguay. Vive una experiencia sostenible en armonía con la naturaleza.",
+  keywords: ["bioconstrucción", "alojamiento sostenible", "arquitectura natural", "construcción con tierra", "Uruguay", "ecoturismo", "templos", "hospedaje ecológico"],
   openGraph: {
     title: "Templo de Tierra | Alojamientos Sostenibles en Bioconstrucción",
-    description: "Templo de Tierra ofrece alojamientos únicos construidos con técnicas ancestrales de bioconstrucción en Argentina. Vive una experiencia sostenible en armonía con la naturaleza.",
+    description: "Templo de Tierra ofrece alojamientos únicos construidos con técnicas ancestrales de bioconstrucción en Uruguay. Vive una experiencia sostenible en armonía con la naturaleza.",
     images: [
       {
         url: "/tdt/DSC02909.png", 

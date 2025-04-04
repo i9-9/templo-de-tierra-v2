@@ -56,13 +56,13 @@ export default function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
                 '@type': 'ListItem',
                 'position': 1,
                 'name': 'Inicio',
-                'item': 'https://templodetierraarg.com/'
+                'item': 'https://templodetierrauy.com/'
               },
               ...items.map((item, index) => ({
                 '@type': 'ListItem',
                 'position': index + 2,
                 'name': item.label,
-                'item': item.href ? `https://templodetierraarg.com${item.href}` : undefined
+                'item': item.href ? `https://templodetierrauy.com${item.href}` : undefined
               }))
             ]
           })

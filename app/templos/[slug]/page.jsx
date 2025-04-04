@@ -16,8 +16,8 @@ export async function generateMetadata({ params }) {
   
   return {
     title: `${templo.nombre} | Alojamiento en Bioconstrucción`,
-    description: `${templo.descripcionCorta} Un espacio único construido con técnicas ancestrales de bioconstrucción en Argentina.`,
-    keywords: ["bioconstrucción", "alojamiento sostenible", "arquitectura natural", templo.nombre, "Argentina", "hospedaje ecológico", "construcción con tierra"],
+    description: `${templo.descripcionCorta} Un espacio único construido con técnicas ancestrales de bioconstrucción en Uruguay.`,
+    keywords: ["bioconstrucción", "alojamiento sostenible", "arquitectura natural", templo.nombre, "Uruguay", "hospedaje ecológico", "construcción con tierra"],
     openGraph: {
       title: `${templo.nombre} | Templo de Tierra`,
       description: templo.descripcionCorta,

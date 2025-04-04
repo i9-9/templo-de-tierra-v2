@@ -92,7 +92,7 @@ export default function TemploDetalles({ templo }) {
             </div>
             <p className="text-[#6F4C21]/90 text-sm">
               La ubicación exacta se compartirá una vez que se confirme la reserva.
-              Estamos ubicados en un hermoso entorno natural en Argentina.
+              Estamos ubicados en un hermoso entorno natural en Uruguay.
             </p>
           </div>
         </div>

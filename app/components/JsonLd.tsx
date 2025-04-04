@@ -34,8 +34,8 @@ export function TemploJsonLd({
     "image": images,
     "address": {
       "@type": "PostalAddress",
-      "addressCountry": "Argentina",
-      "addressLocality": address || "Argentina"
+      "addressCountry": "Uruguay",
+      "addressLocality": address || "Uruguay"
     },
     "priceRange": "$$",
     "currenciesAccepted": priceCurrency,
@@ -86,9 +86,9 @@ export function OrganizationJsonLd() {
     ],
     "contactPoint": {
       "@type": "ContactPoint",
-      "telephone": "+54-123-456-7890",
+      "telephone": "+598-123-456-7890",
       "contactType": "customer service",
-      "email": "info@templodetierraarg.com",
+      "email": "info@templodetierrauy.com",
       "availableLanguage": ["Spanish", "English"]
     }
   };
