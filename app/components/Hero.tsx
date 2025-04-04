@@ -1,3 +1,5 @@
+'use client'
+
 import Button from './ui/Button'
 import ImageCarousel from './ui/ImageCarousel'
 
@@ -49,11 +51,11 @@ export default function Hero() {
               Un santuario natural donde la sabiduría ancestral se encuentra con el presente
             </p>
             <div className="flex gap-4">
-              <Button href="/about" variant="primary">
-                Conócenos
+              <Button href="/templos" variant="primary">
+                Conoce nuestros templos
               </Button>
-              <Button href="/contact" variant="secondary">
-                Conoce más
+              <Button href="/experiencias" variant="secondary">
+                Experiencias
               </Button>
             </div>
           </div>
@@ -71,7 +73,7 @@ export default function Hero() {
       </div>
       
       {/* Mobile Layout - aligned in first column */}
-      <div className="md:hidden flex flex-col h-[calc(100vh-96px-16px)] gap-4 mt-[96px] mx-4">
+      <div className="md:hidden flex flex-col h-[calc(100vh-96px-16px)] gap-4 mt-[96px] container mx-auto px-4">
         {/* First Row - Text Content (1/4) */}
         <div className="relative h-1/4 min-h-[200px]">
           <div className="absolute inset-0 bg-[#F5DC90] z-10 rounded-lg border border-[#6F4C21]/20 shadow-lg"></div>
@@ -84,11 +86,11 @@ export default function Hero() {
                 Un santuario natural donde la sabiduría ancestral se encuentra con el presente
               </p>
               <div className="flex gap-2 scale-90 origin-top-left mt-2">
-                <Button href="/about" variant="primary">
-                  Conócenos
+                <Button href="/templos" variant="primary">
+                  Nuestros templos
                 </Button>
-                <Button href="/contact" variant="secondary">
-                  Conoce más
+                <Button href="/experiencias" variant="secondary">
+                  Experiencias
                 </Button>
               </div>
             </div>
