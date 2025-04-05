@@ -58,7 +58,9 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <Navbar />
-        {children}
+        <div className="mx-[30px]">
+          {children}
+        </div>
         <WebsiteJsonLd />
         <OrganizationJsonLd />
       </body>

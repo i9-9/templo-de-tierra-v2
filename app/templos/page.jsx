@@ -10,23 +10,24 @@ export default function TemplosPage() {
   const templos = getAllTemplos();
   
   return (
-    <main className="pt-24 pb-16">
-      <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto text-center mb-16">
+    <main className="pt-[120px] pb-16">
+      <div className="grid grid-cols-12 mb-16">
+        <div className="col-span-12 md:col-span-10 md:col-start-2 lg:col-span-8 lg:col-start-3 text-center">
           <h1 className="text-[2.5rem] md:text-[3.5rem] font-heading text-[#6F4C21] mb-6">
             Nuestros Templos
           </h1>
-          <p className="text-[#6F4C21]/80 text-lg max-w-2xl mx-auto">
+          <p className="text-[#6F4C21]/80 text-lg mx-auto">
             Cada templo en nuestra comunidad está construido a mano utilizando técnicas 
             ancestrales de bioconstrucción, incorporando materiales naturales como arcilla, 
             arena, paja y madera local.
           </p>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {templos.map(templo => (
+      </div>
+      
+      <div className="grid grid-cols-12 gap-8 mb-16">
+        {templos.map(templo => (
+          <div key={templo.id} className="col-span-12 md:col-span-6 lg:col-span-4">
             <Card
-              key={templo.id}
               title={templo.nombre}
               description={templo.descripcionCorta}
               imageSrc={templo.imagenPrincipal}
@@ -37,11 +38,13 @@ export default function TemplosPage() {
                 templo.amenities[0]
               ]}
             />
-          ))}
-        </div>
-        
-        <div className="bg-[#F5DC90]/20 rounded-xl p-8 md:p-12 mt-16">
-          <div className="max-w-3xl mx-auto">
+          </div>
+        ))}
+      </div>
+      
+      <div className="grid grid-cols-12">
+        <div className="col-span-12 md:col-span-10 md:col-start-2 lg:col-span-8 lg:col-start-3">
+          <div className="bg-[#F5DC90]/20 rounded-xl p-8 md:p-12 mt-16">
             <h2 className="text-[1.953rem] md:text-[2.441rem] font-heading text-[#6F4C21] mb-6 text-center">
               ¿Por qué elegir Templo de Tierra?
             </h2>

@@ -5,7 +5,9 @@ import { TemploJsonLd } from '@/app/components/JsonLd'
 import Breadcrumbs from '@/app/components/ui/Breadcrumbs'
 
 export async function generateMetadata({ params }) {
-  const templo = getTemploBySlug(params.slug);
+  params = await params;
+  const slug = params.slug;
+  const templo = getTemploBySlug(slug);
   
   if (!templo) {
     return {
@@ -36,7 +38,8 @@ export async function generateMetadata({ params }) {
       title: `${templo.nombre} | Templo de Tierra`,
       description: templo.descripcionCorta,
       images: [templo.imagenPrincipal],
-    }
+    },
+    metadataBase: new URL('https://templodetierrauy.com'),
   };
 }
 
@@ -48,30 +51,34 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function TemploPage({ params }) {
-  const templo = getTemploBySlug(params.slug);
+export default async function TemploPage({ params }) {
+  params = await params;
+  const slug = params.slug;
+  const templo = getTemploBySlug(slug);
   
   if (!templo) {
     notFound();
   }
   
   return (
-    <main className="pt-24 pb-16">
-      <div className="container mx-auto px-4">
+    <main className="pt-[120px] pb-16">
+      <div className="mb-6">
         <Breadcrumbs 
           items={[
             { label: 'Templos', href: '/templos' },
             { label: templo.nombre }
           ]} 
         />
-        <TemploDetalles templo={templo} />
-        <TemploJsonLd 
-          name={templo.nombre}
-          description={templo.descripcion}
-          images={templo.imagenes}
-          capacity={templo.capacidad}
-        />
       </div>
+      <div>
+        <TemploDetalles templo={templo} />
+      </div>
+      <TemploJsonLd 
+        name={templo.nombre}
+        description={templo.descripcion}
+        images={templo.imagenes}
+        capacity={templo.capacidad}
+      />
     </main>
   );
 } 

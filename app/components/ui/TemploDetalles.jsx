@@ -8,9 +8,9 @@ export default function TemploDetalles({ templo }) {
   if (!templo) return null;
   
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-      {/* Columna izquierda (2/3 en desktop) con galería e info */}
-      <div className="lg:col-span-2 space-y-8">
+    <div className="grid grid-cols-12 gap-x-8 gap-y-6">
+      {/* Columna izquierda (8/12 en desktop) con galería e info */}
+      <div className="col-span-12 lg:col-span-8 space-y-8">
         <h1 className="text-[2.5rem] font-heading text-[#6F4C21] mb-2">{templo.nombre}</h1>
         
         {/* Galería de imágenes */}
@@ -18,18 +18,18 @@ export default function TemploDetalles({ templo }) {
         
         {/* Información principal */}
         <div className="border-t border-b border-[#6F4C21]/10 py-6 my-6">
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            <div>
+          <div className="grid grid-cols-12 gap-4">
+            <div className="col-span-6 md:col-span-4">
               <p className="text-sm text-[#6F4C21]/70">Capacidad</p>
-              <p className="text-lg font-medium text-[#6F4C21]">{templo.capacidad} personas</p>
+              <p className="text-lg font-medium text-[#6F4C21]">{templo.capacidad}</p>
             </div>
             
-            <div>
+            <div className="col-span-6 md:col-span-4">
               <p className="text-sm text-[#6F4C21]/70">Camas</p>
               <p className="text-lg font-medium text-[#6F4C21]">{templo.camas}</p>
             </div>
             
-            <div className="col-span-2 md:col-span-1">
+            <div className="col-span-12 md:col-span-4">
               <p className="text-sm text-[#6F4C21]/70">Tipo</p>
               <p className="text-lg font-medium text-[#6F4C21]">Alojamiento en bioconstrucción</p>
             </div>
@@ -49,9 +49,9 @@ export default function TemploDetalles({ templo }) {
         {/* Amenities */}
         <div className="mt-8">
           <h2 className="text-[1.77rem] font-heading text-[#6F4C21] mb-4">Lo que este lugar ofrece</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-12 gap-4">
             {templo.amenities.map((amenity, index) => (
-              <div key={index} className="flex items-center gap-2">
+              <div key={index} className="col-span-12 md:col-span-6 flex items-center gap-2">
                 <div className="w-6 h-6 rounded-full bg-[#F5DC90]/50 flex items-center justify-center">
                   <span className="text-[#6F4C21]">✓</span>
                 </div>
@@ -74,9 +74,9 @@ export default function TemploDetalles({ templo }) {
         </div>
       </div>
       
-      {/* Columna derecha (1/3 en desktop) con widget de reserva */}
-      <div className="lg:col-span-1 space-y-6">
-        <div className="sticky top-24">
+      {/* Columna derecha (4/12 en desktop) con widget de reserva */}
+      <div className="col-span-12 lg:col-span-4 space-y-6">
+        <div className="sticky top-[136px]">
           <ReservaWidget temploId={templo.id} temploNombre={templo.nombre} />
           
           <div className="mt-8 p-6 bg-[#F5DC90]/10 rounded-lg border border-[#6F4C21]/10">

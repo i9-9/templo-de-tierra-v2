@@ -39,11 +39,11 @@ const mobileHeroImages = [
 
 export default function Hero() {
   return (
-    <section className="h-screen">
+    <section className="h-screen pt-[116px] pb-[116px]">
       {/* Desktop Layout */}
       <div className="hidden md:grid grid-cols-12 h-full">
         <div className="col-span-6 bg-[#F5DC90] flex items-center justify-center p-6">
-          <div className="max-w-2xl">
+          <div className="w-full max-w-xl px-4 md:px-6 lg:px-8">
             <h1 className="font-heading text-[4.3rem] text-[#6F4C21] mb-6 leading-[1.1]">
               Templo de Tierra
             </h1>
@@ -61,9 +61,9 @@ export default function Hero() {
           </div>
         </div>
         
-        <div className="col-span-6 relative h-full p-0 pt-4 pr-4 pb-4">
-          <div className="absolute inset-4 mt-[96px] bg-[#F5DC90]/10 z-10 rounded-lg border border-[#6F4C21]/20"></div>
-          <div className="absolute inset-4 mt-[96px] overflow-hidden rounded-lg h-[calc(100%-96px-32px)]">
+        <div className="col-span-6 relative h-full px-4">
+          <div className="absolute inset-x-4 inset-y-0 bg-[#F5DC90]/10 z-10 rounded-lg border border-[#6F4C21]/20"></div>
+          <div className="absolute inset-x-4 inset-y-0 overflow-hidden rounded-lg">
             <ImageCarousel 
               images={heroImages} 
               imageClassName="object-cover w-full h-full" 
@@ -72,20 +72,20 @@ export default function Hero() {
         </div>
       </div>
       
-      {/* Mobile Layout - aligned in first column */}
-      <div className="md:hidden flex flex-col h-[calc(100vh-96px-16px)] gap-4 mt-[96px] container mx-auto px-4">
-        {/* First Row - Text Content (1/4) */}
-        <div className="relative h-1/4 min-h-[200px]">
+      {/* Mobile Layout - grid de 12 columnas */}
+      <div className="md:hidden grid grid-cols-12 gap-4 h-[calc(100vh-232px)] container mx-auto px-4 my-2">
+        {/* Text Content Row - Reducir aún más para dar más espacio a la imagen */}
+        <div className="col-span-12 h-[15%] min-h-[160px] relative">
           <div className="absolute inset-0 bg-[#F5DC90] z-10 rounded-lg border border-[#6F4C21]/20 shadow-lg"></div>
-          <div className="absolute inset-0 rounded-lg py-6 flex items-center">
-            <div className="relative z-20 w-full px-8">
-              <h1 className="font-heading text-[2.5rem] text-[#6F4C21] mb-3 leading-[1.1]">
+          <div className="absolute inset-0 rounded-lg py-3 flex items-center">
+            <div className="relative z-20 w-full px-4 md:px-8">
+              <h1 className="font-heading text-[2.1rem] text-[#6F4C21] mb-1 leading-[1.1]">
                 Templo de Tierra
               </h1>
-              <p className="font-sans text-[1rem] text-[#6F4C21] tracking-tight mb-4">
+              <p className="font-sans text-[0.9rem] text-[#6F4C21] tracking-tight mb-2">
                 Un santuario natural donde la sabiduría ancestral se encuentra con el presente
               </p>
-              <div className="flex gap-2 scale-90 origin-top-left mt-2">
+              <div className="flex gap-2 scale-[0.85] origin-top-left">
                 <Button href="/templos" variant="primary">
                   Nuestros templos
                 </Button>
@@ -97,8 +97,8 @@ export default function Hero() {
           </div>
         </div>
         
-        {/* Second Row - Images (3/4) */}
-        <div className="relative h-3/4">
+        {/* Images Row - Aumentar considerablemente la altura */}
+        <div className="col-span-12 h-[85%] relative">
           <div className="absolute inset-0 bg-[#F5DC90]/10 z-10 rounded-lg border border-[#6F4C21]/20 shadow-lg"></div>
           <div className="absolute inset-0 overflow-hidden rounded-lg">
             <ImageCarousel 
