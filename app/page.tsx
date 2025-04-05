@@ -3,7 +3,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { getAllTemplos } from '@/lib/data'
 import { Metadata } from 'next'
-import AnimationStyles from './components/AnimationStyles'
 
 export const metadata: Metadata = {
   title: "Templo de Tierra | Alojamientos Sostenibles en Bioconstrucción",
@@ -32,7 +31,6 @@ export default function Home() {
   
   return (
     <main>
-      <AnimationStyles />
       <Hero />
       
       {/* Templos Destacados */}
