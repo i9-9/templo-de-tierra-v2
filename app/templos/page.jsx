@@ -1,5 +1,7 @@
 import { getAllTemplos } from '@/lib/data'
 import Card from '@/app/components/ui/Card'
+import Image from 'next/image'
+import Link from 'next/link'
 
 export const metadata = {
   title: 'Nuestros Templos | Templo de Tierra',
@@ -25,21 +27,71 @@ export default function TemplosPage() {
       </div>
       
       <div className="grid grid-cols-12 gap-8 mb-16">
-        {templos.map(templo => (
-          <div key={templo.id} className="col-span-12 md:col-span-6 lg:col-span-4">
-            <Card
-              title={templo.nombre}
-              description={templo.descripcionCorta}
-              imageSrc={templo.imagenPrincipal}
-              href={`/templos/${templo.slug}`}
-              aspectRatio="3/2"
-              tags={[
-                `${templo.capacidad} ${templo.capacidad === 1 ? 'persona' : 'personas'}`,
-                templo.amenities[0]
-              ]}
-            />
-          </div>
-        ))}
+        {templos.map(templo => {
+          // Verificamos si es uno de los templos destacados
+          const isDestacado = templo.id === 'durga' || templo.id === 'shanti';
+          
+          return (
+            <div 
+              key={templo.id} 
+              className={`col-span-12 md:col-span-6 lg:col-span-4 ${isDestacado ? 'relative z-10' : ''}`}
+            >
+              {isDestacado && (
+                <div className="absolute -inset-1 bg-gradient-to-r from-[#D8A34B] via-[#F5DC90] to-[#D8A34B] rounded-xl opacity-70 blur-sm -z-10"></div>
+              )}
+              <div className={`${isDestacado ? 'transform hover:scale-[1.02] transition-transform duration-300' : ''} h-full`}>
+                <Link 
+                  href={`/templos/${templo.slug}`}
+                  className="block group overflow-hidden rounded-lg border border-[#6F4C21]/20 shadow-md transition-all duration-300 hover:shadow-lg h-full flex flex-col"
+                >
+                  {/* Sección de imagen */}
+                  <div className="relative w-full aspect-[3/2] overflow-hidden bg-[#F5DC90]/10">
+                    <Image
+                      src={templo.imagenPrincipal}
+                      alt={templo.nombre}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover object-center transition-transform duration-500 ease-in-out group-hover:scale-110"
+                      priority
+                      quality={90}
+                    />
+                    {isDestacado && (
+                      <div className="absolute top-3 right-3 bg-[#D8A34B] text-white py-1 px-3 rounded-full text-sm font-medium shadow-md z-10">
+                        Destacado
+                      </div>
+                    )}
+                  </div>
+                  
+                  {/* Sección de contenido */}
+                  <div className="p-6 bg-[#F5DC90]/40 backdrop-blur-sm flex-grow flex flex-col">
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      <span className="inline-block text-xs px-2 py-1 rounded-full bg-[#6F4C21]/10 text-[#6F4C21]">
+                        {templo.capacidad}
+                      </span>
+                      <span className="inline-block text-xs px-2 py-1 rounded-full bg-[#6F4C21]/10 text-[#6F4C21]">
+                        {isDestacado ? '⭐ Destacado' : templo.amenities[0]}
+                      </span>
+                    </div>
+                    
+                    <h3 className="font-heading text-[1.26rem] text-[#6F4C21] mb-2 leading-tight">
+                      {templo.nombre}
+                    </h3>
+                    
+                    <p className="font-sans text-sm text-[#6F4C21]/80 line-clamp-3 mb-4 flex-grow">
+                      {templo.descripcionCorta}
+                    </p>
+                    
+                    <div className="mt-auto flex items-center justify-end">
+                      <span className="text-sm font-medium text-[#6F4C21] group-hover:translate-x-1 transition-transform duration-300">
+                        Ver más →
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              </div>
+            </div>
+          );
+        })}
       </div>
       
       <div className="grid grid-cols-12">

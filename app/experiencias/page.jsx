@@ -48,21 +48,32 @@ export default function ExperienciasPage() {
                 </div>
                 
                 {/* Columna de texto */}
-                <div className={`col-span-12 md:col-span-6 space-y-6 ${isImageRight ? 'md:order-1' : ''}`}>
-                  <h2 className="text-[2rem] md:text-[2.2rem] font-heading text-[#6F4C21]">
-                    {experiencia.titulo}
-                  </h2>
-                  
-                  <div className="space-y-4 text-[#6F4C21]/80 leading-relaxed">
-                    {experiencia.descripcion.split('\n\n').map((paragraph, i) => (
-                      <p key={i}>{paragraph}</p>
-                    ))}
-                  </div>
-                  
-                  <div className="py-4 px-6 bg-[#F5DC90]/30 rounded-lg inline-block mt-2">
-                    <p className="text-[#6F4C21] font-medium">
-                      {experiencia.disponibilidad}
-                    </p>
+                <div className={`col-span-12 md:col-span-6 ${isImageRight ? 'md:order-1' : ''}`}>
+                  {/* Contenedor de texto con espacio entre elementos */}
+                  <div className="space-y-6">
+                    {/* Título y subtítulo */}
+                    <div>
+                      <h2 className="text-[2rem] md:text-[2.2rem] font-heading text-[#6F4C21] mb-2">
+                        {experiencia.titulo}
+                      </h2>
+                      <p className="text-lg md:text-xl font-medium text-[#6F4C21]/70 italic">
+                        {experiencia.subtitulo}
+                      </p>
+                    </div>
+                    
+                    {/* Descripción más detallada */}
+                    <div className="space-y-4 text-base text-[#6F4C21]/80 leading-relaxed">
+                      {experiencia.descripcion.split('\n\n').map((paragraph, i) => (
+                        <p key={i}>{paragraph}</p>
+                      ))}
+                    </div>
+                    
+                    {/* Disponibilidad */}
+                    <div className="py-4 px-6 bg-[#F5DC90]/30 rounded-lg inline-block mt-2">
+                      <p className="text-[#6F4C21] font-medium">
+                        {experiencia.disponibilidad}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>

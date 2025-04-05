@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -27,6 +27,18 @@ export default function Card({
   aspectRatio = "aspect-[4/3]"
 }) {
   const [isHovered, setIsHovered] = useState(false);
+  const [isImageError, setIsImageError] = useState(false);
+  const [imagePath, setImagePath] = useState(imageSrc);
+  
+  useEffect(() => {
+    // Para propósitos de debugging, podemos registrar la ruta de la imagen
+    console.log(`Card for ${title}, image path: ${imageSrc}`);
+    
+    // Si la imagen no comienza con http o /, añadimos / al inicio
+    if (imageSrc && !imageSrc.startsWith('/') && !imageSrc.startsWith('http')) {
+      setImagePath(`/${imageSrc}`);
+    }
+  }, [imageSrc, title]);
   
   return (
     <Link 
@@ -36,14 +48,27 @@ export default function Card({
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className={`relative w-full ${typeof aspectRatio === 'string' && aspectRatio.startsWith('aspect-') ? aspectRatio : `aspect-[${aspectRatio}]`} overflow-hidden bg-[#F5DC90]/10`}>
-        {imageSrc && (
+        {imagePath && !isImageError ? (
           <Image
-            src={imageSrc}
+            src={imagePath}
             alt={title}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className={`object-cover transition-transform duration-500 ease-in-out ${isHovered ? 'scale-110' : 'scale-100'}`}
+            className={`object-cover object-center transition-transform duration-500 ease-in-out ${isHovered ? 'scale-110' : 'scale-100'}`}
+            priority
+            quality={90}
+            onError={(e) => {
+              console.error(`Error loading image for ${title}:`, e);
+              setIsImageError(true);
+            }}
           />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center bg-[#F5DC90]/30">
+            <span className="text-[#6F4C21] font-medium text-lg px-4 text-center">
+              {title}
+              {isImageError && <span className="block text-xs mt-2">Error al cargar la imagen</span>}
+            </span>
+          </div>
         )}
       </div>
       
