@@ -13,7 +13,7 @@ export default function ExperienciasPage() {
   return (
     <main className="pt-[120px] pb-16">
       {/* Encabezado */}
-      <div className="grid grid-cols-12 mb-24">
+      <div className="grid grid-cols-12 mb-18">
         <div className="col-span-12 md:col-span-10 md:col-start-2 lg:col-span-8 lg:col-start-3 text-center">
           <h1 className="text-[2.5rem] md:text-[3.5rem] font-heading text-[#6F4C21] mb-6">
             Experiencias Conscientes

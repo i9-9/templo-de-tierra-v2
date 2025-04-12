@@ -1,0 +1,217 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+{
+  "documentation": {
+    "nextjs": "https://nextjs.org/docs",
+    "typescript": "https://www.typescriptlang.org/docs",
+    "eslint": "https://eslint.org/docs/latest/",
+    "react": "https://react.dev/",
+    "prisma": "https://www.prisma.io/docs",
+    "nextauth": "https://next-auth.js.org/",
+    "tailwindcss": "https://tailwindcss.com/docs",
+    "framer-motion": "https://www.framer.com/motion/",
+    "date-fns": "https://date-fns.org/docs/Getting-Started",
+    "react-datepicker": "https://reactdatepicker.com/",
+    "resend": "https://resend.com/docs/introduction",
+    "recaptcha": "https://github.com/t49tran/react-google-recaptcha-v3"
+  },
+  "autoFetchDocs": true,
+  "suggestDocumentationOnError": true,
+  "rules": {
+    "typescript": {
+      "strict": true,
+      "showDiagnostics": true,
+      "noImplicitAny": true,
+      "strictNullChecks": true,
+      "strictFunctionTypes": true,
+      "noUnusedLocals": true,
+      "noUnusedParameters": true,
+      "exactOptionalPropertyTypes": true,
+      "noUncheckedIndexedAccess": true
+    },
+    "eslint": {
+      "autoFix": true,
+      "showInline": true,
+      "rules": {
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn",
+        "react/prop-types": "off",
+        "react/react-in-jsx-scope": "off",
+        "no-unused-vars": "warn",
+        "no-console": ["warn", { "allow": ["warn", "error"] }],
+        "prefer-const": "warn",
+        "eqeqeq": "warn"
+      }
+    },
+    "nextjs": {
+      "routeHandlers": {
+        "suggestCorrectSignature": true,
+        "validateRequestResponse": true
+      },
+      "appRouter": {
+        "preferClientComponents": false,
+        "validateMetadata": true,
+        "checkServerComponentImports": true
+      },
+      "performance": {
+        "suggestImageOptimization": true,
+        "suggestLazyLoading": true
+      }
+    },
+    "react": {
+      "hooks": {
+        "exhaustiveDeps": true,
+        "validateUsage": true
+      },
+      "components": {
+        "suggestMemoization": true,
+        "validateProps": true
+      }
+    },
+    "prisma": {
+      "validateSchema": true,
+      "suggestIndexes": true,
+      "checkRelations": true
+    },
+    "editor": {
+      "formatOnSave": true,
+      "formatOnType": true,
+      "tabSize": 2,
+      "showLineNumbers": true,
+      "wordWrap": "on",
+      "autoClosingBrackets": true,
+      "suggestImports": true,
+      "quickSuggestions": {
+        "other": true,
+        "comments": true,
+        "strings": true
+      },
+      "suggestSimilarCode": true,
+      "foldingStrategy": "indentation"
+    },
+    "diagnostics": {
+      "delay": 200,
+      "showOnHover": true,
+      "includeDocumentationLinks": true,
+      "highlightProblematicCode": true,
+      "showQuickFixes": true,
+      "showPerformanceWarnings": true
+    },
+    "intellisense": {
+      "showParameterInfoOnHover": true,
+      "suggestSnippets": true,
+      "suggestSmartDefaults": true,
+      "showDefinitionOnHover": true,
+      "showDocumentationOnHover": true,
+      "suggestCodePatterns": true,
+      "completeObjectProperties": true
+    },
+    "snippets": {
+      "useNextRouteHandler": {
+        "prefix": ["route", "api"],
+        "body": [
+          "export async function ${1:GET}(request: Request, context: { params: { ${2:id}: string } }) {",
+          "  $0",
+          "  return Response.json({ });",
+          "}"
+        ],
+        "description": "Next.js 15 Route Handler"
+      },
+      "useReactServerComponent": {
+        "prefix": ["rsc", "server"],
+        "body": [
+          "import { Suspense } from 'react';",
+          "",
+          "export default async function ${1:Component}() {",
+          "  $0",
+          "  return (",
+          "    <div>",
+          "      <h1>Server Component</h1>",
+          "    </div>",
+          "  );",
+          "}"
+        ],
+        "description": "React Server Component"
+      }
+    },
+    "ai": {
+      "enableCodeCompletion": true,
+      "enableInlineCompletion": true,
+      "suggestRefactoring": true,
+      "suggestPerformanceImprovements": true,
+      "suggestBestPractices": true,
+      "detectPotentialBugs": true,
+      "autoDocumentation": {
+        "enabled": true,
+        "style": "jsdoc"
+      },
+      "contextAwareness": {
+        "importDependencies": true,
+        "projectStructure": true,
+        "componentUsage": true
+      },
+      "codeReview": {
+        "enabled": true,
+        "checkForBugs": true,
+        "suggestImprovements": true,
+        "checkPerformance": true
+      }
+    },
+    "git": {
+      "showInlineBlame": true,
+      "highlightRecentChanges": true,
+      "suggestCommitMessage": true
+    },
+    "security": {
+      "detectVulnerabilities": true,
+      "highlightSensitiveCode": true,
+      "suggestSecureAlternatives": true
+    },
+    "patterns": {
+      "validateComponentPatterns": true,
+      "detectAntiPatterns": true,
+      "suggestBetterAlternatives": true
+    },
+    "accessibility": {
+      "checkA11y": true,
+      "suggestA11yImprovements": true
+    }
+  },
+  "filePatterns": {
+    "route.ts": {
+      "applyRules": ["nextjs.routeHandlers"]
+    },
+    "page.tsx": {
+      "applyRules": ["nextjs.appRouter", "react.components"]
+    },
+    "schema.prisma": {
+      "applyRules": ["prisma"]
+    },
+    "*.tsx": {
+      "applyRules": ["react", "typescript", "accessibility"]
+    },
+    "*.ts": {
+      "applyRules": ["typescript"]
+    }
+  },
+  "projectSpecific": {
+    "routes": {
+      "validateParameters": true,
+      "suggestErrorHandling": true,
+      "enforceResponseFormats": true
+    },
+    "database": {
+      "validateQueries": true,
+      "suggestIndexes": true,
+      "checkTransactions": true
+    },
+    "auth": {
+      "validateJWT": true,
+      "checkSecurityPractices": true,
+      "suggestBestPractices": true
+    }
+  }
+}

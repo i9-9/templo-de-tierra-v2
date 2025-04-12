@@ -42,7 +42,7 @@ export default function TemplosPage() {
               )}
               <div className={`${isDestacado ? 'transform hover:scale-[1.02] transition-transform duration-300' : ''} h-full`}>
                 <Link 
-                  href={`/templos/${templo.slug}`}
+                  href={`/templos/${templo.id}`}
                   className="block group overflow-hidden rounded-lg border border-[#6F4C21]/20 shadow-md transition-all duration-300 hover:shadow-lg h-full flex flex-col"
                 >
                   {/* Sección de imagen */}

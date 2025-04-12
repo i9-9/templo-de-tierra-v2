@@ -1,8 +1,9 @@
-import { getAllTemplos } from '@/lib/data';
 import { MetadataRoute } from 'next';
+import { getAllTemplos } from '@/lib/data';
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://templodetierrauy.com';
+const baseUrl = 'https://templodetierrauy.com';
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const templos = getAllTemplos();
 
   // URLs estáticas
@@ -10,35 +11,35 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: baseUrl,
       lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 1.0,
+      changeFrequency: 'daily',
+      priority: 1,
     },
     {
       url: `${baseUrl}/templos`,
       lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
+      changeFrequency: 'daily',
+      priority: 0.8,
     },
     {
       url: `${baseUrl}/experiencias`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
-      priority: 0.9,
+      priority: 0.8,
     },
     {
       url: `${baseUrl}/contacto`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
-      priority: 0.8,
+      priority: 0.5,
     },
   ] as MetadataRoute.Sitemap;
 
   // URLs dinámicas para los templos
   const temploRoutes = templos.map((templo) => ({
-    url: `${baseUrl}/templos/${templo.slug}`,
+    url: `${baseUrl}/templos/${templo.id}`,
     lastModified: new Date(),
     changeFrequency: 'weekly',
-    priority: 0.8,
+    priority: 0.7,
   })) as MetadataRoute.Sitemap;
 
   return [...staticRoutes, ...temploRoutes];
