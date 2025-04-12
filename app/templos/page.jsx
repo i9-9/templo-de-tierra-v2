@@ -2,6 +2,7 @@ import { getAllTemplos } from '@/lib/data'
 import Card from '@/app/components/ui/Card'
 import Image from 'next/image'
 import Link from 'next/link'
+import Button from '@/app/components/ui/Button'
 
 export const metadata = {
   title: 'Nuestros Templos | Templo de Tierra',
@@ -81,10 +82,13 @@ export default function TemplosPage() {
                       {templo.descripcionCorta}
                     </p>
                     
-                    <div className="mt-auto flex items-center justify-end">
-                      <span className="text-sm font-medium text-[#6F4C21] group-hover:translate-x-1 transition-transform duration-300">
-                        Ver más →
-                      </span>
+                    <div className="flex flex-col gap-4">
+                      <Button variant="primary" className="w-full">
+                        Ver detalles
+                      </Button>
+                      <Button variant="secondary" className="w-full">
+                        Reservar visita
+                      </Button>
                     </div>
                   </div>
                 </Link>

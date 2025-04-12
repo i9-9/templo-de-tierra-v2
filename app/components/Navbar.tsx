@@ -27,14 +27,14 @@ export default function Navbar() {
   }, [isOpen])
 
   return (
-    <nav className={`fixed top-4 left-[30px] right-[30px] z-50 py-4 rounded-lg border border-[#6F4C21]/20 shadow-[0_2px_10px_-3px_rgba(0,0,0,0.1)] transition-all duration-500 ease-in-out ${
+    <nav className={`fixed top-4 left-[30px] right-[30px] z-50 py-4 rounded-lg border border-[#6F4C21]/20 shadow-[0_2px_10px_-3px_rgba(0,0,0,0.1)] transition-all duration-500 ease-in-out animate-fade-down ${
       isOpen 
         ? 'bg-[#F5DC90] h-[calc(100vh-32px)] top-4 left-[30px] right-[30px]' 
-        : 'bg-[#F5DC90]/40 backdrop-blur-sm'
-    }`}>
+        : 'bg-[#F5DC90]/80'
+    }`} style={{ animationDuration: '0.6s', animationDelay: '0.1s' }}>
       <div className="max-w-[1440px] mx-auto">
         <div className="flex items-center justify-between px-4 md:px-4">
-          <Link href="/" className="flex items-center gap-4">
+          <Link href="/" className="flex items-center gap-4 animate-fade-right" style={{ animationDuration: '0.6s', animationDelay: '0.2s' }}>
             <Image
               src="/logo/SVG/Asset 1.svg"
               alt="Templo de Tierra Logo"
@@ -46,7 +46,7 @@ export default function Navbar() {
               Templo de Tierra
             </span>
           </Link>
-          <div className="hidden lg:flex items-center space-x-[30px]">
+          <div className="hidden lg:flex items-center space-x-[30px] animate-fade-left" style={{ animationDuration: '0.6s', animationDelay: '0.3s' }}>
             <Link href="/" className="font-sans text-[1rem] text-[#6F4C21] hover:text-olive-green transition-colors">
               Inicio
             </Link>
@@ -90,9 +90,6 @@ export default function Navbar() {
             </div>
             <Link href="/experiencias" className="font-sans text-[1rem] text-[#6F4C21] hover:text-olive-green transition-colors">
               Experiencias
-            </Link>
-            <Link href="/#destacados" className="font-sans text-[1rem] text-[#6F4C21] hover:text-olive-green transition-colors">
-              Destacados
             </Link>
             <Link href="/contacto" className="font-sans text-[1rem] text-[#6F4C21] hover:text-olive-green transition-colors">
               Contacto
@@ -140,13 +137,6 @@ export default function Navbar() {
                     </li>
                     <li className={`transform transition-all duration-500 ease-in-out ${
                       isOpen ? 'opacity-100 translate-x-0 delay-300' : 'opacity-0 -translate-x-4 delay-40'
-                    }`}>
-                      <Link href="/#destacados" className="font-sans text-[1.26rem] text-[#6F4C21] hover:underline">
-                        Destacados
-                      </Link>
-                    </li>
-                    <li className={`transform transition-all duration-500 ease-in-out ${
-                      isOpen ? 'opacity-100 translate-x-0 delay-350' : 'opacity-0 -translate-x-4 delay-20'
                     }`}>
                       <Link href="/contacto" className="font-sans text-[1.26rem] text-[#6F4C21] hover:underline">
                         Contacto

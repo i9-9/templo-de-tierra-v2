@@ -1,5 +1,6 @@
 import ContactForm from '@/app/components/ui/ContactForm'
 import Image from 'next/image'
+import Button from '@/app/components/ui/Button'
 
 export const metadata = {
   title: 'Contacto | Templo de Tierra',
@@ -45,18 +46,18 @@ export default function ContactoPage() {
             <div className="space-y-4">
               <div>
                 <p className="font-medium text-[#6F4C21]">Correo electrónico</p>
-                <p className="text-[#6F4C21]/80">info@templodetierrauy.com</p>
+                <p className="text-[#6F4C21]/80">templodetierra.ashram@gmail.com</p>
               </div>
               
               <div>
                 <p className="font-medium text-[#6F4C21]">Teléfono</p>
-                <p className="text-[#6F4C21]/80">+598 123 456 7890</p>
+                <p className="text-[#6F4C21]/80">+54 9 11 3103-2348</p>
               </div>
               
               <div>
                 <p className="font-medium text-[#6F4C21]">Ubicación</p>
                 <p className="text-[#6F4C21]/80">
-                  Uruguay<br />
+                  Punta del Este, Uruguay<br />
                   (La ubicación exacta se proporciona después de la reserva)
                 </p>
               </div>
@@ -67,7 +68,7 @@ export default function ContactoPage() {
             <h2 className="text-[1.563rem] font-heading text-[#6F4C21] mb-4">Síguenos</h2>
             
             <div className="flex space-x-4">
-              <a href="https://instagram.com" className="p-3 bg-white/50 rounded-full" aria-label="Instagram">
+              <a href="https://www.instagram.com/templodetierra.uy/" className="p-3 bg-white/50 rounded-full" aria-label="Instagram">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#6F4C21]">
                   <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
                   <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
@@ -75,17 +76,9 @@ export default function ContactoPage() {
                 </svg>
               </a>
               
-              <a href="https://facebook.com" className="p-3 bg-white/50 rounded-full" aria-label="Facebook">
+              <a href="https://wa.me/5491131032348" className="p-3 bg-white/50 rounded-full" aria-label="WhatsApp">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#6F4C21]">
-                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                </svg>
-              </a>
-              
-              <a href="https://whatsapp.com" className="p-3 bg-white/50 rounded-full" aria-label="WhatsApp">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#6F4C21]">
-                  <path d="M17.6 6.8a7.8 7.8 0 0 0-5.4-2.3 7.8 7.8 0 0 0-6.8 11.5L3.5 20l4.1-1a7.8 7.8 0 0 0 3.8 1h.2a7.8 7.8 0 0 0 6-12.8Z"></path>
-                  <path d="M14.5 14.2c-.2 0-1 .4-1 .9s.9.9 1 1c.7.2 1.4-.2 1.4-.7s-.5-1-1.4-1.2Z"></path>
-                  <path d="M14.4 16.9c-1.3 0-2.6-.2-3.6-.9-.3-.2-1.5-1.1-2.8-2.8-.3-.5-.8-1.4-.6-2.6s.7-1.9 1-2.4c.1-.2.7-.5 1-.5.3 0 .3 0 .5.1.2 0 .5.3.8.8.3.5.9 2.3 1 2.5 0 .2.1.4 0 .6s-.2.3-.2.4l-.6.6s-.1.2 0 .3c.4.7 1 1.3 1.5 1.7.5.4 1.5.9 2 1.1.4.2.5.2.7 0s.6-.8.8-1.1c.2-.3.4-.2.6-.1s1.4.6 1.7.8c.2.1.3.2.4.3.1.4 0 1.5-.9 1.9Z"></path>
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
                 </svg>
               </a>
             </div>

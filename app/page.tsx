@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { getAllTemplos } from '@/lib/data'
 import { Metadata } from 'next'
+import Button from '@/app/components/ui/Button'
 
 export const metadata: Metadata = {
   title: "Templo de Tierra | Alojamientos Sostenibles en Bioconstrucción",
@@ -102,9 +103,9 @@ export default function Home() {
                     </p>
                     
                     <div className="mt-auto flex items-center justify-end">
-                      <span className="text-sm font-medium text-[#6F4C21] group-hover:translate-x-1 transition-transform duration-300">
+                      <Button variant="tertiary" className="text-sm group-hover:translate-x-1 transition-transform duration-300">
                         Ver más →
-                      </span>
+                      </Button>
                     </div>
                   </div>
                 </Link>
@@ -151,9 +152,11 @@ export default function Home() {
                     <p className="text-xs text-[#6F4C21]/70 mb-1">
                       {templo.capacidad}
                     </p>
-                    <span className="text-xs font-medium text-[#6F4C21] group-hover:translate-x-1 transition-transform duration-300 block text-right mt-1">
-                      Ver →
-                    </span>
+                    <div className="text-right mt-1">
+                      <Button variant="tertiary" className="text-xs group-hover:translate-x-1 transition-transform duration-300">
+                        Ver →
+                      </Button>
+                    </div>
                   </div>
                 </Link>
               </div>
@@ -163,87 +166,85 @@ export default function Home() {
         
         <div className="grid grid-cols-12">
           <div className="col-span-12 text-center animate-fade-up" style={{ animationDuration: '0.7s', animationDelay: '0.8s' }}>
-            <Link 
-              href="/templos" 
-              className="inline-block border-2 border-[#6F4C21] text-[#6F4C21] py-3 px-8 rounded-lg hover:bg-[#6F4C21] hover:text-[#F5DC90] transition-colors font-medium hover:scale-105 transition-transform duration-300"
-            >
+            <Button variant="secondary" href="/templos">
               Ver todos los templos
-            </Link>
+            </Button>
           </div>
         </div>
       </section>
       
       {/* CTA Experiencias */}
-      <section className="w-full py-24 bg-[#F5DC90]/20 overflow-hidden">
-        <div className="grid grid-cols-12 gap-8 items-center">
-          <div className="col-span-12 md:col-span-6 md:col-start-1 relative aspect-[16/9] rounded-lg overflow-hidden mb-6 shadow-lg animate-fade-left" style={{ animationDuration: '0.8s', animationDelay: '0.2s' }}>
-            <Image
-              src="/tdt/DSC01411.png"
-              alt="Experiencias en Templo de Tierra"
-              fill
-              className="object-cover object-center"
-              sizes="(max-width: 768px) 100vw, 50vw"
-              priority
-            />
-          </div>
-          
-          <div className="col-span-12 md:col-span-6 space-y-6 animate-fade-right" style={{ animationDuration: '0.8s', animationDelay: '0.3s' }}>
-            <h2 className="text-[2.5rem] font-heading text-[#6F4C21]">
-              Descubre Nuestras Experiencias
-            </h2>
-            <p className="text-[#6F4C21]/80 text-lg">
-              Complementa tu estancia con nuestras experiencias diseñadas para 
-              conectarte con la naturaleza, contigo mismo y con técnicas ancestrales 
-              de construcción sostenible.
-            </p>
-            <ul className="space-y-3 text-[#6F4C21]/80">
-              {['Retiros de bienestar', 'Clases de yoga', 'Meditación guiada', 'Talleres de bioconstrucción'].map((item, index) => (
-                <li 
-                  key={index} 
-                  className="flex items-center gap-2 animate-fade-right"
-                  style={{ 
-                    animationDuration: '0.5s',
-                    animationDelay: `${0.5 + (index * 0.15)}s`
-                  }}
-                >
-                  <span className="text-[#6F4C21] transform transition-all hover:scale-125 duration-300">✓</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="pt-4 animate-bounce-in" style={{ animationDuration: '0.8s', animationDelay: '1.1s' }}>
-              <Link 
-                href="/experiencias" 
-                className="inline-block bg-[#6F4C21] text-[#F5DC90] py-3 px-8 rounded-lg hover:bg-[#5A3D1A] transition-colors font-medium hover:scale-105 transition-transform duration-300"
-              >
-                Explorar experiencias
-              </Link>
+      <div className="grid grid-cols-12 mb-16">
+        <div className="col-span-12">
+          <div className="bg-[#F5DC90]/20 rounded-xl p-8 md:p-12">
+            <div className="grid grid-cols-12 gap-8 items-stretch h-full">
+              <div className="col-span-12 md:col-span-6 relative rounded-lg overflow-hidden shadow-lg animate-fade-left h-full" style={{ animationDuration: '0.8s', animationDelay: '0.2s' }}>
+                <Image
+                  src="/tdt/DSC01411.png"
+                  alt="Experiencias en Templo de Tierra"
+                  fill
+                  className="object-cover object-center"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority
+                />
+              </div>
+              
+              <div className="col-span-12 md:col-span-6 flex flex-col justify-center space-y-6 animate-fade-right h-full" style={{ animationDuration: '0.8s', animationDelay: '0.3s' }}>
+                <h2 className="text-[1.8rem] md:text-[2.2rem] font-heading text-[#6F4C21]">
+                  Descubre Nuestras Experiencias
+                </h2>
+                <p className="text-[#6F4C21]/80 text-lg">
+                  Complementa tu estancia con nuestras experiencias diseñadas para conectarte con la naturaleza, 
+                  contigo mismo y con técnicas ancestrales de construcción sostenible.
+                </p>
+                
+                <ul className="space-y-3 text-[#6F4C21]/80">
+                  {['Retiros de bienestar', 'Clases de yoga', 'Meditación guiada', 'Talleres de bioconstrucción'].map((item, index) => (
+                    <li 
+                      key={index} 
+                      className="flex items-center gap-2 animate-fade-right"
+                      style={{ 
+                        animationDuration: '0.5s',
+                        animationDelay: `${0.5 + (index * 0.15)}s`
+                      }}
+                    >
+                      <span className="text-[#6F4C21] transform transition-all hover:scale-125 duration-300">✓</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                
+                <div className="pt-4 animate-fade-up" style={{ animationDuration: '0.8s', animationDelay: '1.1s' }}>
+                  <Button variant="primary" href="/experiencias">
+                    Explorar experiencias
+                  </Button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
       
       {/* Contacto CTA */}
-      <section className="w-full py-24 bg-[#6F4C21] overflow-hidden">
-        <div className="grid grid-cols-12">
-          <div className="col-span-12 md:col-span-10 md:col-start-2 lg:col-span-8 lg:col-start-3 text-center animate-fade-up" style={{ animationDuration: '0.8s', animationDelay: '0.2s' }}>
-            <h2 className="text-[2.5rem] font-heading text-[#F5DC90] mb-6">
+      <div className="grid grid-cols-12">
+        <div className="col-span-12 md:col-span-10 md:col-start-2 lg:col-span-8 lg:col-start-3">
+          <div className="bg-[#F5DC90]/20 rounded-xl p-8 md:p-12 mt-8 text-center shadow-lg">
+            <h2 className="text-[1.8rem] md:text-[2.2rem] font-heading text-[#6F4C21] mb-6">
               ¿Listo para una experiencia única?
             </h2>
-            <p className="text-[#F5DC90]/90 text-lg mb-8">
-              Contáctanos para consultar disponibilidad o resolver cualquier duda.
+            <p className="text-[#6F4C21]/80 mb-8 max-w-2xl mx-auto">
+              Contáctanos para consultar disponibilidad o resolver cualquier duda. 
               Estamos aquí para ayudarte a planificar tu estancia perfecta.
             </p>
-            <Link 
-              href="/contacto" 
-              className="inline-block bg-[#F5DC90] text-[#6F4C21] py-3 px-8 rounded-lg hover:bg-[#F5E8C7] transition-colors font-medium text-lg hover:scale-105 transition-transform duration-300 animate-bounce-in"
-              style={{ animationDuration: '0.7s', animationDelay: '0.6s' }}
-            >
-              Contáctanos
-            </Link>
+            
+            <div className="flex flex-col gap-4">
+              <Button variant="primary" className="w-full">
+                Contáctanos
+              </Button>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
     </main>
   );
 }

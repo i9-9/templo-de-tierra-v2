@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import { WebsiteJsonLd, OrganizationJsonLd } from "./components/JsonLd";
+import { Providers } from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -57,12 +58,14 @@ export default function RootLayout({
         <meta name="geo.placename" content="Uruguay" />
       </head>
       <body className={inter.className}>
-        <Navbar />
-        <div className="mx-[30px]">
-          {children}
-        </div>
-        <WebsiteJsonLd />
-        <OrganizationJsonLd />
+        <Providers>
+          <Navbar />
+          <div className="mx-[30px]">
+            {children}
+          </div>
+          <WebsiteJsonLd />
+          <OrganizationJsonLd />
+        </Providers>
       </body>
     </html>
   );

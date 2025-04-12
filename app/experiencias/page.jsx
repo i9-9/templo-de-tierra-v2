@@ -1,5 +1,6 @@
 import { getAllExperiencias } from '@/lib/data'
 import Image from 'next/image'
+import Button from '@/app/components/ui/Button'
 
 export const metadata = {
   title: 'Experiencias | Templo de Tierra',
@@ -69,7 +70,7 @@ export default function ExperienciasPage() {
                     </div>
                     
                     {/* Disponibilidad */}
-                    <div className="py-4 px-6 bg-[#F5DC90]/30 rounded-lg inline-block mt-2">
+                    <div className="py-4 bg-[#F5DC90]/30 rounded-lg mt-2">
                       <p className="text-[#6F4C21] font-medium">
                         {experiencia.disponibilidad}
                       </p>
@@ -94,12 +95,14 @@ export default function ExperienciasPage() {
               o quieres organizar un retiro personalizado, no dudes en contactarnos.
             </p>
             
-            <a 
-              href="/contacto" 
-              className="inline-block bg-[#6F4C21] text-[#F5DC90] py-3 px-8 rounded-lg hover:bg-[#5A3D1A] transition-colors font-medium text-lg hover:scale-105 transition-transform duration-300"
-            >
-              Contáctanos
-            </a>
+            <div className="flex flex-col gap-4">
+              <Button variant="primary" className="w-full">
+                Ver más detalles
+              </Button>
+              <Button variant="secondary" className="w-full">
+                Reservar ahora
+              </Button>
+            </div>
           </div>
         </div>
       </div>
