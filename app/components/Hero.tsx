@@ -24,10 +24,10 @@ const heroImages = [
 
 export default function Hero() {
   return (
-    <section className="relative min-h-[calc(100vh-30px)] pt-[116px]">
+    <section className="relative min-h-[calc(100vh-30px)] pt-[116px] w-full">
       {/* Contenedor principal con máximo ancho y centrado */}
-      <div className="mx-auto px-[30px]">
-        <div className="max-w-[1440px] mx-auto">
+      <div className="w-full px-[30px]">
+        <div className="w-full">
           {/* Imagen a pantalla completa */}
           <div className="relative w-full h-[calc(100vh-146px)] rounded-lg overflow-hidden shadow-md animate-fade-up" style={{ animationDuration: '1s', animationDelay: '0.4s' }}>
             <div className="relative w-full h-full">
@@ -44,15 +44,15 @@ export default function Hero() {
         {/* Contenedor de texto y botones - ahora como barra horizontal */}
         <div className="absolute left-[30px] right-[30px] bottom-0 animate-fade-up" style={{ animationDuration: '1s', animationDelay: '0.6s' }}>
           <div className="backdrop-blur-md bg-[#F5DC90]/60 py-3 px-4 md:px-8 border-t border-[#6F4C21]/20">
-            <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="w-full flex flex-col md:flex-row items-center justify-between gap-4">
               <h2 className="font-heading text-2xl md:text-2xl lg:text-3xl text-[#6F4C21] leading-tight text-left animate-fade-right md:whitespace-nowrap" style={{ animationDuration: '1s', animationDelay: '0.8s' }}>
                 Un santuario natural donde la sabiduría ancestral se encuentra con el presente
               </h2>
-              <div className="grid grid-cols-2 gap-3 w-full md:w-auto animate-fade-left" style={{ animationDuration: '1s', animationDelay: '1s' }}>
-                <Button href="/templos" variant="primary" className="text-sm md:text-base py-1.5 px-3 md:py-2 md:px-4">
-                  Nuestros templos
+              <div className="flex gap-4 animate-fade-left" style={{ animationDuration: '1s', animationDelay: '1s' }}>
+                <Button variant="primary" href="/templos">
+                  Ver templos
                 </Button>
-                <Button href="/experiencias" variant="secondary" className="text-sm md:text-base py-1.5 px-3 md:py-2 md:px-4">
+                <Button variant="secondary" href="/experiencias">
                   Experiencias
                 </Button>
               </div>

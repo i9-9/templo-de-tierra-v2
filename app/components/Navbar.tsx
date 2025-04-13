@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import MobileMenu from './MobileMenu'
 import { useState, useEffect } from 'react'
-import { getAllTemplos } from '@/lib/data'
+import { getAllTemplos, TemploData } from '@/lib/data'
 import { useSession, signOut } from 'next-auth/react'
 
 export default function Navbar() {
@@ -13,7 +13,7 @@ export default function Navbar() {
   const [showTemplosMenu, setShowTemplosMenu] = useState(false)
   const [showUserMenu, setShowUserMenu] = useState(false)
   const { data: session } = useSession()
-  const templos = getAllTemplos()
+  const templos: TemploData[] = getAllTemplos()
 
   // Handle animation states when menu opens/closes
   useEffect(() => {
@@ -32,10 +32,10 @@ export default function Navbar() {
   return (
     <nav className={`fixed top-4 left-[30px] right-[30px] z-50 py-4 rounded-lg border border-[#6F4C21]/20 shadow-[0_2px_10px_-3px_rgba(0,0,0,0.1)] transition-all duration-500 ease-in-out animate-fade-down ${
       isOpen 
-        ? 'bg-[#F5DC90] h-[calc(100vh-32px)] top-4 left-[30px] right-[30px]' 
+        ? 'bg-[#F5DC90] h-[calc(100vh-32px)]' 
         : 'bg-[#F5DC90]/80 backdrop-blur-sm'
     }`} style={{ animationDuration: '0.6s', animationDelay: '0.1s' }}>
-      <div className="max-w-[1440px] mx-auto">
+      <div className="w-full">
         <div className="flex items-center justify-between px-4 md:px-4">
           <Link href="/" className="flex items-center gap-4 animate-fade-right" style={{ animationDuration: '0.6s', animationDelay: '0.2s' }}>
             <Image
@@ -243,7 +243,6 @@ export default function Navbar() {
                 </div>
               </div>
 
-              {/* Segunda columna - Templos */}
               <div className="space-y-8">
                 <div className={`transform transition-all duration-500 ease-in-out ${
                   isOpen ? 'opacity-100 translate-y-0 delay-300' : 'opacity-0 -translate-y-8'
@@ -271,4 +270,4 @@ export default function Navbar() {
       </div>
     </nav>
   )
-} 
+}

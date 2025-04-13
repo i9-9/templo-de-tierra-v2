@@ -16,7 +16,7 @@ interface Templo {
   imagenPrincipal: string;
   imagenes: string[];
   amenities: string[];
-  camas: string;
+  camas: string[];
   slug: string;
 }
 

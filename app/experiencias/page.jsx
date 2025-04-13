@@ -11,7 +11,7 @@ export default function ExperienciasPage() {
   const experiencias = getAllExperiencias();
   
   return (
-    <main className="pt-[120px] pb-16">
+    <main className="pt-[140px] pb-16 px-[30px]">
       {/* Encabezado */}
       <div className="grid grid-cols-12 mb-18">
         <div className="col-span-12 md:col-span-10 md:col-start-2 lg:col-span-8 lg:col-start-3 text-center">
@@ -26,7 +26,7 @@ export default function ExperienciasPage() {
       </div>
       
       {/* Listado de experiencias */}
-      <div className="grid grid-cols-12 mb-16">
+      <div className="grid grid-cols-12 mb-16 pt-24">
         {experiencias.map((experiencia, index) => {
           // Alternar la disposición de la imagen (izquierda/derecha)
           const isImageRight = index % 2 === 0;

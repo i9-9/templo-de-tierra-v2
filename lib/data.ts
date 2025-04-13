@@ -1,6 +1,7 @@
 import { Prisma } from '@prisma/client';
 
-type TemploData = {
+export type TemploData = {
+  id: string;
   nombre: string;
   slug: string;
   imagenPrincipal: string;
@@ -8,9 +9,12 @@ type TemploData = {
   descripcion: string;
   descripcionCorta: string;
   capacidad: number;
-  precio: number;
+  precio: Prisma.Decimal;
   amenities: string[];
-  camas: string;
+  camas: string[];
+  destacado: boolean;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 type ExperienciaData = {
@@ -23,6 +27,7 @@ type ExperienciaData = {
 
 export const templos: TemploData[] = [
   {
+    id: 'templo-durga',
     nombre: 'Templo Durga',
     slug: 'templo-durga',
     imagenPrincipal: '/images/templos/durga.jpg',
@@ -34,11 +39,15 @@ export const templos: TemploData[] = [
     descripcion: 'El Templo Durga es un espacio sagrado diseñado para la transformación y el poder personal. Su arquitectura única y su energía especial lo convierten en el lugar perfecto para retiros espirituales y encuentros íntimos.',
     descripcionCorta: 'Un espacio sagrado para la transformación y el poder personal.',
     capacidad: 2,
-    precio: 120.0,
+    precio: new Prisma.Decimal('120.00'),
     amenities: ['WiFi', 'Cocina equipada', 'Baño privado', 'Terraza'],
-    camas: '1 cama matrimonial'
+    camas: ['1 cama matrimonial'],
+    destacado: true,
+    createdAt: new Date(),
+    updatedAt: new Date()
   },
   {
+    id: 'templo-rosa',
     nombre: 'Templo Rosa',
     slug: 'templo-rosa',
     imagenPrincipal: '/images/templos/rosa.jpg',
@@ -50,11 +59,15 @@ export const templos: TemploData[] = [
     descripcion: 'El Templo Rosa es un santuario dedicado al amor incondicional y la creatividad. Su diseño inspirado en el corazón y su atmósfera acogedora lo hacen ideal para parejas y artistas.',
     descripcionCorta: 'Un santuario dedicado al amor incondicional y la creatividad.',
     capacidad: 2,
-    precio: 200.0,
+    precio: new Prisma.Decimal('200.00'),
     amenities: ['WiFi', 'Cocina equipada', 'Baño privado', 'Jardín'],
-    camas: '1 cama matrimonial'
+    camas: ['1 cama matrimonial'],
+    destacado: true,
+    createdAt: new Date(),
+    updatedAt: new Date()
   },
   {
+    id: 'templo-del-mar',
     nombre: 'Templo del Mar',
     slug: 'templo-del-mar',
     imagenPrincipal: '/images/templos/mar.jpg',
@@ -66,11 +79,15 @@ export const templos: TemploData[] = [
     descripcion: 'El Templo del Mar es un espacio inspirado en la energía del océano, diseñado para la conexión con la naturaleza y la meditación. Sus vistas panorámicas y su diseño fluido crean una experiencia única.',
     descripcionCorta: 'Un espacio inspirado en la energía del océano y la conexión con la naturaleza.',
     capacidad: 4,
-    precio: 250.0,
+    precio: new Prisma.Decimal('250.00'),
     amenities: ['WiFi', 'Cocina equipada', 'Baño privado', 'Terraza con vista al mar'],
-    camas: '2 camas matrimoniales'
+    camas: ['2 camas matrimoniales'],
+    destacado: false,
+    createdAt: new Date(),
+    updatedAt: new Date()
   },
   {
+    id: 'templo-shanti',
     nombre: 'Templo Shanti',
     slug: 'templo-shanti',
     imagenPrincipal: '/images/templos/shanti.jpg',
@@ -82,9 +99,12 @@ export const templos: TemploData[] = [
     descripcion: 'El Templo Shanti es un espacio diseñado para la paz y la tranquilidad. Su arquitectura minimalista y su ubicación privilegiada lo convierten en el lugar perfecto para retiros de yoga y meditación.',
     descripcionCorta: 'Un espacio diseñado para la paz y la tranquilidad.',
     capacidad: 4,
-    precio: 300.0,
+    precio: new Prisma.Decimal('300.00'),
     amenities: ['WiFi', 'Cocina equipada', 'Baño privado', 'Sala de meditación'],
-    camas: '2 camas matrimoniales'
+    camas: ['2 camas matrimoniales'],
+    destacado: false,
+    createdAt: new Date(),
+    updatedAt: new Date()
   }
 ];
 

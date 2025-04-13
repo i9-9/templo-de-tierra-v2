@@ -4,12 +4,14 @@ import { prisma } from '@/lib/prisma';
 import Image from 'next/image';
 import ReservaForm from '@/app/components/ReservaForm';
 import Link from 'next/link';
+import { Prisma } from '@prisma/client';
 
-interface PageProps {
-  params: { slug: string };
+type Props = {
+  params: { slug: string }
+  searchParams: { [key: string]: string | string[] | undefined }
 }
 
-export default async function TemploPage({ params }: PageProps) {
+export default async function TemploPage({ params, searchParams }: Props) {
   const session = await getServerSession(authOptions);
   const templo = await prisma.templo.findUnique({
     where: { slug: params.slug },
@@ -46,7 +48,7 @@ export default async function TemploPage({ params }: PageProps) {
   };
 
   return (
-    <main className="pt-[120px] pb-16">
+    <main className="pt-[120px] pb-16 px-[30px]">
       {/* Breadcrumbs */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
         <nav className="flex" aria-label="Breadcrumb">

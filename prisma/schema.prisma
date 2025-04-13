@@ -33,6 +33,7 @@ model Templo {
   imagenPrincipal  String
   imagenes         String[]
   slug             String    @unique
+  destacado        Boolean   @default(false)
   reservas         Reserva[]
 }
 

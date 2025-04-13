@@ -8,9 +8,9 @@ export default function PageLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-[#F5DC90]/20">
+    <div className="min-h-screen bg-[#F5DC90]/20 w-full px-[30px]">
       <Navbar />
-      <main>
+      <main className="w-full">
         {children}
       </main>
     </div>

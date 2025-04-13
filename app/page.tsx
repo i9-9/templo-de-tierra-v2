@@ -116,52 +116,56 @@ export default function Home() {
       
       {/* Otros templos en cards más pequeñas */}
       {otrosTemplos.length > 0 && (
-        <div className="grid grid-cols-12 gap-4 mb-16">
-          <div className="col-span-12 animate-fade-up" style={{ animationDuration: '0.7s', animationDelay: '0.5s' }}>
-            <h3 className="text-[1.5rem] font-heading text-[#6F4C21] mb-6 text-center">
-              Otros templos disponibles
-            </h3>
-          </div>
-          
-          {otrosTemplos.map((templo, index) => (
-            <div 
-              key={templo.id}
-              className="col-span-12 sm:col-span-6 md:col-span-4 animate-fade-up"
-              style={{ 
-                animationDuration: '0.7s',
-                animationDelay: `${0.6 + (index * 0.1)}s`
-              }}
-            >
-              <Link 
-                href={`/templos/${templo.id}`}
-                className="block group overflow-hidden rounded-lg border border-[#6F4C21]/10 hover:border-[#6F4C21]/30 shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-row"
-              >
-                <div className="relative w-1/3 overflow-hidden bg-[#F5DC90]/10">
-                  <Image
-                    src={templo.imagenPrincipal}
-                    alt={templo.nombre}
-                    fill
-                    sizes="(max-width: 768px) 33vw, 20vw"
-                    className="object-cover object-center transition-transform duration-500 ease-in-out group-hover:scale-110"
-                  />
+        <section className="w-full py-16">
+          <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8">
+            <div className="grid grid-cols-12 gap-4">
+              <div className="col-span-12 animate-fade-up" style={{ animationDuration: '0.7s', animationDelay: '0.5s' }}>
+                <h3 className="text-[1.5rem] font-heading text-[#6F4C21] mb-6 text-center">
+                  Otros templos disponibles
+                </h3>
+              </div>
+              
+              {otrosTemplos.map((templo, index) => (
+                <div 
+                  key={templo.id}
+                  className="col-span-12 sm:col-span-6 md:col-span-4 animate-fade-up"
+                  style={{ 
+                    animationDuration: '0.7s',
+                    animationDelay: `${0.6 + (index * 0.1)}s`
+                  }}
+                >
+                  <Link 
+                    href={`/templos/${templo.id}`}
+                    className="block group overflow-hidden rounded-lg border border-[#6F4C21]/10 hover:border-[#6F4C21]/30 shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-row"
+                  >
+                    <div className="relative w-1/3 overflow-hidden bg-[#F5DC90]/10">
+                      <Image
+                        src={templo.imagenPrincipal}
+                        alt={templo.nombre}
+                        fill
+                        sizes="(max-width: 768px) 33vw, 20vw"
+                        className="object-cover object-center transition-transform duration-500 ease-in-out group-hover:scale-110"
+                      />
+                    </div>
+                    <div className="p-3 flex-grow bg-[#F5DC90]/30 backdrop-blur-sm">
+                      <h4 className="font-heading text-[1rem] text-[#6F4C21] leading-tight mb-1">
+                        {templo.nombre}
+                      </h4>
+                      <p className="text-xs text-[#6F4C21]/70 mb-1">
+                        {templo.capacidad}
+                      </p>
+                      <div className="text-right mt-1">
+                        <Button variant="tertiary" className="text-xs group-hover:translate-x-1 transition-transform duration-300">
+                          Ver →
+                        </Button>
+                      </div>
+                    </div>
+                  </Link>
                 </div>
-                <div className="p-3 flex-grow bg-[#F5DC90]/30 backdrop-blur-sm">
-                  <h4 className="font-heading text-[1rem] text-[#6F4C21] leading-tight mb-1">
-                    {templo.nombre}
-                  </h4>
-                  <p className="text-xs text-[#6F4C21]/70 mb-1">
-                    {templo.capacidad}
-                  </p>
-                  <div className="text-right mt-1">
-                    <Button variant="tertiary" className="text-xs group-hover:translate-x-1 transition-transform duration-300">
-                      Ver →
-                    </Button>
-                  </div>
-                </div>
-              </Link>
+              ))}
             </div>
-          ))}
-        </div>
+          </div>
+        </section>
       )}
       
       <div className="grid grid-cols-12 mb-16">
