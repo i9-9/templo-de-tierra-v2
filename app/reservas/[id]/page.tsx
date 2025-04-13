@@ -6,6 +6,8 @@ import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
 import Link from 'next/link';
 import ReservaDetails from './ReservaDetails';
+import PageLayout from '../../components/PageLayout';
+
 
 interface PageProps {
   params: Promise<{ id: string }>;
@@ -22,12 +24,14 @@ export default async function ReservaPage(props: PageProps) {
 
   if (!session) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900">Acceso no autorizado</h1>
-          <p className="mt-2 text-gray-600">Debes iniciar sesión para ver los detalles de la reserva.</p>
+      <PageLayout>
+        <div className="min-h-screen pt-28 px-8">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold text-[#6F4C21]">Acceso no autorizado</h1>
+            <p className="mt-2 text-[#6F4C21]/80">Debes iniciar sesión para ver los detalles de la reserva.</p>
+          </div>
         </div>
-      </div>
+      </PageLayout>
     );
   }
 
@@ -43,20 +47,38 @@ export default async function ReservaPage(props: PageProps) {
 
   if (!reserva) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900">Reserva no encontrada</h1>
-          <p className="mt-2 text-gray-600">La reserva que buscas no existe o no tienes acceso a ella.</p>
-          <Link
-            href="/reservas"
-            className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700"
-          >
-            Volver a mis reservas
-          </Link>
+      <PageLayout>
+        <div className="min-h-screen pt-28 px-8">
+          <div className="text-center">
+            <h1 className="text-2xl font-bold text-[#6F4C21]">Reserva no encontrada</h1>
+            <p className="mt-2 text-[#6F4C21]/80">La reserva que buscas no existe o no tienes acceso a ella.</p>
+            <Link
+              href="/reservas"
+              className="mt-4 inline-flex items-center px-4 py-2 border border-[#6F4C21]/20 text-sm font-medium rounded-md shadow-sm text-[#6F4C21] bg-[#F5DC90] hover:bg-[#F5DC90]/80"
+            >
+              Volver a mis reservas
+            </Link>
+          </div>
         </div>
-      </div>
+      </PageLayout>
     );
   }
 
-  return <ReservaDetails reserva={reserva} />;
+  // Convert Decimal to number before passing to client component
+  const reservaWithNumberPrice = {
+    ...reserva,
+    precioTotal: Number(reserva.precioTotal),
+    fechaInicio: reserva.fechaInicio.toISOString(),
+    fechaFin: reserva.fechaFin.toISOString(),
+    createdAt: reserva.createdAt.toISOString(),
+    updatedAt: reserva.updatedAt.toISOString(),
+  };
+
+  return (
+    <PageLayout>
+      <div className="min-h-screen pt-28 px-8">
+        <ReservaDetails reserva={reservaWithNumberPrice} />
+      </div>
+    </PageLayout>
+  );
 } 

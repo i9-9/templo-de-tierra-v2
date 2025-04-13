@@ -6,21 +6,20 @@ import { EstadoReserva, MetodoPago } from '@/lib/models/reserva';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
 import Link from 'next/link';
-import { Decimal } from '@prisma/client/runtime/library';
 
 interface Reserva {
   id: string;
   temploId: string;
   userId: string;
-  fechaInicio: Date;
-  fechaFin: Date;
+  fechaInicio: string;
+  fechaFin: string;
   numeroHuespedes: number;
   estado: EstadoReserva;
-  precioTotal: Decimal;
+  precioTotal: number;
   metodoPago: MetodoPago;
   notas?: string | null;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
   templo: {
     nombre: string;
   };
@@ -63,67 +62,67 @@ export default function ReservaDetails({ reserva }: ReservaDetailsProps) {
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="max-w-7xl mx-auto">
       {error && (
         <div className="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
           {error}
         </div>
       )}
 
-      <div className="bg-white shadow overflow-hidden sm:rounded-lg">
+      <div className="bg-white shadow-lg ring-1 ring-[#6F4C21]/20 overflow-hidden sm:rounded-lg">
         <div className="px-4 py-5 sm:px-6">
           <div className="flex justify-between items-center">
-            <h3 className="text-lg leading-6 font-medium text-gray-900">
+            <h3 className="text-lg leading-6 font-medium text-[#6F4C21]">
               Detalles de la reserva
             </h3>
             <span className={`inline-flex rounded-full px-3 py-1 text-sm font-semibold leading-5 ${
               reserva.estado === EstadoReserva.CONFIRMADA
                 ? 'bg-green-100 text-green-800'
                 : reserva.estado === EstadoReserva.PENDIENTE
-                ? 'bg-yellow-100 text-yellow-800'
+                ? 'bg-[#F5DC90] text-[#6F4C21]'
                 : 'bg-red-100 text-red-800'
             }`}>
               {reserva.estado}
             </span>
           </div>
         </div>
-        <div className="border-t border-gray-200">
+        <div className="border-t border-[#6F4C21]/10">
           <dl>
-            <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">Templo</dt>
-              <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <div className="bg-[#F5DC90]/5 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt className="text-sm font-medium text-[#6F4C21]/80">Templo</dt>
+              <dd className="mt-1 text-sm text-[#6F4C21] sm:mt-0 sm:col-span-2">
                 {reserva.templo.nombre}
               </dd>
             </div>
             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">Fechas</dt>
-              <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              <dt className="text-sm font-medium text-[#6F4C21]/80">Fechas</dt>
+              <dd className="mt-1 text-sm text-[#6F4C21] sm:mt-0 sm:col-span-2">
                 {format(new Date(reserva.fechaInicio), 'PPP', { locale: es })} -{' '}
                 {format(new Date(reserva.fechaFin), 'PPP', { locale: es })}
               </dd>
             </div>
-            <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">Número de huéspedes</dt>
-              <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <div className="bg-[#F5DC90]/5 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt className="text-sm font-medium text-[#6F4C21]/80">Número de huéspedes</dt>
+              <dd className="mt-1 text-sm text-[#6F4C21] sm:mt-0 sm:col-span-2">
                 {reserva.numeroHuespedes}
               </dd>
             </div>
             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">Método de pago</dt>
-              <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+              <dt className="text-sm font-medium text-[#6F4C21]/80">Método de pago</dt>
+              <dd className="mt-1 text-sm text-[#6F4C21] sm:mt-0 sm:col-span-2">
                 {reserva.metodoPago}
               </dd>
             </div>
-            <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">Precio total</dt>
-              <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <div className="bg-[#F5DC90]/5 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt className="text-sm font-medium text-[#6F4C21]/80">Precio total</dt>
+              <dd className="mt-1 text-sm text-[#6F4C21] sm:mt-0 sm:col-span-2">
                 ${reserva.precioTotal.toFixed(2)}
               </dd>
             </div>
             {reserva.notas && (
               <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt className="text-sm font-medium text-gray-500">Notas adicionales</dt>
-                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                <dt className="text-sm font-medium text-[#6F4C21]/80">Notas adicionales</dt>
+                <dd className="mt-1 text-sm text-[#6F4C21] sm:mt-0 sm:col-span-2">
                   {reserva.notas}
                 </dd>
               </div>
@@ -135,7 +134,7 @@ export default function ReservaDetails({ reserva }: ReservaDetailsProps) {
       <div className="mt-8 flex space-x-4">
         <Link
           href="/reservas"
-          className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700"
+          className="inline-flex items-center px-4 py-2 border border-[#6F4C21]/20 text-sm font-medium rounded-md shadow-sm text-[#6F4C21] bg-[#F5DC90] hover:bg-[#F5DC90]/80"
         >
           Volver a mis reservas
         </Link>

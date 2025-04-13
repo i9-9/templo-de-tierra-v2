@@ -25,7 +25,12 @@ type ReservaWithRelations = {
     descripcion: string;
     capacidad: number;
     precio: number;
-    imagen: string | null;
+    amenities: string[];
+    camas: string[];
+    descripcionCorta: string;
+    imagenPrincipal: string;
+    imagenes: string[];
+    slug: string;
     createdAt: Date;
     updatedAt: Date;
   };
@@ -84,7 +89,7 @@ export async function sendReservationEmail(
 
   try {
     const { data, error } = await resend.emails.send({
-      from: 'Templo de Tierra <reservas@templodetierraarg.com>',
+      from: 'Templo de Tierra <reservas@templodetierra.com>',
       to: reserva.user.email,
       subject,
       html

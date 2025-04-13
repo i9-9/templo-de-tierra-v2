@@ -1,46 +1,30 @@
 import { MetadataRoute } from 'next';
 import { getAllTemplos } from '@/lib/data';
 
-const baseUrl = 'https://templodetierrauy.com';
-
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://templodetierra.com';
   const templos = getAllTemplos();
 
-  // URLs estáticas
-  const staticRoutes = [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: 'daily',
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/templos`,
-      lastModified: new Date(),
-      changeFrequency: 'daily',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/experiencias`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/contacto`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.5,
-    },
-  ] as MetadataRoute.Sitemap;
-
-  // URLs dinámicas para los templos
-  const temploRoutes = templos.map((templo) => ({
-    url: `${baseUrl}/templos/${templo.id}`,
+  const routes = [
+    '',
+    '/templos',
+    '/experiencias',
+    '/contacto',
+    '/auth/signin',
+    '/auth/register',
+  ].map((route) => ({
+    url: `${baseUrl}${route}`,
     lastModified: new Date(),
-    changeFrequency: 'weekly',
-    priority: 0.7,
-  })) as MetadataRoute.Sitemap;
+    changeFrequency: 'daily' as const,
+    priority: route === '' ? 1 : 0.8,
+  }));
 
-  return [...staticRoutes, ...temploRoutes];
+  const temploRoutes = templos.map((templo) => ({
+    url: `${baseUrl}/templos/${templo.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }));
+
+  return [...routes, ...temploRoutes];
 } 

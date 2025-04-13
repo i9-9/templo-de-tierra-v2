@@ -17,6 +17,7 @@ interface Templo {
   imagenPrincipal: string;
   amenities: string[];
   slug: string;
+  precio: string;
 }
 
 export default async function TemplosPage() {
@@ -29,8 +30,15 @@ export default async function TemplosPage() {
       imagenPrincipal: true,
       amenities: true,
       slug: true,
+      precio: true,
     }
   });
+  
+  // Convert Decimal values to numbers
+  const formattedTemplos = templos.map(templo => ({
+    ...templo,
+    precio: Number(templo.precio)
+  }));
   
   return (
     <main className="pt-[120px] pb-16">
@@ -48,7 +56,7 @@ export default async function TemplosPage() {
       </div>
       
       <div className="grid grid-cols-12 gap-8 mb-16">
-        {templos.map(templo => {
+        {formattedTemplos.map(templo => {
           // Verificamos si es uno de los templos destacados
           const isDestacado = templo.id === 'durga' || templo.id === 'shanti';
           

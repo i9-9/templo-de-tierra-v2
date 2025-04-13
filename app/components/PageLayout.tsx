@@ -1,6 +1,6 @@
 'use client';
 
-import Navigation from './Navigation';
+import Navbar from './Navbar';
 
 export default function PageLayout({
   children,
@@ -8,9 +8,9 @@ export default function PageLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen bg-yellow-50">
-      <Navigation />
-      <main className="pt-16">
+    <div className="min-h-screen bg-[#F5DC90]/20">
+      <Navbar />
+      <main>
         {children}
       </main>
     </div>

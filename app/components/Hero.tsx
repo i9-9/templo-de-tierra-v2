@@ -45,7 +45,7 @@ export default function Hero() {
         <div className="absolute left-[30px] right-[30px] bottom-0 animate-fade-up" style={{ animationDuration: '1s', animationDelay: '0.6s' }}>
           <div className="backdrop-blur-md bg-[#F5DC90]/60 py-3 px-4 md:px-8 border-t border-[#6F4C21]/20">
             <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-              <h2 className="font-heading text-2xl md:text-2xl lg:text-3xl text-[#6F4C21] leading-tight text-left animate-fade-right max-w-2xl" style={{ animationDuration: '1s', animationDelay: '0.8s' }}>
+              <h2 className="font-heading text-2xl md:text-2xl lg:text-3xl text-[#6F4C21] leading-tight text-left animate-fade-right md:whitespace-nowrap" style={{ animationDuration: '1s', animationDelay: '0.8s' }}>
                 Un santuario natural donde la sabiduría ancestral se encuentra con el presente
               </h2>
               <div className="grid grid-cols-2 gap-3 w-full md:w-auto animate-fade-left" style={{ animationDuration: '1s', animationDelay: '1s' }}>

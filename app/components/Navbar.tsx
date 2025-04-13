@@ -5,11 +5,14 @@ import Image from 'next/image'
 import MobileMenu from './MobileMenu'
 import { useState, useEffect } from 'react'
 import { getAllTemplos } from '@/lib/data'
+import { useSession, signOut } from 'next-auth/react'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
   const [showTemplosMenu, setShowTemplosMenu] = useState(false)
+  const [showUserMenu, setShowUserMenu] = useState(false)
+  const { data: session } = useSession()
   const templos = getAllTemplos()
 
   // Handle animation states when menu opens/closes
@@ -30,7 +33,7 @@ export default function Navbar() {
     <nav className={`fixed top-4 left-[30px] right-[30px] z-50 py-4 rounded-lg border border-[#6F4C21]/20 shadow-[0_2px_10px_-3px_rgba(0,0,0,0.1)] transition-all duration-500 ease-in-out animate-fade-down ${
       isOpen 
         ? 'bg-[#F5DC90] h-[calc(100vh-32px)] top-4 left-[30px] right-[30px]' 
-        : 'bg-[#F5DC90]/80'
+        : 'bg-[#F5DC90]/80 backdrop-blur-sm'
     }`} style={{ animationDuration: '0.6s', animationDelay: '0.1s' }}>
       <div className="max-w-[1440px] mx-auto">
         <div className="flex items-center justify-between px-4 md:px-4">
@@ -94,6 +97,48 @@ export default function Navbar() {
             <Link href="/contacto" className="font-sans text-[1rem] text-[#6F4C21] hover:text-olive-green transition-colors">
               Contacto
             </Link>
+
+            {/* User menu */}
+            {session ? (
+              <div className="relative">
+                <button
+                  className="font-sans text-[1rem] text-[#6F4C21] hover:text-olive-green transition-colors flex items-center gap-1"
+                  onMouseEnter={() => setShowUserMenu(true)}
+                  onMouseLeave={() => setShowUserMenu(false)}
+                >
+                  {session.user?.name || 'Mi cuenta'}
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                <div
+                  className={`absolute top-full right-0 bg-[#F5DC90] rounded-lg shadow-lg py-2 w-48 transition-all duration-200 ${showUserMenu ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'}`}
+                  onMouseEnter={() => setShowUserMenu(true)}
+                  onMouseLeave={() => setShowUserMenu(false)}
+                >
+                  <Link
+                    href="/reservas"
+                    className="block px-4 py-2 text-[#6F4C21] hover:bg-[#F5DC90]/60 transition-colors"
+                  >
+                    Mis Reservas
+                  </Link>
+                  <div className="border-t border-[#6F4C21]/20 my-1"></div>
+                  <button
+                    onClick={() => signOut()}
+                    className="block w-full text-left px-4 py-2 text-[#6F4C21] hover:bg-[#F5DC90]/60 transition-colors"
+                  >
+                    Cerrar sesión
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <Link
+                href="/auth/signin"
+                className="font-sans text-[1rem] text-[#6F4C21] hover:text-olive-green transition-colors"
+              >
+                Iniciar sesión
+              </Link>
+            )}
           </div>
           <div className="lg:hidden">
             <MobileMenu isOpen={isOpen} setIsOpen={setIsOpen} />
@@ -142,6 +187,35 @@ export default function Navbar() {
                         Contacto
                       </Link>
                     </li>
+                    {session ? (
+                      <>
+                        <li className={`transform transition-all duration-500 ease-in-out ${
+                          isOpen ? 'opacity-100 translate-x-0 delay-350' : 'opacity-0 -translate-x-4 delay-20'
+                        }`}>
+                          <Link href="/reservas" className="font-sans text-[1.26rem] text-[#6F4C21] hover:underline">
+                            Mis Reservas
+                          </Link>
+                        </li>
+                        <li className={`transform transition-all duration-500 ease-in-out ${
+                          isOpen ? 'opacity-100 translate-x-0 delay-400' : 'opacity-0 -translate-x-4'
+                        }`}>
+                          <button
+                            onClick={() => signOut()}
+                            className="font-sans text-[1.26rem] text-[#6F4C21] hover:underline"
+                          >
+                            Cerrar sesión
+                          </button>
+                        </li>
+                      </>
+                    ) : (
+                      <li className={`transform transition-all duration-500 ease-in-out ${
+                        isOpen ? 'opacity-100 translate-x-0 delay-350' : 'opacity-0 -translate-x-4 delay-20'
+                      }`}>
+                        <Link href="/auth/signin" className="font-sans text-[1.26rem] text-[#6F4C21] hover:underline">
+                          Iniciar sesión
+                        </Link>
+                      </li>
+                    )}
                   </ul>
                 </div>
 
@@ -183,7 +257,7 @@ export default function Navbar() {
                           isOpen ? 'opacity-100 translate-x-0 delay-' + (450 + index * 50) : 'opacity-0 -translate-x-4'
                         }`}
                       >
-                        <Link href={`/templos/${templo.id}`} className="font-sans text-[1.26rem] text-[#6F4C21] hover:underline">
+                        <Link href={`/templos/${templo.slug}`} className="font-sans text-[1.26rem] text-[#6F4C21] hover:underline">
                           {templo.nombre} <span className="text-sm text-[#6F4C21]/70">({templo.capacidad})</span>
                         </Link>
                       </li>
