@@ -60,7 +60,7 @@ export function WebsiteJsonLd() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "url": "https://templodetierraarg.com/",
+    "url": "https://templodetierra.com/",
     "name": "Templo de Tierra",
     "description": "Alojamientos únicos en bioconstrucción, diseñados en armonía con la naturaleza.",
     "potentialAction": {
@@ -78,17 +78,17 @@ export function OrganizationJsonLd() {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Templo de Tierra",
-    "url": "https://templodetierraarg.com",
-    "logo": "https://templodetierraarg.com/logo/SVG/Asset 1.svg",
+    "url": "https://templodetierra.com",
+    "logo": "https://templodetierra.com/logo/SVG/Asset 1.svg",
     "sameAs": [
-      "https://www.instagram.com/templodetierraarg/",
-      "https://www.facebook.com/templodetierraarg/"
+      "https://www.instagram.com/templodetierra.uy/",
+      "https://www.facebook.com/templodetierra.uy/"
     ],
     "contactPoint": {
       "@type": "ContactPoint",
       "telephone": "+598-123-456-7890",
       "contactType": "customer service",
-      "email": "info@templodetierrauy.com",
+      "email": "templodetierra.ashram@gmail.com",
       "availableLanguage": ["Spanish", "English"]
     }
   };

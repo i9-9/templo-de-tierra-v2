@@ -24,33 +24,38 @@ const heroImages = [
 
 export default function Hero() {
   return (
-    <section className="h-[calc(100vh-30px)] pt-[116px] relative">
-      {/* Imagen a pantalla completa */}
-      <div className="absolute inset-x-[30px] top-[116px] bottom-0 max-w-[1440px] mx-auto left-0 right-0 rounded-lg overflow-hidden shadow-md animate-fade-up" style={{ animationDuration: '1s', animationDelay: '0.4s' }}>
-        <div className="relative w-full h-full">
-          <ImageCarousel 
-            images={heroImages} 
-            imageClassName="object-cover w-full h-full" 
-          />
-          {/* Overlay gradiente para mejorar legibilidad del texto */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#000000]/50 via-transparent to-transparent"></div>
+    <section className="relative min-h-[calc(100vh-30px)] pt-[116px]">
+      {/* Contenedor principal con máximo ancho y centrado */}
+      <div className="mx-auto px-[30px]">
+        <div className="max-w-[1440px] mx-auto">
+          {/* Imagen a pantalla completa */}
+          <div className="relative w-full h-[calc(100vh-146px)] rounded-lg overflow-hidden shadow-md animate-fade-up" style={{ animationDuration: '1s', animationDelay: '0.4s' }}>
+            <div className="relative w-full h-full">
+              <ImageCarousel 
+                images={heroImages} 
+                imageClassName="object-cover w-full h-full" 
+              />
+              {/* Overlay gradiente para mejorar legibilidad del texto */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#000000]/50 via-transparent to-transparent"></div>
+            </div>
+          </div>
         </div>
-      </div>
 
-      {/* Contenedor de texto y botones - ahora como barra horizontal */}
-      <div className="absolute left-0 right-0 bottom-0 animate-fade-up" style={{ animationDuration: '1s', animationDelay: '0.6s' }}>
-        <div className="backdrop-blur-md bg-[#F5DC90]/60 py-3 px-4 md:px-8 border-t border-[#6F4C21]/20">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <h2 className="font-heading text-2xl md:text-2xl lg:text-3xl text-[#6F4C21] leading-tight text-left animate-fade-right" style={{ animationDuration: '1s', animationDelay: '0.8s' }}>
-              Un santuario natural donde la sabiduría ancestral se encuentra con el presente
-            </h2>
-            <div className="grid grid-cols-2 gap-3 w-full md:w-auto animate-fade-left" style={{ animationDuration: '1s', animationDelay: '1s' }}>
-              <Button href="/templos" variant="primary" className="text-sm md:text-base py-1.5 px-3 md:py-2 md:px-4">
-                Nuestros templos
-              </Button>
-              <Button href="/experiencias" variant="secondary" className="text-sm md:text-base py-1.5 px-3 md:py-2 md:px-4">
-                Experiencias
-              </Button>
+        {/* Contenedor de texto y botones - ahora como barra horizontal */}
+        <div className="absolute left-[30px] right-[30px] bottom-0 animate-fade-up" style={{ animationDuration: '1s', animationDelay: '0.6s' }}>
+          <div className="backdrop-blur-md bg-[#F5DC90]/60 py-3 px-4 md:px-8 border-t border-[#6F4C21]/20">
+            <div className="max-w-[1440px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+              <h2 className="font-heading text-2xl md:text-2xl lg:text-3xl text-[#6F4C21] leading-tight text-left animate-fade-right max-w-2xl" style={{ animationDuration: '1s', animationDelay: '0.8s' }}>
+                Un santuario natural donde la sabiduría ancestral se encuentra con el presente
+              </h2>
+              <div className="grid grid-cols-2 gap-3 w-full md:w-auto animate-fade-left" style={{ animationDuration: '1s', animationDelay: '1s' }}>
+                <Button href="/templos" variant="primary" className="text-sm md:text-base py-1.5 px-3 md:py-2 md:px-4">
+                  Nuestros templos
+                </Button>
+                <Button href="/experiencias" variant="secondary" className="text-sm md:text-base py-1.5 px-3 md:py-2 md:px-4">
+                  Experiencias
+                </Button>
+              </div>
             </div>
           </div>
         </div>

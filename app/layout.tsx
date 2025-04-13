@@ -5,6 +5,7 @@ import { WebsiteJsonLd, OrganizationJsonLd } from "./components/JsonLd";
 import { Providers } from "./providers";
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://templodetierra.com'),
   title: {
     default: "Templo de Tierra | Alojamientos Sostenibles en Bioconstrucción",
     template: "%s | Templo de Tierra"
@@ -16,12 +17,12 @@ export const metadata: Metadata = {
   publisher: "Templo de Tierra",
   robots: "index, follow",
   alternates: {
-    canonical: "https://templodetierraarg.com"
+    canonical: "https://templodetierra.com"
   },
   openGraph: {
     type: "website",
     locale: "es_AR",
-    url: "https://templodetierraarg.com",
+    url: "https://templodetierra.com",
     title: "Templo de Tierra | Alojamientos Sostenibles en Bioconstrucción",
     description: "Alojamientos únicos en bioconstrucción, diseñados en armonía con la naturaleza. Una experiencia sostenible en Uruguay.",
     siteName: "Templo de Tierra",
