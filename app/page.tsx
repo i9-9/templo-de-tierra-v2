@@ -62,7 +62,7 @@ export default function Home() {
                 
                 <div className="transform hover:scale-[1.02] transition-transform duration-300 h-full">
                   <Link 
-                    href={`/templos/${templo.slug}`}
+                    href={`/templos/${templo.id}`}
                     className="block group overflow-hidden rounded-lg border border-[#6F4C21]/20 shadow-md transition-all duration-300 hover:shadow-lg h-full flex flex-col"
                   >
                     {/* Sección de imagen */}
@@ -133,7 +133,7 @@ export default function Home() {
               }}
             >
               <Link 
-                href={`/templos/${templo.slug}`}
+                href={`/templos/${templo.id}`}
                 className="block group overflow-hidden rounded-lg border border-[#6F4C21]/10 hover:border-[#6F4C21]/30 shadow-sm hover:shadow-md transition-all duration-300 h-full flex flex-row"
               >
                 <div className="relative w-1/3 overflow-hidden bg-[#F5DC90]/10">

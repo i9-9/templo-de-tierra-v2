@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -10,9 +10,14 @@ interface Templo {
   id: string;
   nombre: string;
   descripcion: string;
+  descripcionCorta: string;
   capacidad: number;
-  precio: Decimal;
-  imagen?: string | null;
+  precio: Decimal | number;
+  imagenPrincipal: string;
+  imagenes: string[];
+  amenities: string[];
+  camas: string;
+  slug: string;
 }
 
 interface ReservaFormProps {
@@ -24,9 +29,8 @@ export default function ReservaForm({ templo }: ReservaFormProps) {
   const { data: session } = useSession();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState<CreateReservaDTO>({
+  const [formData, setFormData] = useState<Omit<CreateReservaDTO, 'userId'>>({
     temploId: templo.id,
-    userId: session?.user?.id || '',
     fechaInicio: new Date(),
     fechaFin: new Date(),
     numeroHuespedes: 1,
@@ -47,12 +51,19 @@ export default function ReservaForm({ templo }: ReservaFormProps) {
         return;
       }
 
+      // Convert dates to ISO strings for API
+      const reservaData = {
+        ...formData,
+        fechaInicio: formData.fechaInicio.toISOString(),
+        fechaFin: formData.fechaFin.toISOString(),
+      };
+
       const response = await fetch('/api/reservas', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(reservaData),
       });
 
       if (!response.ok) {
@@ -102,7 +113,7 @@ export default function ReservaForm({ templo }: ReservaFormProps) {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="fechaInicio" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="fechaInicio" className="block text-sm font-medium text-[#6F4C21]/70">
             Fecha de llegada
           </label>
           <input
@@ -111,13 +122,13 @@ export default function ReservaForm({ templo }: ReservaFormProps) {
             name="fechaInicio"
             value={formData.fechaInicio.toISOString().split('T')[0]}
             onChange={handleDateChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+            className="mt-1 block w-full rounded-md border-[#6F4C21]/20 bg-transparent shadow-sm focus:border-[#D8A34B] focus:ring-[#D8A34B] text-[#6F4C21]"
             required
           />
         </div>
 
         <div>
-          <label htmlFor="fechaFin" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="fechaFin" className="block text-sm font-medium text-[#6F4C21]/70">
             Fecha de salida
           </label>
           <input
@@ -126,13 +137,13 @@ export default function ReservaForm({ templo }: ReservaFormProps) {
             name="fechaFin"
             value={formData.fechaFin.toISOString().split('T')[0]}
             onChange={handleDateChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+            className="mt-1 block w-full rounded-md border-[#6F4C21]/20 bg-transparent shadow-sm focus:border-[#D8A34B] focus:ring-[#D8A34B] text-[#6F4C21]"
             required
           />
         </div>
 
         <div>
-          <label htmlFor="numeroHuespedes" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="numeroHuespedes" className="block text-sm font-medium text-[#6F4C21]/70">
             Número de huéspedes
           </label>
           <input
@@ -143,13 +154,13 @@ export default function ReservaForm({ templo }: ReservaFormProps) {
             max={templo.capacidad}
             value={formData.numeroHuespedes}
             onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+            className="mt-1 block w-full rounded-md border-[#6F4C21]/20 bg-transparent shadow-sm focus:border-[#D8A34B] focus:ring-[#D8A34B] text-[#6F4C21]"
             required
           />
         </div>
 
         <div>
-          <label htmlFor="metodoPago" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="metodoPago" className="block text-sm font-medium text-[#6F4C21]/70">
             Método de pago
           </label>
           <select
@@ -157,7 +168,7 @@ export default function ReservaForm({ templo }: ReservaFormProps) {
             name="metodoPago"
             value={formData.metodoPago}
             onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+            className="mt-1 block w-full rounded-md border-[#6F4C21]/20 bg-transparent shadow-sm focus:border-[#D8A34B] focus:ring-[#D8A34B] text-[#6F4C21]"
             required
           >
             {Object.values(MetodoPago).map((metodo) => (
@@ -170,7 +181,7 @@ export default function ReservaForm({ templo }: ReservaFormProps) {
       </div>
 
       <div>
-        <label htmlFor="notas" className="block text-sm font-medium text-gray-700">
+        <label htmlFor="notas" className="block text-sm font-medium text-[#6F4C21]/70">
           Notas adicionales
         </label>
         <textarea
@@ -179,23 +190,23 @@ export default function ReservaForm({ templo }: ReservaFormProps) {
           rows={3}
           value={formData.notas}
           onChange={handleChange}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+          className="mt-1 block w-full rounded-md border-[#6F4C21]/20 bg-transparent shadow-sm focus:border-[#D8A34B] focus:ring-[#D8A34B] text-[#6F4C21]"
         />
       </div>
 
-      <div className="bg-gray-50 p-4 rounded-lg">
-        <h3 className="text-lg font-medium text-gray-900">Resumen de la reserva</h3>
-        <div className="mt-2 space-y-2">
-          <p className="text-sm text-gray-600">
+      <div className="bg-[#6F4C21]/5 p-6 rounded-lg">
+        <h3 className="text-lg font-medium text-[#6F4C21]">Resumen de la reserva</h3>
+        <div className="mt-4 space-y-2">
+          <p className="text-sm text-[#6F4C21]/80">
             Precio por noche: ${templo.precio.toFixed(2)}
           </p>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-[#6F4C21]/80">
             Número de noches: {Math.ceil((formData.fechaFin.getTime() - formData.fechaInicio.getTime()) / (1000 * 60 * 60 * 24))}
           </p>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-[#6F4C21]/80">
             Número de huéspedes: {formData.numeroHuespedes}
           </p>
-          <p className="text-lg font-semibold text-gray-900">
+          <p className="text-lg font-bold text-[#6F4C21] mt-4">
             Total: ${precioTotal.toFixed(2)}
           </p>
         </div>
@@ -204,9 +215,9 @@ export default function ReservaForm({ templo }: ReservaFormProps) {
       <button
         type="submit"
         disabled={loading}
-        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
+        className="w-full px-6 py-3 text-white bg-[#D8A34B] hover:bg-[#6F4C21] rounded-md font-medium transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        {loading ? 'Reservando...' : 'Confirmar reserva'}
+        {loading ? 'Procesando...' : 'Confirmar reserva'}
       </button>
     </form>
   );

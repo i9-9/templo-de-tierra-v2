@@ -183,7 +183,7 @@ export default function Navbar() {
                           isOpen ? 'opacity-100 translate-x-0 delay-' + (450 + index * 50) : 'opacity-0 -translate-x-4'
                         }`}
                       >
-                        <Link href={`/templos/${templo.slug}`} className="font-sans text-[1.26rem] text-[#6F4C21] hover:underline">
+                        <Link href={`/templos/${templo.id}`} className="font-sans text-[1.26rem] text-[#6F4C21] hover:underline">
                           {templo.nombre} <span className="text-sm text-[#6F4C21]/70">({templo.capacidad})</span>
                         </Link>
                       </li>

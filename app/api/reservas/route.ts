@@ -35,19 +35,36 @@ export async function GET() {
 export async function POST(request: Request) {
   const session = await getServerSession(authOptions);
 
-  if (!session) {
+  if (!session || !session.user?.id) {
+    console.error('No session or user ID:', session);
     return new NextResponse('Unauthorized', { status: 401 });
   }
 
   try {
+    console.log('Session user ID:', session.user.id);
+    
+    // Verify user exists in database
+    const user = await prisma.user.findUnique({
+      where: { id: session.user.id },
+      select: { id: true, email: true }
+    });
+
+    if (!user) {
+      console.error('User not found in database:', session.user.id);
+      return new NextResponse('Usuario no encontrado en la base de datos', { status: 404 });
+    }
+
+    console.log('Found user:', user);
+
     const body = await request.json();
-    const reservaData: CreateReservaDTO = {
-      ...body,
-      userId: session.user.id,
-    };
+    const reservaData: Omit<CreateReservaDTO, 'userId'> = body;
+
+    // Convert string dates to Date objects
+    const fechaInicio = new Date(reservaData.fechaInicio);
+    const fechaFin = new Date(reservaData.fechaFin);
 
     // Validar fechas
-    const errorFecha = validarFechasReserva(reservaData.fechaInicio, reservaData.fechaFin);
+    const errorFecha = validarFechasReserva(fechaInicio, fechaFin);
     if (errorFecha) {
       return new NextResponse(errorFecha, { status: 400 });
     }
@@ -59,8 +76,8 @@ export async function POST(request: Request) {
         estado: { not: EstadoReserva.CANCELADA },
         OR: [
           {
-            fechaInicio: { lte: reservaData.fechaFin },
-            fechaFin: { gte: reservaData.fechaInicio }
+            fechaInicio: { lte: fechaFin },
+            fechaFin: { gte: fechaInicio }
           }
         ]
       },
@@ -82,17 +99,25 @@ export async function POST(request: Request) {
     // Calcular el precio total
     const precioTotal = calcularPrecioTotal(
       Number(templo.precio),
-      new Date(reservaData.fechaInicio),
-      new Date(reservaData.fechaFin),
+      fechaInicio,
+      fechaFin,
       reservaData.numeroHuespedes
     );
+
+    console.log('Creating reservation with user ID:', user.id);
 
     // Crear la reserva
     const reserva = await prisma.reserva.create({
       data: {
-        ...reservaData,
+        temploId: reservaData.temploId,
+        userId: user.id,
+        fechaInicio,
+        fechaFin,
+        numeroHuespedes: reservaData.numeroHuespedes,
+        metodoPago: reservaData.metodoPago,
         precioTotal,
-        estado: EstadoReserva.PENDIENTE
+        estado: EstadoReserva.PENDIENTE,
+        notas: reservaData.notas
       },
       include: {
         templo: true,
@@ -102,7 +127,15 @@ export async function POST(request: Request) {
 
     return NextResponse.json(reserva);
   } catch (error) {
-    console.error('Error al crear la reserva:', error);
-    return new NextResponse('Internal Server Error', { status: 500 });
+    console.error('Error detallado al crear la reserva:', {
+      error,
+      session: session?.user,
+      stack: error instanceof Error ? error.stack : undefined
+    });
+    
+    if (error instanceof Error) {
+      return new NextResponse(`Error al crear la reserva: ${error.message}`, { status: 500 });
+    }
+    return new NextResponse('Error interno del servidor', { status: 500 });
   }
 } 

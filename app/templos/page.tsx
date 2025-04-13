@@ -1,4 +1,4 @@
-import { getAllTemplos } from '@/lib/data'
+import { prisma } from '@/lib/prisma'
 import Card from '@/app/components/ui/Card'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -9,8 +9,28 @@ export const metadata = {
   description: 'Descubre nuestra selección de templos construidos con técnicas ancestrales de bioconstrucción, cada uno con su propia esencia y carácter único.',
 }
 
-export default function TemplosPage() {
-  const templos = getAllTemplos();
+interface Templo {
+  id: string;
+  nombre: string;
+  descripcionCorta: string;
+  capacidad: string;
+  imagenPrincipal: string;
+  amenities: string[];
+  slug: string;
+}
+
+export default async function TemplosPage() {
+  const templos = await prisma.templo.findMany({
+    select: {
+      id: true,
+      nombre: true,
+      descripcionCorta: true,
+      capacidad: true,
+      imagenPrincipal: true,
+      amenities: true,
+      slug: true,
+    }
+  });
   
   return (
     <main className="pt-[120px] pb-16">
@@ -42,7 +62,7 @@ export default function TemplosPage() {
               )}
               <div className={`${isDestacado ? 'transform hover:scale-[1.02] transition-transform duration-300' : ''} h-full`}>
                 <Link 
-                  href={`/templos/${templo.id}`}
+                  href={`/templos/${templo.slug}`}
                   className="block group overflow-hidden rounded-lg border border-[#6F4C21]/20 shadow-md transition-all duration-300 hover:shadow-lg h-full flex flex-col"
                 >
                   {/* Sección de imagen */}
@@ -127,14 +147,6 @@ export default function TemplosPage() {
                 <p className="text-[#6F4C21]/80">
                   Más que un simple alojamiento, ofrecemos una experiencia de vida que te conecta
                   con técnicas ancestrales y una forma de vivir más consciente y sostenible.
-                </p>
-              </div>
-              
-              <div className="bg-white/40 p-6 rounded-lg">
-                <h3 className="text-[1.25rem] font-heading text-[#6F4C21] mb-3">Comunidad consciente</h3>
-                <p className="text-[#6F4C21]/80">
-                  Al hospedarte con nosotros, te conviertes en parte de una comunidad que valora
-                  la sostenibilidad, el aprendizaje compartido y el respeto por la naturaleza.
                 </p>
               </div>
             </div>

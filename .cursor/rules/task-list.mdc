@@ -1,0 +1,41 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Feature: [Feature Name]
+
+## Overview
+Brief description of the feature and its purpose in the project.
+
+## Background
+Context information about why this feature is necessary and how it fits into the project.
+
+## Completed Tasks
+- [x] Task 1 that has been completed
+- [x] Task 2 that has been completed
+
+## In Progress Tasks
+- [ ] Task 3 currently being worked on
+- [ ] Task 4 to be completed soon
+
+## Future Tasks
+- [ ] Task 5 planned for future implementation
+- [ ] Task 6 planned for future implementation
+
+## Implementation Notes
+Technical notes about implementation decisions, architecture, and dependencies.
+
+## Blockers
+Any issues that are preventing progress on the implementation.
+
+## Testing Strategy
+How the feature will be tested (unit tests, integration tests, etc.).
+
+## Timeline
+Expected completion dates for key milestones.
+
+## Links
+- Related documentation: [link]
+- Design mockups: [link]
+- Related PRs: [link]
