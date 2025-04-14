@@ -1,21 +1,33 @@
 {
+  "version": 2,
   "buildCommand": "prisma generate && prisma db push && next build",
-  "framework": "nextjs",
   "installCommand": "npm install",
+  "framework": "nextjs",
   "regions": ["iad1"],
   "env": {
     "NEXTAUTH_URL": {
-      "description": "URL of your application (will be automatically set by Vercel)"
+      "description": "The URL of your application",
+      "type": "string"
     },
     "NEXTAUTH_SECRET": {
-      "description": "Secret key for NextAuth.js",
-      "generateValue": true
+      "description": "Secret used to encrypt the NextAuth.js JWT",
+      "type": "string"
     },
     "DATABASE_URL": {
-      "description": "Supabase connection string with pgbouncer"
+      "description": "Supabase connection string with pooling",
+      "type": "string"
     },
     "DIRECT_URL": {
-      "description": "Supabase direct connection string"
+      "description": "Supabase direct connection string",
+      "type": "string"
+    },
+    "RECAPTCHA_SITE_KEY": {
+      "description": "reCAPTCHA site key",
+      "type": "string"
+    },
+    "RECAPTCHA_SECRET_KEY": {
+      "description": "reCAPTCHA secret key",
+      "type": "string"
     }
   }
 } 
