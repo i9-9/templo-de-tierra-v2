@@ -1,0 +1,21 @@
+{
+  "buildCommand": "prisma generate && prisma db push && next build",
+  "framework": "nextjs",
+  "installCommand": "npm install",
+  "regions": ["iad1"],
+  "env": {
+    "NEXTAUTH_URL": {
+      "description": "URL of your application (will be automatically set by Vercel)"
+    },
+    "NEXTAUTH_SECRET": {
+      "description": "Secret key for NextAuth.js",
+      "generateValue": true
+    },
+    "DATABASE_URL": {
+      "description": "Supabase connection string with pgbouncer"
+    },
+    "DIRECT_URL": {
+      "description": "Supabase direct connection string"
+    }
+  }
+} 
