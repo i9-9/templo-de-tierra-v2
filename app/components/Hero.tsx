@@ -26,7 +26,7 @@ export default function Hero() {
   return (
     <section className="relative min-h-[calc(100vh-30px)] pt-[116px] w-full">
       {/* Contenedor principal con máximo ancho y centrado */}
-      <div className="w-full px-[30px]">
+      <div className="w-full px-4 md:px-[30px]">
         <div className="w-full">
           {/* Imagen a pantalla completa */}
           <div className="relative w-full h-[calc(100vh-146px)] rounded-lg overflow-hidden shadow-md animate-fade-up" style={{ animationDuration: '1s', animationDelay: '0.4s' }}>
@@ -41,18 +41,18 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Contenedor de texto y botones - ahora como barra horizontal */}
-        <div className="absolute left-[30px] right-[30px] bottom-0 animate-fade-up" style={{ animationDuration: '1s', animationDelay: '0.6s' }}>
-          <div className="backdrop-blur-md bg-[#F5DC90]/60 py-3 px-4 md:px-8 border-t border-[#6F4C21]/20">
+        {/* Contenedor de texto y botones */}
+        <div className="absolute left-4 right-4 md:left-[30px] md:right-[30px] bottom-0 animate-fade-up" style={{ animationDuration: '1s', animationDelay: '0.6s' }}>
+          <div className="backdrop-blur-md bg-[#F5DC90]/60 py-4 md:py-3 px-4 md:px-8 border-t border-[#6F4C21]/20">
             <div className="w-full flex flex-col md:flex-row items-center justify-between gap-4">
-              <h2 className="font-heading text-2xl md:text-2xl lg:text-3xl text-[#6F4C21] leading-tight text-left animate-fade-right md:whitespace-nowrap" style={{ animationDuration: '1s', animationDelay: '0.8s' }}>
+              <h2 className="font-heading text-xl md:text-2xl lg:text-3xl text-[#6F4C21] leading-tight text-center md:text-left animate-fade-right" style={{ animationDuration: '1s', animationDelay: '0.8s' }}>
                 Un santuario natural donde la sabiduría ancestral se encuentra con el presente
               </h2>
-              <div className="flex gap-4 animate-fade-left" style={{ animationDuration: '1s', animationDelay: '1s' }}>
-                <Button variant="primary" href="/templos">
+              <div className="w-full md:w-auto grid grid-cols-1 md:flex gap-4 animate-fade-left" style={{ animationDuration: '1s', animationDelay: '1s' }}>
+                <Button variant="primary" href="/templos" className="w-full">
                   Ver templos
                 </Button>
-                <Button variant="secondary" href="/experiencias">
+                <Button variant="secondary" href="/experiencias" className="w-full">
                   Experiencias
                 </Button>
               </div>

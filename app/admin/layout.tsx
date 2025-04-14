@@ -16,9 +16,9 @@ export default async function AdminLayout({
   }
 
   return (
-    <div className="relative min-h-screen bg-gray-50">
+    <div className="relative min-h-screen bg-[#6F4C21]">
       {/* Main container that starts below the navbar */}
-      <div className="absolute inset-0 top-[72px] z-0">
+      <div className="absolute inset-0 top-[100px] z-0">
         <div className="flex h-full">
           {/* Sidebar */}
           <div className="w-64 bg-[#6F4C21] text-white">

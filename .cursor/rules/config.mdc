@@ -16,7 +16,9 @@ alwaysApply: true
     "date-fns": "https://date-fns.org/docs/Getting-Started",
     "react-datepicker": "https://reactdatepicker.com/",
     "resend": "https://resend.com/docs/introduction",
-    "recaptcha": "https://github.com/t49tran/react-google-recaptcha-v3"
+    "recaptcha": "https://github.com/t49tran/react-google-recaptcha-v3",
+    "supabase": "https://supabase.com/docs"
+
   },
   "autoFetchDocs": true,
   "suggestDocumentationOnError": true,

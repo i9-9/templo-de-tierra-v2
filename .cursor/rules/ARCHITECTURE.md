@@ -1,4 +1,4 @@
-# Arquitectura del Proyecto - Templo de Tierra
+# Arquitectura de la Aplicación
 
 ## Visión General
 
@@ -8,14 +8,40 @@ Templo de Tierra es una aplicación web construida con Next.js 14, utilizando el
 
 - **Framework**: Next.js 14 (App Router)
 - **Lenguaje**: TypeScript
-- **Base de Datos**: PostgreSQL con Prisma ORM
+- **Base de Datos**: PostgreSQL (Supabase)
+- **ORM**: Prisma
 - **Autenticación**: NextAuth.js
-- **Estilos**: Tailwind CSS
-- **Animaciones**: Framer Motion
-- **Formularios**: React Hook Form
-- **Fechas**: date-fns
-- **Emails**: Resend
-- **Validación**: Zod
+- **Estilos**: TailwindCSS
+- **Email**: Resend
+- **Seguridad**: reCAPTCHA v3
+- **Deploy**: Vercel
+
+## Estructura de Base de Datos (Supabase)
+
+### Configuración
+- Connection Pooling habilitado (puerto 6543)
+- Conexión directa disponible (puerto 5432)
+- Row Level Security (RLS) implementado para seguridad
+
+### Modelos Principales
+- User (autenticación y perfil)
+- Templo (alojamientos)
+- Reserva (reservaciones)
+- Favorito (templos guardados)
+
+## Autenticación
+
+- NextAuth.js para manejo de sesiones
+- Google OAuth como proveedor principal
+- Sesiones JWT almacenadas en cookies
+- Middleware para protección de rutas
+
+## API Routes
+
+- `/api/reservas`: Gestión de reservaciones
+- `/api/templos`: CRUD de templos
+- `/api/admin`: Endpoints administrativos
+- `/api/email`: Servicio de emails
 
 ## Estructura del Proyecto
 
@@ -138,4 +164,77 @@ templo-de-tierra-v2/
 - Prettier para formateo
 - Husky para pre-commit hooks
 - Testing con Jest y Testing Library
-- CI/CD con GitHub Actions 
+- CI/CD con GitHub Actions
+
+## Consideraciones de Diseño
+
+### Navbar Fijo
+La aplicación utiliza un navbar fijo en la parte superior de la pantalla. Esto tiene las siguientes implicaciones:
+
+1. **Altura del Navbar**: El navbar tiene una altura fija de 120px (`h-[120px]`).
+2. **Espaciado de Contenido**: 
+   - Todas las páginas deben comenzar con un padding-top de 120px (`pt-[120px]`) para evitar que el contenido se oculte detrás del navbar.
+   - Los elementos que necesiten posicionamiento absoluto o fijo deben tener en cuenta esta altura.
+3. **Z-index**: El navbar tiene un z-index alto para asegurar que siempre esté por encima del contenido.
+4. **Responsive**: El navbar se adapta a diferentes tamaños de pantalla, manteniendo su posición fija.
+
+Ejemplo de implementación en páginas:
+```tsx
+<main className="pt-[120px]">
+  {/* Contenido de la página */}
+</main>
+```
+
+## Deployment (Vercel)
+
+### Variables de Entorno
+```env
+DATABASE_URL=postgres://...
+DIRECT_URL=postgres://...
+NEXTAUTH_URL=https://...
+NEXTAUTH_SECRET=...
+GOOGLE_CLIENT_ID=...
+GOOGLE_CLIENT_SECRET=...
+RESEND_API_KEY=...
+RECAPTCHA_KEYS=...
+```
+
+### Configuración
+- Build Command: `prisma generate && prisma db push && next build`
+- Node.js Version: 18.x
+- Framework Preset: Next.js
+- Región: iad1 (US East)
+
+### Optimizaciones
+- Connection Pooling para base de datos
+- Imágenes optimizadas con Next/Image
+- Componentes del lado del cliente minimizados
+- Caching y revalidación configurados
+
+## Mantenimiento
+
+### Desarrollo Local
+1. Clonar repositorio
+2. Instalar dependencias: `npm install`
+3. Configurar variables de entorno
+4. Ejecutar migraciones: `npx prisma db push`
+5. Iniciar servidor: `npm run dev`
+
+### Producción
+1. Merge a main dispara deploy automático
+2. Vercel ejecuta build con Prisma
+3. Variables de entorno de producción aplicadas
+4. Migraciones ejecutadas automáticamente
+
+## Monitoreo
+
+- Vercel Analytics
+- Error tracking
+- Logs de base de datos
+- Métricas de rendimiento
+
+## Backups
+
+- Supabase maneja backups automáticos
+- Exportación manual disponible
+- Point-in-time recovery configurado 

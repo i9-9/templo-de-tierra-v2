@@ -1,23 +1,35 @@
 import { Prisma } from '@prisma/client';
+import { Decimal } from '@prisma/client/runtime/library';
+import { addDays, isBefore, isAfter } from 'date-fns';
 
-export function calcularPrecioTotal(precioPorNoche: Prisma.Decimal, fechaInicio: Date, fechaFin: Date): number {
-  const noches = Math.ceil((fechaFin.getTime() - fechaInicio.getTime()) / (1000 * 60 * 60 * 24));
-  return Number(precioPorNoche) * noches;
+export function calcularPrecioTotal(precioPorNoche: number | Decimal, fechaInicio: Date, fechaFin: Date): number {
+  const diferenciaDias = Math.ceil((fechaFin.getTime() - fechaInicio.getTime()) / (1000 * 60 * 60 * 24));
+  const precio = typeof precioPorNoche === 'number' ? precioPorNoche : precioPorNoche.toNumber();
+  return precio * diferenciaDias;
 }
 
-export function validarFechasReserva(fechaInicio: Date, fechaFin: Date): string | null {
+export function validarFechasReserva(fechaInicio: Date, fechaFin: Date): boolean {
   const hoy = new Date();
-  hoy.setHours(0, 0, 0, 0);
+  const fechaInicioDate = new Date(fechaInicio);
+  const fechaFinDate = new Date(fechaFin);
 
-  if (fechaInicio < hoy) {
-    return 'La fecha de inicio no puede ser en el pasado';
+  // Validar que las fechas sean futuras
+  if (isBefore(fechaInicioDate, hoy) || isBefore(fechaFinDate, hoy)) {
+    return false;
   }
 
-  if (fechaFin <= fechaInicio) {
-    return 'La fecha de fin debe ser posterior a la fecha de inicio';
+  // Validar que la fecha de fin sea posterior a la fecha de inicio
+  if (isBefore(fechaFinDate, fechaInicioDate)) {
+    return false;
   }
 
-  return null;
+  // Validar que la reserva no exceda los 30 días
+  const fechaMaxima = addDays(fechaInicioDate, 30);
+  if (isAfter(fechaFinDate, fechaMaxima)) {
+    return false;
+  }
+
+  return true;
 }
 
 export function formatearFecha(fecha: Date): string {

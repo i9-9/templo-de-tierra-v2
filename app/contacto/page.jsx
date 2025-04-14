@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function ContactoPage() {
   return (
-    <main className="pt-[120px] pb-16 px-[30px]">
+    <main className="container mx-auto px-4 pt-[150px] pb-16">
       <div className="grid grid-cols-12 mb-16">
         <div className="col-span-12 md:col-span-10 md:col-start-2 lg:col-span-8 lg:col-start-3 text-center">
           <h1 className="text-[2.5rem] md:text-[3.5rem] font-heading text-[#6F4C21] mb-6">

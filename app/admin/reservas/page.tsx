@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import { formatearFecha, formatearPrecio } from '@/lib/utils/reserva';
+import Link from 'next/link';
 
 export default async function AdminReservasPage() {
   const reservas = await prisma.reserva.findMany({
@@ -36,6 +37,9 @@ export default async function AdminReservasPage() {
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Estado
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Acciones
               </th>
             </tr>
           </thead>
@@ -78,6 +82,36 @@ export default async function AdminReservasPage() {
                   >
                     {reserva.estado}
                   </span>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                  <div className="flex space-x-2">
+                    {reserva.estado === 'PENDIENTE' && (
+                      <>
+                        <form action={`/api/admin/reservas/${reserva.id}/confirmar`} method="POST">
+                          <button
+                            type="submit"
+                            className="text-green-600 hover:text-green-800 font-medium"
+                          >
+                            Confirmar
+                          </button>
+                        </form>
+                        <form action={`/api/admin/reservas/${reserva.id}/cancelar`} method="POST">
+                          <button
+                            type="submit"
+                            className="text-red-600 hover:text-red-800 font-medium"
+                          >
+                            Cancelar
+                          </button>
+                        </form>
+                      </>
+                    )}
+                    <Link
+                      href={`/admin/reservas/${reserva.id}`}
+                      className="text-[#6F4C21] hover:text-[#5A3B1A] font-medium"
+                    >
+                      Ver detalles
+                    </Link>
+                  </div>
                 </td>
               </tr>
             ))}

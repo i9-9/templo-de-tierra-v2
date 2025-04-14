@@ -3,34 +3,26 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
-import { CreateReservaDTO, MetodoPago, validarFechasReserva, calcularPrecioTotal } from '@/lib/models/reserva';
-import { Decimal } from '@prisma/client/runtime/library';
-
-interface Templo {
-  id: string;
-  nombre: string;
-  descripcion: string;
-  descripcionCorta: string;
-  capacidad: number;
-  precio: Decimal | number;
-  imagenPrincipal: string;
-  imagenes: string[];
-  amenities: string[];
-  camas: string[];
-  slug: string;
-}
+import DatePicker from 'react-datepicker';
+import { es } from 'date-fns/locale';
+import { EstadoReserva, MetodoPago } from '@/lib/models/reserva';
+import { validarFechasReserva, calcularPrecioTotal } from '@/lib/utils/reserva';
+import "react-datepicker/dist/react-datepicker.css";
 
 interface ReservaFormProps {
-  templo: Templo;
+  temploId: string;
+  precioPorNoche: number;
+  capacidad: number;
+  nombre: string;
 }
 
-export default function ReservaForm({ templo }: ReservaFormProps) {
+export default function ReservaForm({ temploId, precioPorNoche, capacidad, nombre }: ReservaFormProps) {
   const router = useRouter();
   const { data: session } = useSession();
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const [formData, setFormData] = useState<Omit<CreateReservaDTO, 'userId'>>({
-    temploId: templo.id,
+  const [formData, setFormData] = useState({
+    temploId,
     fechaInicio: new Date(),
     fechaFin: new Date(),
     numeroHuespedes: 1,
@@ -51,11 +43,25 @@ export default function ReservaForm({ templo }: ReservaFormProps) {
         return;
       }
 
+      // Validar número de huéspedes
+      if (formData.numeroHuespedes > capacidad) {
+        setError(`El templo tiene una capacidad máxima de ${capacidad} huéspedes`);
+        return;
+      }
+
+      // Calcular precio total
+      const precioTotal = calcularPrecioTotal(
+        precioPorNoche,
+        formData.fechaInicio,
+        formData.fechaFin
+      );
+
       // Convert dates to ISO strings for API
       const reservaData = {
         ...formData,
         fechaInicio: formData.fechaInicio.toISOString(),
         fechaFin: formData.fechaFin.toISOString(),
+        precioTotal,
       };
 
       const response = await fetch('/api/reservas', {
@@ -88,101 +94,106 @@ export default function ReservaForm({ templo }: ReservaFormProps) {
     }));
   };
 
-  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: new Date(value),
-    }));
+  const handleDateChange = (date: Date | null, field: 'fechaInicio' | 'fechaFin') => {
+    if (date) {
+      setFormData(prev => ({
+        ...prev,
+        [field]: date,
+      }));
+    }
   };
 
-  const precioTotal = calcularPrecioTotal(
-    templo.precio,
-    formData.fechaInicio,
-    formData.fechaFin,
-    formData.numeroHuespedes
-  );
+  if (!session) {
+    return (
+      <div className="text-center py-8">
+        <p className="text-[#6F4C21] mb-4">Debes iniciar sesión para realizar una reserva</p>
+        <a
+          href="/auth/signin"
+          className="inline-flex items-center px-4 py-2 border border-[#6F4C21]/20 text-sm font-medium rounded-md shadow-sm text-[#6F4C21] bg-[#F5DC90] hover:bg-[#F5DC90]/80"
+        >
+          Iniciar sesión
+        </a>
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {error && (
-        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
           {error}
         </div>
       )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="fechaInicio" className="block text-sm font-medium text-[#6F4C21]/70">
+          <label htmlFor="fechaInicio" className="block text-sm font-medium text-[#6F4C21]">
             Fecha de llegada
           </label>
-          <input
-            type="date"
-            id="fechaInicio"
-            name="fechaInicio"
-            value={formData.fechaInicio.toISOString().split('T')[0]}
-            onChange={handleDateChange}
-            className="mt-1 block w-full rounded-md border-[#6F4C21]/20 bg-transparent shadow-sm focus:border-[#D8A34B] focus:ring-[#D8A34B] text-[#6F4C21]"
-            required
+          <DatePicker
+            selected={formData.fechaInicio}
+            onChange={(date) => handleDateChange(date, 'fechaInicio')}
+            className="mt-1 block w-full rounded-md border-[#6F4C21]/20 shadow-sm focus:border-[#6F4C21] focus:ring-[#6F4C21] text-base py-3 px-4"
+            dateFormat="dd/MM/yyyy"
+            locale={es}
+            minDate={new Date()}
           />
         </div>
 
         <div>
-          <label htmlFor="fechaFin" className="block text-sm font-medium text-[#6F4C21]/70">
+          <label htmlFor="fechaFin" className="block text-sm font-medium text-[#6F4C21]">
             Fecha de salida
           </label>
-          <input
-            type="date"
-            id="fechaFin"
-            name="fechaFin"
-            value={formData.fechaFin.toISOString().split('T')[0]}
-            onChange={handleDateChange}
-            className="mt-1 block w-full rounded-md border-[#6F4C21]/20 bg-transparent shadow-sm focus:border-[#D8A34B] focus:ring-[#D8A34B] text-[#6F4C21]"
-            required
+          <DatePicker
+            selected={formData.fechaFin}
+            onChange={(date) => handleDateChange(date, 'fechaFin')}
+            className="mt-1 block w-full rounded-md border-[#6F4C21]/20 shadow-sm focus:border-[#6F4C21] focus:ring-[#6F4C21] text-base py-3 px-4"
+            dateFormat="dd/MM/yyyy"
+            locale={es}
+            minDate={formData.fechaInicio}
           />
-        </div>
-
-        <div>
-          <label htmlFor="numeroHuespedes" className="block text-sm font-medium text-[#6F4C21]/70">
-            Número de huéspedes
-          </label>
-          <input
-            type="number"
-            id="numeroHuespedes"
-            name="numeroHuespedes"
-            min="1"
-            max={templo.capacidad}
-            value={formData.numeroHuespedes}
-            onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-[#6F4C21]/20 bg-transparent shadow-sm focus:border-[#D8A34B] focus:ring-[#D8A34B] text-[#6F4C21]"
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="metodoPago" className="block text-sm font-medium text-[#6F4C21]/70">
-            Método de pago
-          </label>
-          <select
-            id="metodoPago"
-            name="metodoPago"
-            value={formData.metodoPago}
-            onChange={handleChange}
-            className="mt-1 block w-full rounded-md border-[#6F4C21]/20 bg-transparent shadow-sm focus:border-[#D8A34B] focus:ring-[#D8A34B] text-[#6F4C21]"
-            required
-          >
-            {Object.values(MetodoPago).map((metodo) => (
-              <option key={metodo} value={metodo}>
-                {metodo.charAt(0).toUpperCase() + metodo.slice(1)}
-              </option>
-            ))}
-          </select>
         </div>
       </div>
 
       <div>
-        <label htmlFor="notas" className="block text-sm font-medium text-[#6F4C21]/70">
-          Notas adicionales
+        <label htmlFor="numeroHuespedes" className="block text-sm font-medium text-[#6F4C21]">
+          Número de huéspedes
+        </label>
+        <select
+          id="numeroHuespedes"
+          name="numeroHuespedes"
+          value={formData.numeroHuespedes}
+          onChange={handleChange}
+          className="mt-1 block w-full rounded-md border-[#6F4C21]/20 shadow-sm focus:border-[#6F4C21] focus:ring-[#6F4C21] text-base py-3 px-4"
+        >
+          {[...Array(capacidad)].map((_, i) => (
+            <option key={i + 1} value={i + 1}>
+              {i + 1} {i + 1 === 1 ? 'huésped' : 'huéspedes'}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div>
+        <label htmlFor="metodoPago" className="block text-sm font-medium text-[#6F4C21]">
+          Método de pago
+        </label>
+        <select
+          id="metodoPago"
+          name="metodoPago"
+          value={formData.metodoPago}
+          onChange={handleChange}
+          className="mt-1 block w-full rounded-md border-[#6F4C21]/20 shadow-sm focus:border-[#6F4C21] focus:ring-[#6F4C21] text-base py-3 px-4"
+        >
+          <option value={MetodoPago.TARJETA}>Tarjeta de crédito/débito</option>
+          <option value={MetodoPago.TRANSFERENCIA}>Transferencia bancaria</option>
+          <option value={MetodoPago.EFECTIVO}>Efectivo</option>
+        </select>
+      </div>
+
+      <div>
+        <label htmlFor="notas" className="block text-sm font-medium text-[#6F4C21]">
+          Notas adicionales (opcional)
         </label>
         <textarea
           id="notas"
@@ -190,24 +201,29 @@ export default function ReservaForm({ templo }: ReservaFormProps) {
           rows={3}
           value={formData.notas}
           onChange={handleChange}
-          className="mt-1 block w-full rounded-md border-[#6F4C21]/20 bg-transparent shadow-sm focus:border-[#D8A34B] focus:ring-[#D8A34B] text-[#6F4C21]"
+          className="mt-1 block w-full rounded-md border-[#6F4C21]/20 shadow-sm focus:border-[#6F4C21] focus:ring-[#6F4C21] text-base py-3 px-4"
+          placeholder="Alguna preferencia o requerimiento especial..."
         />
       </div>
 
-      <div className="bg-[#6F4C21]/5 p-6 rounded-lg">
+      <div className="bg-[#F5DC90]/20 p-4 rounded-lg">
         <h3 className="text-lg font-medium text-[#6F4C21]">Resumen de la reserva</h3>
-        <div className="mt-4 space-y-2">
+        <div className="mt-2 space-y-2">
           <p className="text-sm text-[#6F4C21]/80">
-            Precio por noche: ${templo.precio.toFixed(2)}
+            Templo: <span className="font-medium">{nombre}</span>
           </p>
           <p className="text-sm text-[#6F4C21]/80">
-            Número de noches: {Math.ceil((formData.fechaFin.getTime() - formData.fechaInicio.getTime()) / (1000 * 60 * 60 * 24))}
+            Precio por noche: <span className="font-medium">${precioPorNoche}</span>
           </p>
           <p className="text-sm text-[#6F4C21]/80">
-            Número de huéspedes: {formData.numeroHuespedes}
+            Noches: <span className="font-medium">
+              {Math.ceil((formData.fechaFin.getTime() - formData.fechaInicio.getTime()) / (1000 * 60 * 60 * 24))}
+            </span>
           </p>
-          <p className="text-lg font-bold text-[#6F4C21] mt-4">
-            Total: ${precioTotal.toFixed(2)}
+          <p className="text-lg font-medium text-[#6F4C21]">
+            Total: <span className="font-bold">
+              ${calcularPrecioTotal(precioPorNoche, formData.fechaInicio, formData.fechaFin)}
+            </span>
           </p>
         </div>
       </div>
@@ -215,7 +231,7 @@ export default function ReservaForm({ templo }: ReservaFormProps) {
       <button
         type="submit"
         disabled={loading}
-        className="w-full px-6 py-3 text-white bg-[#D8A34B] hover:bg-[#6F4C21] rounded-md font-medium transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-[#6F4C21] hover:bg-[#5A3B1A] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#6F4C21] disabled:opacity-50"
       >
         {loading ? 'Procesando...' : 'Confirmar reserva'}
       </button>
