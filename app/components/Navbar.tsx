@@ -27,10 +27,14 @@ export default function Navbar() {
     const fetchTemplos = async () => {
       try {
         const response = await fetch('/api/templos')
+        if (!response.ok) {
+          throw new Error('Failed to fetch templos')
+        }
         const data = await response.json()
         setTemplos(data)
       } catch (error) {
         console.error('Error al cargar los templos:', error)
+        setTemplos([]) // Set empty array as fallback
       }
     }
 

@@ -8,28 +8,28 @@ export function calcularPrecioTotal(precioPorNoche: number | Decimal, fechaInici
   return precio * diferenciaDias;
 }
 
-export function validarFechasReserva(fechaInicio: Date, fechaFin: Date): boolean {
+export function validarFechasReserva(fechaInicio: Date, fechaFin: Date): string | null {
   const hoy = new Date();
   const fechaInicioDate = new Date(fechaInicio);
   const fechaFinDate = new Date(fechaFin);
 
   // Validar que las fechas sean futuras
   if (isBefore(fechaInicioDate, hoy) || isBefore(fechaFinDate, hoy)) {
-    return false;
+    return 'Las fechas de reserva deben ser futuras';
   }
 
   // Validar que la fecha de fin sea posterior a la fecha de inicio
   if (isBefore(fechaFinDate, fechaInicioDate)) {
-    return false;
+    return 'La fecha de fin debe ser posterior a la fecha de inicio';
   }
 
   // Validar que la reserva no exceda los 30 días
   const fechaMaxima = addDays(fechaInicioDate, 30);
   if (isAfter(fechaFinDate, fechaMaxima)) {
-    return false;
+    return 'La reserva no puede exceder los 30 días';
   }
 
-  return true;
+  return null;
 }
 
 export function formatearFecha(fecha: Date): string {

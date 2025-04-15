@@ -1,38 +1,37 @@
-import { NextResponse } from 'next/server';
-import { Resend } from 'resend';
+import nodemailer from 'nodemailer';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const transporter = nodemailer.createTransport({
+  host: process.env.SMTP_HOST,
+  port: process.env.SMTP_PORT,
+  secure: process.env.SMTP_SECURE === 'true',
+  auth: {
+    user: process.env.SMTP_USER,
+    pass: process.env.SMTP_PASSWORD,
+  },
+});
 
 export async function POST(request) {
   try {
-    const { name, email, message, recaptchaToken } = await request.json();
-    console.log('Datos recibidos:', { name, email, message });
+    const { name, email, message } = await request.json();
 
-    // Verificar reCAPTCHA
-    const recaptchaResponse = await fetch('https://www.google.com/recaptcha/api/siteverify', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptchaToken}`,
-    });
-
-    const recaptchaData = await recaptchaResponse.json();
-    console.log('Respuesta reCAPTCHA:', recaptchaData);
-
-    if (!recaptchaData.success || recaptchaData.score < 0.7) {
-      console.error('Error de verificación reCAPTCHA:', recaptchaData);
-      return NextResponse.json(
-        { error: 'Error de verificación de seguridad. Por favor, intenta nuevamente.' },
+    // Validate input
+    if (!name || !email || !message) {
+      return Response.json(
+        { error: 'Todos los campos son requeridos' },
         { status: 400 }
       );
     }
 
-    // Enviar email
-    const { data, error } = await resend.emails.send({
-      from: 'Templo de Tierra <templodetierra.ashram@gmail.com>',
-      to: ['yvan.vrs@gmail.com'],
+    // Send email
+    await transporter.sendMail({
+      from: process.env.SMTP_FROM,
+      to: process.env.SMTP_USER,
       subject: `Nuevo mensaje de contacto de ${name}`,
+      text: `
+        Nombre: ${name}
+        Email: ${email}
+        Mensaje: ${message}
+      `,
       html: `
         <h2>Nuevo mensaje de contacto</h2>
         <p><strong>Nombre:</strong> ${name}</p>
@@ -42,20 +41,11 @@ export async function POST(request) {
       `,
     });
 
-    if (error) {
-      console.error('Error al enviar email:', error);
-      return NextResponse.json(
-        { error: `Error al enviar el email: ${error.message}` },
-        { status: 500 }
-      );
-    }
-
-    console.log('Email enviado con éxito:', data);
-    return NextResponse.json({ success: true });
+    return Response.json({ success: true });
   } catch (error) {
-    console.error('Error interno del servidor:', error);
-    return NextResponse.json(
-      { error: 'Error interno del servidor' },
+    console.error('Error sending email:', error);
+    return Response.json(
+      { error: 'Error al enviar el mensaje' },
       { status: 500 }
     );
   }

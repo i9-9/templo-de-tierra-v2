@@ -85,4 +85,18 @@ export const enviarEmailReserva = async (data: ReservaEmailData) => {
     console.error('Error sending email:', error);
     throw new Error('Failed to send email');
   }
+};
+
+export const sendReservationEmail = async (reserva: any, type: 'confirmation' | 'update' | 'cancellation') => {
+  const estado = type === 'confirmation' ? 'confirmada' : 'cancelada';
+  
+  await enviarEmailReserva({
+    email: reserva.user.email,
+    nombre: reserva.user.name || 'Usuario',
+    templo: reserva.templo.nombre,
+    fechaInicio: reserva.fechaInicio.toISOString(),
+    fechaFin: reserva.fechaFin.toISOString(),
+    precioTotal: Number(reserva.precioTotal),
+    estado
+  });
 }; 

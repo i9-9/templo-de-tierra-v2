@@ -5,6 +5,12 @@ export default async function AdminUsuariosPage() {
     orderBy: {
       email: 'asc',
     },
+    select: {
+      id: true,
+      email: true,
+      name: true,
+      createdAt: true,
+    },
   });
 
   return (

@@ -4,8 +4,9 @@
  */
 export function validateEnv() {
   const requiredEnvVars = [
-    // Base de Datos
-    'DATABASE_URL',
+    // Supabase
+    'NEXT_PUBLIC_SUPABASE_URL',
+    'NEXT_PUBLIC_SUPABASE_ANON_KEY',
 
     // SMTP
     'SMTP_HOST',
@@ -18,10 +19,6 @@ export function validateEnv() {
     // NextAuth
     'NEXTAUTH_URL',
     'NEXTAUTH_SECRET',
-
-    // Google OAuth
-    'GOOGLE_CLIENT_ID',
-    'GOOGLE_CLIENT_SECRET',
 
     // Recaptcha
     'NEXT_PUBLIC_RECAPTCHA_SITE_KEY',

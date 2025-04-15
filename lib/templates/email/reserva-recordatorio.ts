@@ -1,4 +1,4 @@
-import { baseEmailTemplate } from './base';
+import { baseTemplate } from './base';
 
 interface ReservaRecordatorioProps {
   nombreUsuario: string;
@@ -7,6 +7,7 @@ interface ReservaRecordatorioProps {
   fechaFin: string;
   diasRestantes: number;
   reservaId: string;
+  logoCid: string;
 }
 
 export const reservaRecordatorioTemplate = ({
@@ -16,25 +17,29 @@ export const reservaRecordatorioTemplate = ({
   fechaFin,
   diasRestantes,
   reservaId,
+  logoCid,
 }: ReservaRecordatorioProps) => {
-  const title = 'Recordatorio de tu próxima reserva';
   const content = `
-    Hola ${nombreUsuario},
+    <h2>Recordatorio de tu próxima reserva</h2>
     
-    Tu reserva en ${nombreTemplo} está próxima a comenzar.
+    <p>Hola ${nombreUsuario},</p>
     
-    Detalles de tu reserva:
-    - Fecha de inicio: ${fechaInicio}
-    - Fecha de fin: ${fechaFin}
-    - Días restantes: ${diasRestantes}
+    <p>Tu reserva en ${nombreTemplo} está próxima a comenzar.</p>
     
-    Te recomendamos revisar los detalles de tu reserva y preparar todo lo necesario para tu estadía.
+    <div class="details-box">
+      <h3>Detalles de tu reserva:</h3>
+      <p>Fecha de inicio: ${fechaInicio}</p>
+      <p>Fecha de fin: ${fechaFin}</p>
+      <p>Días restantes: ${diasRestantes}</p>
+    </div>
+    
+    <p>Te recomendamos revisar los detalles de tu reserva y preparar todo lo necesario para tu estadía.</p>
+    
+    <p>Puedes ver los detalles completos en tu <a href="${process.env.APP_URL}/reservas/${reservaId}" style="color: #6F4C21; font-weight: bold;">panel de usuario</a>.</p>
   `;
 
-  return baseEmailTemplate({
-    title,
+  return baseTemplate({
     content,
-    buttonText: 'Ver detalles de la reserva',
-    buttonUrl: `${process.env.APP_URL}/reservas/${reservaId}`,
+    logoCid,
   });
 }; 

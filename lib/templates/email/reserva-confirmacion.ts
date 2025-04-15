@@ -1,4 +1,4 @@
-import { baseEmailTemplate } from './base';
+import { baseTemplate } from './base';
 
 interface ReservaConfirmacionProps {
   nombreUsuario: string;
@@ -7,6 +7,7 @@ interface ReservaConfirmacionProps {
   fechaFin: string;
   precioTotal: number;
   reservaId: string;
+  logoCid: string;
 }
 
 export const reservaConfirmacionTemplate = ({
@@ -16,25 +17,27 @@ export const reservaConfirmacionTemplate = ({
   fechaFin,
   precioTotal,
   reservaId,
+  logoCid,
 }: ReservaConfirmacionProps) => {
-  const title = '¡Reserva Confirmada!';
   const content = `
-    Hola ${nombreUsuario},
+    <h2>¡Reserva Confirmada!</h2>
     
-    Tu reserva en ${nombreTemplo} ha sido confirmada exitosamente.
+    <p>Hola ${nombreUsuario},</p>
     
-    Detalles de tu reserva:
-    - Fecha de inicio: ${fechaInicio}
-    - Fecha de fin: ${fechaFin}
-    - Precio total: $${precioTotal}
+    <p>Tu reserva en ${nombreTemplo} ha sido confirmada exitosamente.</p>
     
-    Puedes ver los detalles de tu reserva en tu panel de usuario.
+    <div class="details-box">
+      <h3>Detalles de tu reserva:</h3>
+      <p>Fecha de inicio: ${fechaInicio}</p>
+      <p>Fecha de fin: ${fechaFin}</p>
+      <p>Precio total: $${precioTotal.toFixed(2)}</p>
+    </div>
+    
+    <p>Puedes ver los detalles de tu reserva en tu <a href="${process.env.APP_URL}/reservas/${reservaId}" style="color: #6F4C21; font-weight: bold;">panel de usuario</a>.</p>
   `;
 
-  return baseEmailTemplate({
-    title,
+  return baseTemplate({
     content,
-    buttonText: 'Ver mi reserva',
-    buttonUrl: `${process.env.APP_URL}/reservas/${reservaId}`,
+    logoCid,
   });
 }; 

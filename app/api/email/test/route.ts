@@ -3,18 +3,15 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    await enviarEmailReserva(
-      'templodetierra.ashram@gmail.com', // Email real de destino
-      'confirmacion',
-      {
-        nombreUsuario: 'Usuario de Prueba',
-        nombreTemplo: 'Templo del Sol',
-        fechaInicio: '2024-03-20',
-        fechaFin: '2024-03-25',
-        precioTotal: 1000,
-        reservaId: 'test-123'
-      }
-    );
+    await enviarEmailReserva({
+      email: 'templodetierra.ashram@gmail.com',
+      nombre: 'Usuario de Prueba',
+      templo: 'Templo del Sol',
+      fechaInicio: '2024-03-20',
+      fechaFin: '2024-03-25',
+      precioTotal: 1000,
+      estado: 'confirmada'
+    });
 
     return NextResponse.json({ message: 'Email de prueba enviado correctamente' });
   } catch (error) {

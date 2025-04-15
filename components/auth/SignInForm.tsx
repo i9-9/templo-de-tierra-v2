@@ -2,35 +2,43 @@
 
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
-import SignInButton from './SignInButton';
+import { useRouter, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
 
 export default function SignInForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const message = searchParams.get('message');
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsLoading(true);
     setError(null);
+    setIsLoading(true);
+
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
 
     try {
       const result = await signIn('credentials', {
-        redirect: false,
-        email: (e.target as HTMLFormElement).email.value,
-        password: (e.target as HTMLFormElement).password.value,
+        email,
+        password,
+        redirect: false
       });
+
+      console.log('Sign in result:', result);
 
       if (result?.error) {
         setError('Credenciales inválidas');
-      } else {
-        router.push('/');
-        router.refresh();
+        return;
       }
-    } catch (error) {
-      console.error('Error during sign in:', error);
-      setError('Ocurrió un error al iniciar sesión');
+
+      router.push('/dashboard');
+    } catch (err) {
+      console.error('Sign in error:', err);
+      setError('Error al iniciar sesión');
     } finally {
       setIsLoading(false);
     }
@@ -39,6 +47,18 @@ export default function SignInForm() {
   return (
     <div className="mt-8 space-y-6">
       <form onSubmit={handleSubmit} className="space-y-6">
+        {message && (
+          <div className="bg-green-50 text-green-500 p-3 rounded-lg text-sm">
+            {message}
+          </div>
+        )}
+        
+        {error && (
+          <div className="bg-red-50 text-red-500 p-3 rounded-lg text-sm">
+            {error}
+          </div>
+        )}
+        
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-gray-700">
             Correo electrónico
@@ -67,12 +87,6 @@ export default function SignInForm() {
           />
         </div>
 
-        {error && (
-          <div className="text-red-600 text-sm">
-            {error}
-          </div>
-        )}
-
         <div>
           <button
             type="submit"
@@ -95,7 +109,9 @@ export default function SignInForm() {
         </div>
 
         <div className="mt-6">
-          <SignInButton />
+          <Link href="/auth/register" className="text-amber-600 hover:text-amber-500">
+            Regístrate
+          </Link>
         </div>
       </div>
     </div>

@@ -62,14 +62,13 @@ export async function POST(request: Request) {
     // Enviar email de notificación
     try {
       await enviarEmailReserva({
-        nombreUsuario: session.user.name || 'Usuario',
-        emailUsuario: session.user.email || '',
-        nombreTemplo: templo.nombre,
-        fechaInicio: new Date(fechaInicio),
-        fechaFin: new Date(fechaFin),
-        numeroHuespedes,
+        email: session.user.email || '',
+        nombre: session.user.name || 'Usuario',
+        templo: templo.nombre,
+        fechaInicio: new Date(fechaInicio).toISOString(),
+        fechaFin: new Date(fechaFin).toISOString(),
         precioTotal: precioTotal.toNumber(),
-        estado: EstadoReserva.PENDIENTE
+        estado: 'confirmada'
       });
     } catch (error) {
       console.error('Error al enviar el email de notificación:', error);
@@ -184,14 +183,13 @@ export async function PATCH(request: Request) {
     // Enviar email de notificación
     try {
       await enviarEmailReserva({
-        nombreUsuario: reserva.user.name || 'Usuario',
-        emailUsuario: reserva.user.email || '',
-        nombreTemplo: reserva.templo.nombre,
-        fechaInicio: reserva.fechaInicio,
-        fechaFin: reserva.fechaFin,
-        numeroHuespedes: reserva.numeroHuespedes,
+        email: reserva.user.email || '',
+        nombre: reserva.user.name || 'Usuario',
+        templo: reserva.templo.nombre,
+        fechaInicio: reserva.fechaInicio.toISOString(),
+        fechaFin: reserva.fechaFin.toISOString(),
         precioTotal: reserva.precioTotal.toNumber(),
-        estado: EstadoReserva.CANCELADA
+        estado: 'cancelada'
       });
     } catch (error) {
       console.error('Error al enviar el email de notificación:', error);

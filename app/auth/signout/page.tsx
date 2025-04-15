@@ -1,6 +1,6 @@
 'use client';
 
-import { signOut } from 'next-auth/react';
+import { signOut } from '@/lib/auth';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
@@ -9,7 +9,7 @@ export default function SignOutPage() {
 
   useEffect(() => {
     const handleSignOut = async () => {
-      await signOut({ redirect: false });
+      await signOut();
       router.push('/');
       router.refresh();
     };

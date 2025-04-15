@@ -1,25 +1,14 @@
-import { prisma } from '@/lib/prisma';
 import { NextResponse } from 'next/server';
+import { getAllTemplos } from '@/lib/data';
 
 export async function GET() {
   try {
-    const templos = await prisma.templo.findMany({
-      select: {
-        id: true,
-        nombre: true,
-        slug: true,
-        capacidad: true,
-      },
-      orderBy: {
-        nombre: 'asc',
-      },
-    });
-
+    const templos = getAllTemplos();
     return NextResponse.json(templos);
   } catch (error) {
-    console.error('Error al obtener los templos:', error);
+    console.error('Error fetching templos:', error);
     return NextResponse.json(
-      { error: 'Error al obtener los templos' },
+      { error: 'Failed to fetch templos' },
       { status: 500 }
     );
   }
