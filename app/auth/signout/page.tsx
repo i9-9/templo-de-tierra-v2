@@ -1,6 +1,6 @@
 'use client';
 
-import { signOut } from '@/lib/auth';
+import { signOut } from '@/lib/auth.client';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
@@ -10,7 +10,6 @@ export default function SignOutPage() {
   useEffect(() => {
     const handleSignOut = async () => {
       await signOut();
-      router.push('/');
       router.refresh();
     };
 
