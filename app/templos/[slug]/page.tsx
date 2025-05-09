@@ -3,13 +3,18 @@ import { getTemploBySlug } from '@/lib/templos'
 import ImageGallery from '@/app/components/ImageGallery'
 import ReservaForm from '@/app/components/ReservaForm'
 
+interface PageProps {
+  params: Promise<{ slug: string }>;
+}
+
 export const metadata = {
   title: 'Templo | Templo de Tierra',
   description: 'Descubre este templo único de bioconstrucción, diseñado para ofrecerte una experiencia de conexión profunda con la naturaleza.',
 }
 
-export default async function TemploPage({ params }: { params: { slug: string } }) {
-  const templo = await getTemploBySlug(params.slug)
+export default async function TemploPage({ params }: PageProps) {
+  const resolvedParams = await params;
+  const templo = await getTemploBySlug(resolvedParams.slug)
   
   if (!templo) {
     notFound()

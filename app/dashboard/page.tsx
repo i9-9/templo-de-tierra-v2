@@ -14,7 +14,7 @@ export default async function DashboardPage() {
   ])
 
   // Obtener las últimas reservas
-  const ultimasReservas = await prisma.reserva.findMany({
+  const reservas = await prisma.reserva.findMany({
     take: 5,
     orderBy: {
       createdAt: 'desc',
@@ -23,7 +23,26 @@ export default async function DashboardPage() {
       templo: true,
       user: true,
     },
-  }) as Reserva[]
+  })
+
+  // Convertir las fechas y decimales a los tipos correctos
+  const ultimasReservas = reservas.map(reserva => ({
+    ...reserva,
+    fechaInicio: new Date(reserva.fechaInicio),
+    fechaFin: new Date(reserva.fechaFin),
+    createdAt: new Date(reserva.createdAt),
+    updatedAt: new Date(reserva.updatedAt),
+    templo: {
+      ...reserva.templo,
+      createdAt: new Date(reserva.templo.createdAt),
+      updatedAt: new Date(reserva.templo.updatedAt),
+    },
+    user: {
+      ...reserva.user,
+      createdAt: new Date(reserva.user.createdAt),
+      emailVerified: reserva.user.emailVerified ? new Date(reserva.user.emailVerified) : null,
+    }
+  })) as Reserva[]
 
   return (
     <div className="space-y-6">

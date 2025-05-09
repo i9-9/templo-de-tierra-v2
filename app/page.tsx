@@ -5,6 +5,7 @@ import { getAllTemplos } from '@/lib/data'
 import { Metadata } from 'next'
 import Button from '@/app/components/ui/Button'
 import AnimateOnScroll from '@/app/components/ui/AnimateOnScroll'
+import FloatingActionButton from '@/app/components/ui/FloatingActionButton'
 
 export const metadata: Metadata = {
   title: "Templo de Tierra | Alojamientos Sostenibles en Bioconstrucción",
@@ -34,7 +35,6 @@ export default function Home() {
   return (
     <main>
       <Hero />
-      
       {/* Templos Destacados */}
       <section className="w-full py-24 mt-8">
         <AnimateOnScroll animationClass="fadeUp" delay={0}>
@@ -263,6 +263,13 @@ export default function Home() {
           </div>
         </div>
       </div>
+      
+      {/* Floating action button */}
+      <FloatingActionButton 
+        href="/templos" 
+        label="Reservar ahora" 
+        variant="primary" 
+      />
     </main>
   );
 }

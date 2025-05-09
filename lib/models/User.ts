@@ -4,19 +4,21 @@ declare module "next-auth" {
   interface Session {
     user: {
       id: string;
-      name: string;
-      email: string;
-      image?: string;
-    } & DefaultSession["user"];
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+      isAdmin: boolean;
+    }
     accessToken?: string;
   }
 }
 
 export interface User {
   id: string;
-  name: string;
-  email: string;
-  image?: string;
+  name?: string | null;
+  email?: string | null;
+  image?: string | null;
+  isAdmin: boolean;
   createdAt: Date;
   updatedAt: Date;
 } 

@@ -1,14 +1,25 @@
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import { cookies } from 'next/headers';
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from '@/lib/auth';
+import { redirect } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
+import { prisma } from '@/lib/prisma';
+import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline';
 
 export default async function AdminTemplos() {
-  const supabase = createServerComponentClient({ cookies });
+  const session = await getServerSession(authOptions);
+  
+  // Verificar que el usuario esté autenticado y sea admin
+  if (!session || !session.user.isAdmin) {
+    redirect('/auth/signin');
+  }
 
-  const { data: templos } = await supabase
-    .from('templos')
-    .select('*')
-    .order('created_at', { ascending: false });
+  // Obtener la lista de templos usando Prisma
+  const templos = await prisma.templo.findMany({
+    orderBy: {
+      createdAt: 'desc'
+    }
+  });
 
   return (
     <div className="space-y-6">
@@ -44,50 +55,77 @@ export default async function AdminTemplos() {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {templos?.map((templo) => (
-              <tr key={templo.id}>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm font-medium text-gray-900">
-                    {templo.nombre}
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">{templo.capacidad}</div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-900">
-                    ${templo.precio.toFixed(2)}
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <span
-                    className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                      templo.destacado
-                        ? 'bg-green-100 text-green-800'
-                        : 'bg-gray-100 text-gray-800'
-                    }`}
-                  >
-                    {templo.destacado ? 'Sí' : 'No'}
-                  </span>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                  <Link
-                    href={`/admin/templos/${templo.id}/editar`}
-                    className="text-blue-600 hover:text-blue-900 mr-4"
-                  >
-                    Editar
-                  </Link>
-                  <button
-                    className="text-red-600 hover:text-red-900"
-                    onClick={() => {
-                      // TODO: Implementar eliminación
-                    }}
-                  >
-                    Eliminar
-                  </button>
+            {templos.length > 0 ? (
+              templos.map((templo) => (
+                <tr key={templo.id}>
+                  <td className="px-6 py-4">
+                    <div className="flex items-center">
+                      {templo.imagenPrincipal && (
+                        <div className="relative w-10 h-10 rounded-full overflow-hidden mr-3">
+                          <Image 
+                            src={templo.imagenPrincipal} 
+                            alt={templo.nombre} 
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                      )}
+                      <div>
+                        <div className="text-sm font-medium text-gray-900">
+                          {templo.nombre}
+                        </div>
+                        <div className="text-sm text-gray-500">
+                          {templo.slug}
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-gray-900">{templo.capacidad}</div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-gray-900">
+                      ${parseFloat(templo.precio.toString()).toFixed(2)}
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <span
+                      className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                        templo.destacado
+                          ? 'bg-green-100 text-green-800'
+                          : 'bg-gray-100 text-gray-800'
+                      }`}
+                    >
+                      {templo.destacado ? 'Sí' : 'No'}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <div className="flex space-x-2">
+                      <Link
+                        href={`/admin/templos/${templo.id}/editar`}
+                        className="text-blue-600 hover:text-blue-900"
+                      >
+                        <PencilIcon className="w-5 h-5" />
+                        <span className="sr-only">Editar</span>
+                      </Link>
+                      <Link
+                        href={`/admin/templos/${templo.id}/eliminar`}
+                        className="text-red-600 hover:text-red-900"
+                      >
+                        <TrashIcon className="w-5 h-5" />
+                        <span className="sr-only">Eliminar</span>
+                      </Link>
+                    </div>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={5} className="px-6 py-4 text-center text-gray-500">
+                  No hay templos registrados. <Link href="/admin/templos/nuevo" className="text-blue-600 hover:underline">Crear uno nuevo</Link>
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>

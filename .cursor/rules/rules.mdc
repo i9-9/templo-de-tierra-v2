@@ -1,6 +1,111 @@
----
-description: 
-globs: 
-alwaysApply: true
----
- 
+# Reglas de Diseño - Templo de Tierra
+
+## Navbar Fijo (Regla Crítica)
+
+### Altura y Espaciado
+- Desktop: Navbar altura fija de 120px
+- Mobile: Navbar altura fija de 80px
+- TODAS las páginas deben usar:
+  ```tsx
+  <main className="pt-[120px] md:pt-[80px]">
+    {/* Contenido */}
+  </main>
+  ```
+- Los elementos con posicionamiento absoluto/fijo deben usar:
+  ```tsx
+  <div className="absolute top-[120px] md:top-[80px] left-0">
+    {/* Contenido */}
+  </div>
+  ```
+
+### Implementación Base
+```tsx
+// Estructura base para todas las páginas (responsive)
+<main className="pt-[120px] md:pt-[80px]">
+  {/* Contenido */}
+</main>
+
+// Elementos posicionados (responsive)
+<div className="absolute top-[120px] md:top-[80px] left-0">
+  {/* Contenido */}
+</div>
+
+// Modales y overlays (responsive)
+<div className="fixed inset-0 z-50 pt-[120px] md:pt-[80px]">
+  {/* Contenido */}
+</div>
+```
+
+### Consideraciones Especiales
+1. **Z-index**: 
+   - Navbar: z-index alto en todos los dispositivos
+   - Modales/overlays deben superar el z-index del navbar
+2. **Scroll**: 
+   - Desktop: `scroll-mt-[120px]`
+   - Mobile: `scroll-mt-[80px]`
+3. **Responsive**:
+   - Usar breakpoint `md:` para cambios en la altura del navbar
+   - Asegurar que el contenido se ajuste correctamente en ambos casos
+4. **Menú Mobile**:
+   - El menú desplegable debe aparecer debajo del navbar
+   - Considerar el espacio del navbar al calcular posiciones
+
+### Verificación Obligatoria
+Antes de cualquier implementación, verificar:
+- ¿El contenido respeta el espacio del navbar en desktop (120px) y mobile (80px)?
+- ¿Los elementos posicionados consideran el offset en ambos casos?
+- ¿El z-index es correcto en todos los dispositivos?
+- ¿La implementación es responsive y se ajusta correctamente?
+- ¿El menú mobile funciona correctamente con el navbar?
+
+## Sistema de Colores
+- Principal: `#6F4C21` (Marrón)
+- Secundario: `#F5DC90` (Amarillo)
+- Fondos: `#F5DC90/20` (Amarillo claro)
+
+## Tipografía
+- Títulos: Font Heading
+- Texto: Font Sans 
+
+# Reglas del Proyecto
+
+## Diseño y Estilos
+
+### Espaciado y Márgenes
+- Todas las páginas deben seguir la estructura base:
+  ```tsx
+  <div className="container mx-auto px-4 pt-[150px] pb-8">
+    {/* Contenido */}
+  </div>
+  ```
+- Usar clases de Tailwind para espaciado:
+  - Entre secciones: `space-y-16`
+  - Entre elementos relacionados: `space-y-8`
+  - Entre elementos dentro de una sección: `space-y-4`
+- Mantener consistencia en el responsive design:
+  - Móvil: `px-2`
+  - Tablet: `px-4`
+  - Desktop: `px-6`
+
+### Componentes
+- Los componentes deben respetar el espaciado de su contenedor
+- Documentar cualquier excepción a las reglas de espaciado
+- Usar valores predefinidos de Tailwind en lugar de valores personalizados
+
+### ⚠️ Advertencias Importantes
+- **NO** eliminar las funciones asíncronas (`async`) de los componentes que interactúan con la base de datos
+- Las funciones asíncronas son necesarias para:
+  - Conexión con la base de datos
+  - Fetching de datos
+  - Operaciones que requieren esperar una respuesta
+- Ejemplo correcto:
+  ```tsx
+  export default async function Page() {
+    const data = await prisma.templo.findMany();
+    return (
+      <div className="container mx-auto px-4 pt-[150px] pb-8">
+        {/* Contenido */}
+      </div>
+    );
+  }
+  ``` 

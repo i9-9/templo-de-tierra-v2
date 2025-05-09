@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import RegisterForm from '@/components/auth/RegisterForm'
+import RegisterForm from '@/app/components/auth/RegisterForm'
 import PageLayout from '@/app/components/PageLayout'
 
 export const metadata: Metadata = {
@@ -10,14 +10,9 @@ export const metadata: Metadata = {
 export default function RegisterPage() {
   return (
     <PageLayout>
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-24 bg-warm-sand">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-earth-brown">
-            Crear cuenta
-          </h2>
-        </div>
-
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+      <div className="container mx-auto px-4 py-8">
+        <div className="max-w-md mx-auto bg-[#F5DC90]/30 p-8 rounded-lg shadow-sm border border-[#6F4C21]/10">
+          <h1 className="text-2xl font-heading text-[#6F4C21] text-center mb-6">Crear Cuenta</h1>
           <RegisterForm />
         </div>
       </div>

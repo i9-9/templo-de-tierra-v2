@@ -1,20 +1,20 @@
-const { PrismaClient } = require('@prisma/client');
-const { hash } = require('bcryptjs');
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
 async function main() {
-  // Crear admin user
-  const hashedPassword = await hash('admin123', 12);
-  await prisma.user.upsert({
-    where: { email: 'admin@templodetierra.com' },
+  // Create admin user
+  const admin = await prisma.user.upsert({
+    where: { email: 'admin@example.com' },
     update: {},
     create: {
-      email: 'admin@templodetierra.com',
+      email: 'admin@example.com',
       name: 'Admin',
-      password: hashedPassword,
+      isAdmin: true,
     },
   });
+
+  console.log({ admin });
 
   // Crear templos de prueba
   const templos = [

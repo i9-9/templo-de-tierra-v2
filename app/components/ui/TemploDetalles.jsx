@@ -5,8 +5,6 @@ import Gallery from './Gallery'
 import { useState } from 'react'
 
 export default function TemploDetalles({ templo }) {
-  if (!templo) return null;
-  
   const [reservaState, setReservaState] = useState({
     checkIn: '',
     checkOut: '',
@@ -15,6 +13,8 @@ export default function TemploDetalles({ templo }) {
     submitting: false,
     error: null,
   });
+
+  if (!templo) return null;
   
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -253,7 +253,7 @@ export default function TemploDetalles({ templo }) {
                 <button
                   type="submit"
                   disabled={reservaState.submitting}
-                  className="w-full bg-[#6F4C21] text-[#F5DC90] py-3 rounded-lg hover:bg-[#5A3D1A] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-[#6F4C21] text-[#F5DC90] py-3 rounded-lg hover:bg-[#5A3D1A] transition-colors disabled:opacity-50"
                 >
                   {reservaState.submitting ? 'Enviando...' : 'Solicitar reserva'}
                 </button>

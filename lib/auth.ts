@@ -36,6 +36,12 @@ declare module 'next-auth' {
   }
 }
 
+declare module '@auth/core/adapters' {
+  interface AdapterUser {
+    isAdmin: boolean
+  }
+}
+
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 
@@ -48,7 +54,7 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
 })
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma),
+  adapter: PrismaAdapter(prisma) as any, // Type assertion to bypass the type mismatch
   providers: [
     EmailProvider({
       server: {
