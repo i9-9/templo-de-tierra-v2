@@ -1,11 +1,10 @@
 import Hero from './components/Hero'
 import Link from 'next/link'
 import Image from 'next/image'
-import { getAllTemplos } from '@/lib/data'
+import { getAllTemplos } from '@/lib/templos'
 import { Metadata } from 'next'
 import Button from '@/app/components/ui/Button'
 import AnimateOnScroll from '@/app/components/ui/AnimateOnScroll'
-import FloatingActionButton from '@/app/components/ui/FloatingActionButton'
 
 export const metadata: Metadata = {
   title: "Templo de Tierra | Alojamientos Sostenibles en Bioconstrucción",
@@ -25,8 +24,8 @@ export const metadata: Metadata = {
   }
 };
 
-export default function Home() {
-  const templos = getAllTemplos();
+export default async function Home() {
+  const templos = await getAllTemplos();
   // Filtramos los templos destacados (Durga y Shanti)
   const templosDestacados = templos.filter(templo => templo.id === 'durga' || templo.id === 'shanti');
   // Filtramos otros templos para mostrar en formato más simple
@@ -263,13 +262,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-      
-      {/* Floating action button */}
-      <FloatingActionButton 
-        href="/templos" 
-        label="Reservar ahora" 
-        variant="primary" 
-      />
     </main>
   );
 }

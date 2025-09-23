@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server';
-import { getAllTemplos } from '@/lib/data';
+import { getAllTemplos as getAllTemplosFromData } from '@/lib/data.js';
 
 export async function GET() {
   try {
-    const templos = getAllTemplos();
+    console.log('Using local data for templos API');
+    const templos = getAllTemplosFromData();
     return NextResponse.json(templos);
   } catch (error) {
     console.error('Error fetching templos:', error);

@@ -3,7 +3,11 @@
 import { useState } from 'react'
 import Image from 'next/image'
 
-export default function Gallery({ images }) {
+interface GalleryProps {
+  images: string[];
+}
+
+export default function Gallery({ images }: GalleryProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   
   if (!images || images.length === 0) {

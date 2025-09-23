@@ -1,4 +1,4 @@
-import { getAllTemplos } from '@/lib/data'
+import { getAllTemplos } from '@/lib/templos'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -7,8 +7,8 @@ export const metadata = {
   description: 'Descubre nuestros templos de bioconstrucción, cada uno con su propia energía y diseño único, en plena conexión con la naturaleza.',
 }
 
-export default function TemplosPage() {
-  const templos = getAllTemplos();
+export default async function TemplosPage() {
+  const templos = await getAllTemplos();
   
   return (
     <main className="pt-[140px] pb-16 px-[30px]">

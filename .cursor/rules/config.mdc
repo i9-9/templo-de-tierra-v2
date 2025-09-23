@@ -61,6 +61,16 @@ alwaysApply: true
       "performance": {
         "suggestImageOptimization": true,
         "suggestLazyLoading": true
+      },
+      "deployment": {
+        "vercel": {
+          "checkEnvVars": true,
+          "validateBuildSettings": true
+        },
+        "database": {
+          "validateConnectionStrings": true,
+          "checkPooling": true
+        }
       }
     },
     "react": {
@@ -180,6 +190,28 @@ alwaysApply: true
     "accessibility": {
       "checkA11y": true,
       "suggestA11yImprovements": true
+    },
+    "database": {
+      "supabase": {
+        "validateConnectionStrings": true,
+        "checkPooling": true,
+        "suggestPolicies": true
+      },
+      "prisma": {
+        "validateSchema": true,
+        "suggestIndexes": true,
+        "checkRelations": true,
+        "enforcePooling": true
+      }
+    },
+    "auth": {
+      "validateJWT": true,
+      "checkSecurityPractices": true,
+      "suggestBestPractices": true,
+      "nextauth": {
+        "validateConfig": true,
+        "checkCallbacks": true
+      }
     }
   },
   "filePatterns": {
@@ -190,13 +222,16 @@ alwaysApply: true
       "applyRules": ["nextjs.appRouter", "react.components"]
     },
     "schema.prisma": {
-      "applyRules": ["prisma"]
+      "applyRules": ["prisma", "database.supabase"]
     },
     "*.tsx": {
       "applyRules": ["react", "typescript", "accessibility"]
     },
     "*.ts": {
       "applyRules": ["typescript"]
+    },
+    "vercel.json": {
+      "applyRules": ["nextjs.deployment.vercel"]
     }
   },
   "projectSpecific": {

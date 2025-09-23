@@ -1,9 +1,9 @@
 import { MetadataRoute } from 'next';
-import { getAllTemplos } from '@/lib/data';
+import { getAllTemplos } from '@/lib/templos';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://templodetierra.com';
-  const templos = getAllTemplos();
+  const templos = await getAllTemplos();
 
   const routes = [
     '',

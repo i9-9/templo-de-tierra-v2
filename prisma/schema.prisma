@@ -72,10 +72,9 @@ model Templo {
   slug            String     @unique
   descripcion     String
   descripcionCorta String
-  capacidad       Int
-  precio          Decimal    @db.Decimal(10, 2)
+  capacidad       String     // Cambiado a String para coincidir con la DB
   amenities       String[]
-  camas           String[]
+  camas           String     // Cambiado a String para coincidir con la DB
   imagenPrincipal String
   imagenes        String[]
   destacado       Boolean    @default(false)
