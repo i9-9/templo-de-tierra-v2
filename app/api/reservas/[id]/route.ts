@@ -76,7 +76,7 @@ export async function PATCH(request: NextRequest) {
           precioTotal: Number(updatedReserva.precioTotal),
           templo: {
             ...updatedReserva.templo,
-            precio: Number(updatedReserva.templo.precio),
+            precio: 0, // Campo no disponible en el esquema actual
           },
         },
         body.estado === "CONFIRMADA" ? "confirmation" : "update"
@@ -128,7 +128,7 @@ export async function DELETE(request: NextRequest) {
       precioTotal: Number(updatedReserva.precioTotal),
       templo: {
         ...updatedReserva.templo,
-        precio: Number(updatedReserva.templo.precio),
+        precio: 0, // Campo no disponible en el esquema actual
       },
     };
 

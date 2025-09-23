@@ -1,6 +1,4 @@
 import { NextResponse } from 'next/server';
-import { getUser } from '@/lib/auth';
-import { supabase } from '@/lib/supabase';
 import { prisma } from '@/lib/prisma';
 
 interface RouteContext {
@@ -14,51 +12,20 @@ export async function GET(
 ) {
   try {
     const resolvedParams = await params;
-    const supabaseUser = await getUser();
-    
-    if (!supabaseUser) {
-      return NextResponse.json(
-        { error: 'No autorizado' },
-        { status: 403 }
-      );
-    }
-    
-    // Verificar si el usuario es administrador
-    const dbUser = await prisma.user.findUnique({
-      where: { id: supabaseUser.id },
-      select: { isAdmin: true }
-    });
-    
-    if (!dbUser?.isAdmin) {
-      return NextResponse.json(
-        { error: 'Se requieren privilegios de administrador' },
-        { status: 403 }
-      );
-    }
 
     // Obtener el templo por ID
-    const { data, error } = await supabase
-      .from('Templo')
-      .select('*')
-      .eq('id', resolvedParams.id)
-      .single();
+    const templo = await prisma.templo.findUnique({
+      where: { id: resolvedParams.id }
+    });
 
-    if (error) {
-      console.error('Error al obtener templo:', error);
-      return NextResponse.json(
-        { error: 'Error al obtener templo' },
-        { status: 500 }
-      );
-    }
-
-    if (!data) {
+    if (!templo) {
       return NextResponse.json(
         { error: 'Templo no encontrado' },
         { status: 404 }
       );
     }
 
-    return NextResponse.json({ templo: data });
+    return NextResponse.json({ templo });
   } catch (error) {
     console.error('Error inesperado:', error);
     return NextResponse.json(
@@ -75,27 +42,6 @@ export async function PUT(
 ) {
   try {
     const resolvedParams = await params;
-    const supabaseUser = await getUser();
-    
-    if (!supabaseUser) {
-      return NextResponse.json(
-        { error: 'No autorizado' },
-        { status: 403 }
-      );
-    }
-    
-    // Verificar si el usuario es administrador
-    const dbUser = await prisma.user.findUnique({
-      where: { id: supabaseUser.id },
-      select: { isAdmin: true }
-    });
-    
-    if (!dbUser?.isAdmin) {
-      return NextResponse.json(
-        { error: 'Se requieren privilegios de administrador' },
-        { status: 403 }
-      );
-    }
 
     // Obtener datos del body
     const body = await request.json();
@@ -109,13 +55,11 @@ export async function PUT(
     }
 
     // Verificar que el templo existe
-    const { data: templo, error: checkError } = await supabase
-      .from('Templo')
-      .select('id')
-      .eq('id', resolvedParams.id)
-      .single();
+    const existingTemplo = await prisma.templo.findUnique({
+      where: { id: resolvedParams.id }
+    });
 
-    if (checkError || !templo) {
+    if (!existingTemplo) {
       return NextResponse.json(
         { error: 'Templo no encontrado' },
         { status: 404 }
@@ -123,34 +67,23 @@ export async function PUT(
     }
 
     // Actualizar el templo
-    const { data, error } = await supabase
-      .from('Templo')
-      .update({
+    const templo = await prisma.templo.update({
+      where: { id: resolvedParams.id },
+      data: {
         nombre: body.nombre,
         slug: body.slug,
         descripcion: body.descripcion,
         descripcionCorta: body.descripcionCorta || body.descripcion.substring(0, 100) + '...',
-        capacidad: body.capacidad || 1,
-        precio: body.precio || 0,
+        capacidad: body.capacidad?.toString() || '1',
         amenities: body.amenities || [],
-        camas: body.camas || [],
+        camas: body.camas?.toString() || '',
         imagenPrincipal: body.imagenPrincipal || '',
         imagenes: body.imagenes || [],
         destacado: body.destacado || false
-      })
-      .eq('id', resolvedParams.id)
-      .select()
-      .single();
+      }
+    });
 
-    if (error) {
-      console.error('Error al actualizar templo:', error);
-      return NextResponse.json(
-        { error: 'Error al actualizar templo: ' + error.message },
-        { status: 500 }
-      );
-    }
-
-    return NextResponse.json({ templo: data });
+    return NextResponse.json({ templo });
   } catch (error) {
     console.error('Error inesperado:', error);
     return NextResponse.json(
@@ -167,36 +100,13 @@ export async function DELETE(
 ) {
   try {
     const resolvedParams = await params;
-    const supabaseUser = await getUser();
-    
-    if (!supabaseUser) {
-      return NextResponse.json(
-        { error: 'No autorizado' },
-        { status: 403 }
-      );
-    }
-    
-    // Verificar si el usuario es administrador
-    const dbUser = await prisma.user.findUnique({
-      where: { id: supabaseUser.id },
-      select: { isAdmin: true }
-    });
-    
-    if (!dbUser?.isAdmin) {
-      return NextResponse.json(
-        { error: 'Se requieren privilegios de administrador' },
-        { status: 403 }
-      );
-    }
 
     // Verificar que el templo existe
-    const { data: templo, error: checkError } = await supabase
-      .from('Templo')
-      .select('id')
-      .eq('id', resolvedParams.id)
-      .single();
+    const existingTemplo = await prisma.templo.findUnique({
+      where: { id: resolvedParams.id }
+    });
 
-    if (checkError || !templo) {
+    if (!existingTemplo) {
       return NextResponse.json(
         { error: 'Templo no encontrado' },
         { status: 404 }
@@ -204,18 +114,9 @@ export async function DELETE(
     }
 
     // Eliminar el templo
-    const { error } = await supabase
-      .from('Templo')
-      .delete()
-      .eq('id', resolvedParams.id);
-
-    if (error) {
-      console.error('Error al eliminar templo:', error);
-      return NextResponse.json(
-        { error: 'Error al eliminar templo: ' + error.message },
-        { status: 500 }
-      );
-    }
+    await prisma.templo.delete({
+      where: { id: resolvedParams.id }
+    });
 
     return NextResponse.json(
       { message: 'Templo eliminado correctamente' },

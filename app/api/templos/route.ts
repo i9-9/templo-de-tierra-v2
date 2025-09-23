@@ -1,10 +1,11 @@
 import { NextResponse } from 'next/server';
-import { getAllTemplos as getAllTemplosFromData } from '@/lib/data.js';
+import { prisma } from '@/lib/prisma';
 
 export async function GET() {
   try {
-    console.log('Using local data for templos API');
-    const templos = getAllTemplosFromData();
+    const templos = await prisma.templo.findMany({
+      orderBy: { nombre: 'asc' }
+    });
     return NextResponse.json(templos);
   } catch (error) {
     console.error('Error fetching templos:', error);

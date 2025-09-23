@@ -3,8 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { createBrowserClient } from '@supabase/ssr';
-import { uploadImage } from '@/lib/supabase';
+// Image upload will be handled by the API route
 
 interface TemploFormProps {
   templo?: {
@@ -25,10 +24,6 @@ interface TemploFormProps {
 
 export default function TemploForm({ templo }: TemploFormProps) {
   const router = useRouter();
-  const supabase = createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [imageUploading, setImageUploading] = useState(false);
@@ -107,13 +102,28 @@ export default function TemploForm({ templo }: TemploFormProps) {
     setImageUploading(true);
     try {
       const file = e.target.files[0];
-      const url = await uploadImage(file, 'templos', 'imagenes');
       
-      if (url) {
+      // Create FormData for file upload
+      const uploadFormData = new FormData();
+      uploadFormData.append('file', file);
+      
+      // Upload to API route
+      const response = await fetch('/api/upload', {
+        method: 'POST',
+        body: uploadFormData,
+      });
+      
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.error || 'Error al subir la imagen');
+      }
+      
+      if (data.url) {
         if (isPrincipal) {
-          setFormData({ ...formData, imagenPrincipal: url });
+          setFormData({ ...formData, imagenPrincipal: data.url });
         } else {
-          setFormData({ ...formData, imagenes: [...formData.imagenes, url] });
+          setFormData({ ...formData, imagenes: [...formData.imagenes, data.url] });
         }
       }
     } catch (err) {

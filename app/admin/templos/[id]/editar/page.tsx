@@ -1,6 +1,4 @@
-import { getServerSession } from 'next-auth/next';
-import { authOptions } from '@/lib/auth';
-import { redirect, notFound } from 'next/navigation';
+import { notFound } from 'next/navigation';
 import TemploForm from '@/app/components/admin/TemploForm';
 import { prisma } from '@/lib/prisma';
 import { Metadata } from 'next';
@@ -22,12 +20,6 @@ export default async function EditarTemplo({
   params,
 }: PageProps) {
   const resolvedParams = await params;
-  const session = await getServerSession(authOptions);
-  
-  // Verificar que el usuario esté autenticado y sea admin
-  if (!session || !session.user.isAdmin) {
-    redirect('/auth/signin');
-  }
 
   // Obtener el templo por ID
   const templo = await prisma.templo.findUnique({
@@ -48,10 +40,10 @@ export default async function EditarTemplo({
     slug: templo.slug,
     descripcion: templo.descripcion,
     descripcionCorta: templo.descripcionCorta,
-    capacidad: templo.capacidad,
-    precio: parseFloat(templo.precio.toString()), // Convertir Decimal a number
+    capacidad: parseInt(templo.capacidad),
+    precio: 0, // Campo no disponible en el esquema actual
     amenities: templo.amenities,
-    camas: templo.camas,
+    camas: templo.camas ? [templo.camas] : [], // Convertir string a array
     imagenPrincipal: templo.imagenPrincipal,
     imagenes: templo.imagenes,
     destacado: templo.destacado

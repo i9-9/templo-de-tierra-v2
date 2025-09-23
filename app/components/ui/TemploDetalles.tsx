@@ -29,20 +29,28 @@ export default function TemploDetalles({ templo }: TemploDetallesProps) {
     huespedes: 2,
     submitted: false,
     submitting: false,
-    error: null,
+    error: null as string | null,
   });
 
   if (!templo) return null;
   
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setReservaState(prev => ({
       ...prev,
       [name]: value
     }));
   };
+
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setReservaState(prev => ({
+      ...prev,
+      [name]: parseInt(value)
+    }));
+  };
   
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     setReservaState(prev => ({
@@ -108,7 +116,7 @@ export default function TemploDetalles({ templo }: TemploDetallesProps) {
     
     const checkInDate = new Date(reservaState.checkIn);
     const checkOutDate = new Date(reservaState.checkOut);
-    const diffTime = Math.abs(checkOutDate - checkInDate);
+    const diffTime = Math.abs(checkOutDate.getTime() - checkInDate.getTime());
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     
     return diffDays;
@@ -276,7 +284,7 @@ export default function TemploDetalles({ templo }: TemploDetallesProps) {
                   <select
                     name="huespedes"
                     value={reservaState.huespedes}
-                    onChange={handleInputChange}
+                    onChange={handleSelectChange}
                     className="w-full px-4 py-2 border border-[#6F4C21]/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#6F4C21]/20"
                   >
                     {[1, 2, 3, 4].map(num => (

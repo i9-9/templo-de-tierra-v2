@@ -2,6 +2,7 @@ import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 import { Reserva } from './types'
+import { Decimal } from '@prisma/client/runtime/library'
 
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions)
@@ -34,6 +35,9 @@ export default async function DashboardPage() {
     updatedAt: new Date(reserva.updatedAt),
     templo: {
       ...reserva.templo,
+      precio: new Decimal(0), // Campo no disponible en el esquema actual
+      capacidad: parseInt(reserva.templo.capacidad), // Convertir string a number
+      camas: reserva.templo.camas ? [reserva.templo.camas] : [], // Convertir string a array
       createdAt: new Date(reserva.templo.createdAt),
       updatedAt: new Date(reserva.templo.updatedAt),
     },

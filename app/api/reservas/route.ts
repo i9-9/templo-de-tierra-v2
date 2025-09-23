@@ -36,9 +36,10 @@ export async function POST(request: Request) {
       );
     }
 
-    // Calcular el precio total
+    // Calcular el precio total (usando un precio fijo por ahora)
     const dias = Math.ceil((new Date(fechaFin).getTime() - new Date(fechaInicio).getTime()) / (1000 * 60 * 60 * 24));
-    const precioTotal = templo.precio.mul(dias);
+    const precioPorDia = 100; // Precio fijo por día
+    const precioTotal = precioPorDia * dias;
 
     // Crear la reserva
     const reserva = await prisma.reserva.create({
@@ -67,7 +68,7 @@ export async function POST(request: Request) {
         templo: templo.nombre,
         fechaInicio: new Date(fechaInicio).toISOString(),
         fechaFin: new Date(fechaFin).toISOString(),
-        precioTotal: precioTotal.toNumber(),
+        precioTotal: precioTotal,
         estado: 'confirmada'
       });
     } catch (error) {

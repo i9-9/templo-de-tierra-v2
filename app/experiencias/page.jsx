@@ -1,11 +1,10 @@
+'use client'
+
 import { getAllExperiencias } from '@/lib/data'
 import Image from 'next/image'
 import Button from '@/app/components/ui/Button'
 
-export const metadata = {
-  title: 'Experiencias | Templo de Tierra',
-  description: 'Descubre nuestras experiencias de bienestar, yoga, meditación y talleres de bioconstrucción en Templo de Tierra, en plena conexión con la naturaleza.',
-}
+// Metadata moved to layout.tsx or handled differently for client components
 
 export default function ExperienciasPage() {
   const experiencias = getAllExperiencias();
