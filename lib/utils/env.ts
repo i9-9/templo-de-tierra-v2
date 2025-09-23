@@ -4,39 +4,11 @@
  */
 export function validateEnv() {
   const requiredEnvVars = [
-    // Supabase
-    'NEXT_PUBLIC_SUPABASE_URL',
-    'NEXT_PUBLIC_SUPABASE_ANON_KEY',
+    // Database
+    'DATABASE_URL',
 
-    // SMTP
-    'SMTP_HOST',
-    'SMTP_PORT',
-    'SMTP_SECURE',
-    'SMTP_USER',
-    'SMTP_PASSWORD',
-    'SMTP_FROM',
-
-    // NextAuth
-    'NEXTAUTH_URL',
-    'NEXTAUTH_SECRET',
-
-    // Recaptcha
-    'NEXT_PUBLIC_RECAPTCHA_SITE_KEY',
-    'RECAPTCHA_SECRET_KEY',
-
-    // Stripe
-    'STRIPE_SECRET_KEY',
-    'STRIPE_WEBHOOK_SECRET',
-    'STRIPE_PUBLISHABLE_KEY',
-
-    // Cloudinary
-    'CLOUDINARY_CLOUD_NAME',
-    'CLOUDINARY_API_KEY',
-    'CLOUDINARY_API_SECRET',
-
-    // Aplicación
-    'NODE_ENV',
-    'APP_URL'
+    // Aplicación básica
+    'NODE_ENV'
   ];
 
   const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);

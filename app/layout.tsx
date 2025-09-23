@@ -7,12 +7,12 @@ import { WebsiteJsonLd, OrganizationJsonLd } from "./components/JsonLd";
 import { Providers } from "./providers";
 import { defaultMetadata } from "@/app/metadata";
 import SchemaOrg from "@/app/components/SchemaOrg";
-import { validateEnv } from '@/lib/utils/env';
+// import { validateEnv } from '@/lib/utils/env';
 
 const inter = Inter({ subsets: ['latin'] });
 
-// Validar variables de entorno al iniciar
-validateEnv();
+// Validar variables de entorno al iniciar (comentado para build)
+// validateEnv();
 
 export const metadata: Metadata = defaultMetadata;
 
