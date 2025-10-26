@@ -27,11 +27,11 @@
 }
 
 :root {
-  --background: #F5DC90;
+  --background: #FAF5E8;
   --foreground: #171717;
   
   /* Main Colors */
-  --warm-sand: #F5DC90;
+  --warm-sand: #FAF5E8;
   --olive-green: #918E46;
   --earth-brown: #6F4C21;
   
@@ -68,11 +68,11 @@
 
   /* Colors */
   --main-color: #6F4C21;
-  --secondary-color: #F5DC90;
+  --secondary-color: #FAF5E8;
 }
 
 @theme inline {
-  --color-background: #F5DC90;
+  --color-background: #FAF5E8;
   --color-foreground: var(--foreground);
   --font-sans: 'Neue Haas Grotesk', sans-serif;
   --font-mono: var(--font-geist-mono);
@@ -80,7 +80,7 @@
 }
 
 body {
-  background: #F5DC90;
+  background: #FAF5E8;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -171,7 +171,7 @@ body {
 }
 
 .react-datepicker__header {
-  background-color: #F5DC90;
+  background-color: #FAF5E8;
   border-bottom: none;
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;

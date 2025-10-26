@@ -81,7 +81,7 @@ export default async function Home() {
                     </div>
                     
                     {/* Sección de contenido */}
-                    <div className="p-6 bg-[#F5DC90]/40 backdrop-blur-sm flex-grow flex flex-col">
+                    <div className="p-6 bg-gradient-to-br from-[#F5DC90]/20 to-[#F5DC90]/40 backdrop-blur-sm flex-grow flex flex-col">
                       <div className="flex flex-wrap gap-2 mb-3">
                         <span className="inline-block text-xs px-2 py-1 rounded-full bg-[#6F4C21]/10 text-[#6F4C21]">
                           {templo.capacidad}
@@ -146,7 +146,7 @@ export default async function Home() {
                         className="object-cover object-center transition-transform duration-500 ease-in-out group-hover:scale-110"
                       />
                     </div>
-                    <div className="p-3 flex-grow bg-[#F5DC90]/30 backdrop-blur-sm">
+                    <div className="p-3 flex-grow bg-gradient-to-br from-[#F5DC90]/20 to-[#F5DC90]/40 backdrop-blur-sm">
                       <h4 className="font-heading text-[1rem] text-[#6F4C21] leading-tight mb-1">
                         {templo.nombre}
                       </h4>
@@ -177,8 +177,11 @@ export default async function Home() {
       
       {/* CTA Experiencias */}
       <div className="mb-16 px-4 md:px-6 lg:px-8">
-        <div className="bg-[#F5DC90]/20 rounded-xl p-8 md:p-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+        <div className="bg-gradient-to-br from-[#F5DC90]/20 to-[#F5DC90]/40 rounded-xl p-8 md:p-12 relative overflow-hidden">
+          <div className="absolute top-0 left-0 w-24 h-24 bg-[#6F4C21]/5 rounded-full -translate-x-12 -translate-y-12"></div>
+          <div className="absolute bottom-0 right-0 w-32 h-32 bg-[#6F4C21]/5 rounded-full translate-x-16 translate-y-16"></div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch relative z-10">
             <AnimateOnScroll animationClass="fadeRight">
               <div className="relative rounded-lg overflow-hidden shadow-lg aspect-[4/3]">
                 <Image
@@ -195,10 +198,10 @@ export default async function Home() {
             <AnimateOnScroll animationClass="fadeLeft">
               <div className="flex flex-col justify-center space-y-6">
                 <h2 className="text-[1.8rem] md:text-[2.2rem] font-heading text-[#6F4C21]">
-                  Descubre Nuestras Experiencias
+                  Descubrí Nuestras Experiencias
                 </h2>
                 <p className="text-[#6F4C21]/80 text-lg">
-                  Complementa tu estancia con nuestras experiencias diseñadas para conectarte con la naturaleza, 
+                  Complementá tu estadía con nuestras experiencias diseñadas para conectarte con la naturaleza, 
                   contigo mismo y con técnicas ancestrales de construcción sostenible.
                 </p>
                 
@@ -220,7 +223,7 @@ export default async function Home() {
                 <AnimateOnScroll animationClass="fadeUp" delay={0.4}>
                   <div className="pt-4">
                     <Button variant="primary" href="/experiencias">
-                      Explorar experiencias
+                      Explorá experiencias
                     </Button>
                   </div>
                 </AnimateOnScroll>
@@ -239,7 +242,7 @@ export default async function Home() {
           <div className="relative z-10">
             <AnimateOnScroll animationClass="fadeUp">
               <h2 className="text-[1.8rem] md:text-[2.2rem] font-heading text-[#6F4C21] mb-4">
-                ¿Tienes alguna pregunta?
+                ¿Tenés alguna pregunta?
               </h2>
             </AnimateOnScroll>
             

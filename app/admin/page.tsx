@@ -1,42 +1,11 @@
-import { getServerSession } from 'next-auth/next';
-import { authOptions } from '@/lib/auth';
-import { redirect } from 'next/navigation';
 import Link from 'next/link';
-import { prisma } from '@/lib/prisma';
 
 export default async function AdminDashboard() {
-  const session = await getServerSession(authOptions);
-  
-  // Verificar que el usuario esté autenticado y sea admin
-  if (!session || !session.user.isAdmin) {
-    redirect('/auth/signin');
-  }
-
-  // Obtener estadísticas usando Prisma
-  const templosCount = await prisma.templo.count();
-  const reservasCount = await prisma.reserva.count();
-  const usuariosCount = await prisma.user.count();
-
-  // Obtener las últimas reservas
-  const ultimasReservas = await prisma.reserva.findMany({
-    take: 5,
-    orderBy: {
-      createdAt: 'desc'
-    },
-    include: {
-      templo: {
-        select: {
-          nombre: true
-        }
-      },
-      user: {
-        select: {
-          name: true,
-          email: true
-        }
-      }
-    }
-  });
+  // Estadísticas de ejemplo (sin conexión a DB)
+  const templosCount = 0;
+  const reservasCount = 0;
+  const usuariosCount = 0;
+  const ultimasReservas: any[] = [];
 
   return (
     <div className="space-y-6">

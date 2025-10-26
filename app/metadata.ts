@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 
 const defaultTitle = 'Templo de Tierra - Espacios Sagrados para tu Bienestar';
-const defaultDescription = 'Descubre nuestros templos sagrados, espacios diseñados para la meditación, el yoga y el bienestar. Reserva tu experiencia única en un entorno natural y tranquilo.';
+const defaultDescription = 'Descubrí nuestros templos sagrados, espacios diseñados para la meditación, el yoga y el bienestar. Reservá tu experiencia única en un entorno natural y tranquilo.';
 
 export const defaultMetadata: Metadata = {
   title: defaultTitle,

@@ -1,17 +1,6 @@
-import { prisma } from '@/lib/prisma';
-
 export default async function AdminUsuariosPage() {
-  const usuarios = await prisma.user.findMany({
-    orderBy: {
-      email: 'asc',
-    },
-    select: {
-      id: true,
-      email: true,
-      name: true,
-      createdAt: true,
-    },
-  });
+  // Lista vacía de usuarios (sin conexión a DB)
+  const usuarios: any[] = [];
 
   return (
     <div>

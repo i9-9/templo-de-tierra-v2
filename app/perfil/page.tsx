@@ -88,7 +88,7 @@ export default async function PerfilPage() {
                   Tus próximas reservas
                 </h3>
                 <p className="text-[#6F4C21]/70">
-                  No tienes reservas próximas. <Link href="/templos" className="text-[#6F4C21] hover:underline">Explora nuestros templos</Link> para planificar tu próxima visita.
+                  No tenés reservas próximas. <Link href="/templos" className="text-[#6F4C21] hover:underline">Explorá nuestros templos</Link> para planificar tu próxima visita.
                 </p>
               </div>
 
@@ -97,7 +97,7 @@ export default async function PerfilPage() {
                   Tus experiencias favoritas
                 </h3>
                 <p className="text-[#6F4C21]/70">
-                  Aún no has guardado experiencias favoritas. <Link href="/experiencias" className="text-[#6F4C21] hover:underline">Descubre nuestras experiencias</Link> y guárdalas para más tarde.
+                  Aún no has guardado experiencias favoritas. <Link href="/experiencias" className="text-[#6F4C21] hover:underline">Descubrí nuestras experiencias</Link> y guardalas para más tarde.
                 </p>
               </div>
             </div>

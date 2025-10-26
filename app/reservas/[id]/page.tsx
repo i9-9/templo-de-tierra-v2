@@ -51,7 +51,7 @@ export default async function ReservaPage(props: PageProps) {
         <div className="min-h-screen pt-28 px-8">
           <div className="text-center">
             <h1 className="text-2xl font-bold text-[#6F4C21]">Reserva no encontrada</h1>
-            <p className="mt-2 text-[#6F4C21]/80">La reserva que buscas no existe o no tienes acceso a ella.</p>
+            <p className="mt-2 text-[#6F4C21]/80">La reserva que buscás no existe o no tenés acceso a ella.</p>
             <Link
               href="/reservas"
               className="mt-4 inline-flex items-center px-4 py-2 border border-[#6F4C21]/20 text-sm font-medium rounded-md shadow-sm text-[#6F4C21] bg-[#F5DC90] hover:bg-[#F5DC90]/80"

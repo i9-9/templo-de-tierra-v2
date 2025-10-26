@@ -1,6 +1,4 @@
-import { notFound } from 'next/navigation';
 import TemploForm from '@/app/components/admin/TemploForm';
-import { prisma } from '@/lib/prisma';
 import { Metadata } from 'next';
 
 interface PageProps {
@@ -21,32 +19,20 @@ export default async function EditarTemplo({
 }: PageProps) {
   const resolvedParams = await params;
 
-  // Obtener el templo por ID
-  const templo = await prisma.templo.findUnique({
-    where: {
-      id: resolvedParams.id
-    }
-  });
-
-  // Si no existe el templo, mostrar 404
-  if (!templo) {
-    notFound();
-  }
-
-  // Convertir el objeto templo al formato esperado por el formulario
+  // Templo de ejemplo (sin conexión a DB)
   const temploFormateado = {
-    id: templo.id,
-    nombre: templo.nombre,
-    slug: templo.slug,
-    descripcion: templo.descripcion,
-    descripcionCorta: templo.descripcionCorta,
-    capacidad: parseInt(templo.capacidad),
-    precio: 0, // Campo no disponible en el esquema actual
-    amenities: templo.amenities,
-    camas: templo.camas ? [templo.camas] : [], // Convertir string a array
-    imagenPrincipal: templo.imagenPrincipal,
-    imagenes: templo.imagenes,
-    destacado: templo.destacado
+    id: resolvedParams.id,
+    nombre: 'Templo',
+    slug: 'templo',
+    descripcion: 'Descripción del templo',
+    descripcionCorta: 'Descripción corta',
+    capacidad: 2,
+    precio: 0,
+    amenities: [],
+    camas: [],
+    imagenPrincipal: '',
+    imagenes: [],
+    destacado: false
   };
 
   return (

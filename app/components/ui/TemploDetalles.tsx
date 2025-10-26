@@ -145,7 +145,7 @@ export default function TemploDetalles({ templo }: TemploDetallesProps) {
 
 ¡Gracias!`;
 
-    const whatsappUrl = `https://wa.me/5491131032348?text=${encodeURIComponent(mensaje)}`;
+    const whatsappUrl = `https://wa.me/5491140753025?text=${encodeURIComponent(mensaje)}`;
     window.open(whatsappUrl, '_blank');
   };
   
@@ -220,7 +220,7 @@ export default function TemploDetalles({ templo }: TemploDetallesProps) {
       <div className="col-span-12 lg:col-span-4 space-y-6">
         <div className="sticky top-[136px]">
           {reservaState.submitted ? (
-            <div className="p-6 bg-[#F5DC90]/20 rounded-lg border border-[#6F4C21]/20 text-center">
+            <div className="p-6 bg-white rounded-lg border border-[#6F4C21]/20 text-center">
               <h3 className="text-[#6F4C21] font-heading text-2xl mb-4">¡Solicitud Enviada!</h3>
               <p className="text-[#6F4C21] mb-6">
                 Tu solicitud de reserva para {templo.nombre} ha sido recibida. 
@@ -240,7 +240,7 @@ export default function TemploDetalles({ templo }: TemploDetallesProps) {
               </button>
             </div>
           ) : (
-            <div className="p-6 bg-[#F5DC90]/20 rounded-lg border border-[#6F4C21]/20">
+            <div className="p-6 bg-white rounded-lg border border-[#6F4C21]/20">
               <h3 className="text-[#6F4C21] font-heading text-2xl mb-6">Solicitar reserva</h3>
               <form onSubmit={handleSubmit} className="space-y-4">
                 {reservaState.error && (
@@ -329,7 +329,7 @@ export default function TemploDetalles({ templo }: TemploDetallesProps) {
             </div>
           )}
           
-          <div className="mt-8 p-6 bg-[#F5DC90]/10 rounded-lg border border-[#6F4C21]/10">
+          <div className="mt-8 p-6 bg-white rounded-lg border border-[#6F4C21]/10">
             <h3 className="text-[#6F4C21] font-heading text-xl mb-4">Ubicación</h3>
             <div className="aspect-video relative rounded-lg overflow-hidden mb-4">
               <Image 

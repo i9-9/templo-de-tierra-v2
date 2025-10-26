@@ -121,13 +121,13 @@ export default function ReservaWidget({ temploId, temploNombre }) {
 
 ¡Gracias!`;
 
-    const whatsappUrl = `https://wa.me/5491131032348?text=${encodeURIComponent(mensaje)}`;
+    const whatsappUrl = `https://wa.me/5491140753025?text=${encodeURIComponent(mensaje)}`;
     window.open(whatsappUrl, '_blank');
   };
   
   if (reservaState.submitted) {
     return (
-      <div className="p-6 bg-[#F5DC90]/20 rounded-lg border border-[#6F4C21]/20 text-center">
+      <div className="p-6 bg-white rounded-lg border border-[#6F4C21]/20 text-center">
         <h3 className="text-[#6F4C21] font-heading text-2xl mb-4">¡Solicitud Enviada!</h3>
         <p className="text-[#6F4C21] mb-6">
           Tu solicitud de reserva para {temploNombre} ha sido recibida. 
@@ -150,7 +150,7 @@ export default function ReservaWidget({ temploId, temploNombre }) {
   }
   
   return (
-    <div className="p-6 bg-[#F5DC90]/20 rounded-lg border border-[#6F4C21]/20">
+    <div className="p-6 bg-white rounded-lg border border-[#6F4C21]/20">
       <h3 className="text-[#6F4C21] font-heading text-xl mb-4">Consultar disponibilidad</h3>
       
       <form onSubmit={handleSubmit} className="space-y-4">

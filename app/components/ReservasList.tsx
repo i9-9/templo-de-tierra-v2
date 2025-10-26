@@ -96,7 +96,7 @@ export default function ReservasList() {
   if (reservas.length === 0) {
     return (
       <div className="text-center py-8">
-        <p className="text-[#6F4C21]">No tienes reservas aún</p>
+        <p className="text-[#6F4C21]">No tenés reservas aún</p>
       </div>
     );
   }

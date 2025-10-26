@@ -41,7 +41,6 @@ export default function SchemaOrg({ templo, type = 'WebSite' }: SchemaOrgProps) 
           logo: `${baseUrl}/logo/SVG/Asset 1.svg`,
           sameAs: [
             'https://www.instagram.com/templodetierra',
-            'https://www.facebook.com/templodetierra',
           ],
         };
       default:

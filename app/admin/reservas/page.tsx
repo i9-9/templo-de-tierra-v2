@@ -1,17 +1,9 @@
-import { prisma } from '@/lib/prisma';
-import { formatearFecha, formatearPrecio } from '@/lib/utils/reserva';
 import Link from 'next/link';
+import { formatearFecha, formatearPrecio } from '@/lib/utils/reserva';
 
 export default async function AdminReservasPage() {
-  const reservas = await prisma.reserva.findMany({
-    include: {
-      templo: true,
-      user: true,
-    },
-    orderBy: {
-      createdAt: 'desc',
-    },
-  });
+  // Lista vacía de reservas (sin conexión a DB)
+  const reservas: any[] = [];
 
   return (
     <div>

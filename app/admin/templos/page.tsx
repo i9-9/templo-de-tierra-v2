@@ -1,25 +1,10 @@
-import { getServerSession } from 'next-auth/next';
-import { authOptions } from '@/lib/auth';
-import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { prisma } from '@/lib/prisma';
 import { PencilIcon, TrashIcon } from '@heroicons/react/24/outline';
 
 export default async function AdminTemplos() {
-  const session = await getServerSession(authOptions);
-  
-  // Verificar que el usuario esté autenticado y sea admin
-  if (!session || !session.user.isAdmin) {
-    redirect('/auth/signin');
-  }
-
-  // Obtener la lista de templos usando Prisma
-  const templos = await prisma.templo.findMany({
-    orderBy: {
-      createdAt: 'desc'
-    }
-  });
+  // Lista vacía de templos (sin conexión a DB)
+  const templos: any[] = [];
 
   return (
     <div className="space-y-6">

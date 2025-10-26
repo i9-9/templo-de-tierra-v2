@@ -1,30 +1,26 @@
 import { prisma } from '@/lib/prisma';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest, NextResponse } from 'next/server';
 import { enviarEmailReserva } from '@/lib/services/email';
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
+export async function POST(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
   try {
     // Verificar que el usuario es admin
-    const session = await getServerSession(req, res, authOptions);
+    const session = await getServerSession(authOptions);
     if (!session?.user || session.user.email !== 'admin@templodetierra.com') {
-      return res.status(401).json({ error: 'No autorizado' });
+      return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
     }
 
-    const { id } = req.query;
+    const { id } = await params;
 
     // Actualizar el estado de la reserva
     const reserva = await prisma.reserva.update({
-      where: { id: id as string },
-      data: { estado: 'CANCELADA' },
+      where: { id },
+      data: { estado: 'CONFIRMADA' },
       include: {
         templo: true,
         user: true,
@@ -33,7 +29,7 @@ export default async function handler(
 
     // Verificar que el usuario tiene un email antes de enviar la notificación
     if (reserva.user.email) {
-      // Enviar email de cancelación al usuario
+      // Enviar email de confirmación al usuario
       await enviarEmailReserva({
         email: reserva.user.email,
         nombre: reserva.user.name || 'Usuario',
@@ -41,14 +37,21 @@ export default async function handler(
         fechaInicio: reserva.fechaInicio.toISOString(),
         fechaFin: reserva.fechaFin.toISOString(),
         precioTotal: Number(reserva.precioTotal),
-        estado: 'cancelada'
+        estado: 'confirmada'
       });
     }
 
-    // Redirigir al usuario a la página de reservas
-    res.redirect(303, '/admin/reservas');
+    // Retornar respuesta de éxito con redirección
+    return NextResponse.json(
+      { success: true, reserva },
+      { status: 200 }
+    );
   } catch (error) {
-    console.error('Error al cancelar la reserva:', error);
-    res.status(500).json({ error: 'Error al cancelar la reserva' });
+    console.error('Error al confirmar la reserva:', error);
+    return NextResponse.json(
+      { error: 'Error al confirmar la reserva' },
+      { status: 500 }
+    );
   }
-} 
+}
+

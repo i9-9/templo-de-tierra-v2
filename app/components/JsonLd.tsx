@@ -81,8 +81,7 @@ export function OrganizationJsonLd() {
     "url": "https://templodetierra.com",
     "logo": "https://templodetierra.com/logo/SVG/Asset 1.svg",
     "sameAs": [
-      "https://www.instagram.com/templodetierra.uy/",
-      "https://www.facebook.com/templodetierra.uy/"
+      "https://www.instagram.com/templodetierra.uy/"
     ],
     "contactPoint": {
       "@type": "ContactPoint",

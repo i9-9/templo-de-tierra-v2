@@ -1,14 +1,13 @@
 'use client'
 
 import { useState } from 'react'
-import { signUpWithEmail } from '@/lib/auth'
-import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { signIn } from 'next-auth/react'
 
 export default function RegisterForm() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
-  const router = useRouter()
+  const [success, setSuccess] = useState(false)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -17,24 +16,45 @@ export default function RegisterForm() {
 
     const formData = new FormData(e.currentTarget)
     const email = formData.get('email') as string
-    const password = formData.get('password') as string
-    const confirmPassword = formData.get('confirmPassword') as string
-
-    if (password !== confirmPassword) {
-      setError('Las contraseñas no coinciden')
-      setLoading(false)
-      return
-    }
 
     try {
-      await signUpWithEmail(email, password)
-      router.push('/auth/signin?message=Cuenta creada exitosamente. Por favor inicia sesión.')
+      // NextAuth EmailProvider envía un magic link al email
+      const result = await signIn('email', {
+        email,
+        redirect: false,
+        callbackUrl: '/dashboard'
+      })
+
+      if (result?.error) {
+        setError('Error al enviar el email de verificación')
+      } else {
+        setSuccess(true)
+      }
     } catch (err: any) {
       console.error('Error registering:', err)
       setError(err.message || 'Error al crear la cuenta')
     } finally {
       setLoading(false)
     }
+  }
+
+  if (success) {
+    return (
+      <div className="space-y-4">
+        <div className="bg-green-50 text-green-700 p-4 rounded-lg">
+          <p className="font-medium">¡Email enviado!</p>
+          <p className="text-sm mt-1">
+            Revisa tu correo electrónico y haz clic en el enlace de verificación para completar tu registro.
+          </p>
+        </div>
+        <Link 
+          href="/auth/signin"
+          className="block text-center text-sm text-amber-600 hover:text-amber-500"
+        >
+          Volver a iniciar sesión
+        </Link>
+      </div>
+    )
   }
 
   return (
@@ -45,6 +65,10 @@ export default function RegisterForm() {
         </div>
       )}
       
+      <div className="bg-blue-50 text-blue-700 p-3 rounded-lg text-sm mb-4">
+        <p>Ingresa tu email y te enviaremos un enlace mágico para iniciar sesión sin necesidad de contraseña.</p>
+      </div>
+
       <div>
         <label htmlFor="email" className="block text-sm font-medium text-gray-700">
           Email
@@ -55,34 +79,7 @@ export default function RegisterForm() {
           id="email"
           required
           className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500"
-        />
-      </div>
-
-      <div>
-        <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-          Contraseña
-        </label>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          required
-          minLength={6}
-          className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500"
-        />
-      </div>
-
-      <div>
-        <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700">
-          Confirmar Contraseña
-        </label>
-        <input
-          type="password"
-          name="confirmPassword"
-          id="confirmPassword"
-          required
-          minLength={6}
-          className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-amber-500 focus:outline-none focus:ring-1 focus:ring-amber-500"
+          placeholder="tu@email.com"
         />
       </div>
 
@@ -91,7 +88,7 @@ export default function RegisterForm() {
         disabled={loading}
         className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 disabled:opacity-50"
       >
-        {loading ? 'Creando cuenta...' : 'Crear cuenta'}
+        {loading ? 'Enviando...' : 'Enviar enlace de acceso'}
       </button>
 
       <p className="text-sm text-center text-gray-600">

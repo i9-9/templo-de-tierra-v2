@@ -1,0 +1,12 @@
+# Allow all bots to crawl everything
+User-agent: *
+Allow: /
+
+# Disallow private areas
+Disallow: /api/
+Disallow: /admin/
+Disallow: /perfil/
+Disallow: /auth/
+
+# Sitemap location
+Sitemap: https://templodetierra.com/sitemap.xml

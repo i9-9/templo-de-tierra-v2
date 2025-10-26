@@ -6,22 +6,30 @@ import Link from 'next/link'
 
 export default function FloatingButtons() {
   const [isVisible, setIsVisible] = useState(true)
-  const [showReservar, setShowReservar] = useState(false)
+  const [showButtons, setShowButtons] = useState(false)
   const pathname = usePathname()
 
-  // Mostrar botón de reservar en página principal después de scroll
+  // Mostrar botones en página principal después de pasar el hero
   useEffect(() => {
     if (pathname === '/') {
       const handleScroll = () => {
-        if (window.scrollY > 300) {
-          setShowReservar(true)
+        // Calcular altura del hero (ahora ocupa toda la pantalla)
+        const heroHeight = window.innerHeight
+        
+        if (window.scrollY > heroHeight) {
+          setShowButtons(true)
         } else {
-          setShowReservar(false)
+          setShowButtons(false)
         }
       }
 
+      // Inicialmente ocultos en la landing
+      setShowButtons(false)
       window.addEventListener('scroll', handleScroll)
       return () => window.removeEventListener('scroll', handleScroll)
+    } else {
+      // En otras páginas, mostrar siempre
+      setShowButtons(true)
     }
   }, [pathname])
 
@@ -60,26 +68,25 @@ Me gustaría conocer:
 ¡Gracias!`
     }
 
-    const whatsappUrl = `https://wa.me/5491131032348?text=${encodeURIComponent(mensaje)}`
+    const whatsappUrl = `https://wa.me/5491140753025?text=${encodeURIComponent(mensaje)}`
     window.open(whatsappUrl, '_blank')
   }
 
-  if (!isVisible) return null
+  if (!isVisible || !showButtons) return null
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
-      <div className="bg-[#F5DC90]/80 backdrop-blur-sm border border-[#6F4C21]/20 shadow-[0_2px_10px_-3px_rgba(0,0,0,0.1)] rounded-lg p-3 flex items-center space-x-3 transition-all duration-500 ease-in-out">
-        {/* Botón Reservar - solo en página principal con scroll */}
-        {pathname === '/' && showReservar && (
+    <div className="fixed bottom-6 right-6 z-50 animate-fade-up" style={{ animationDuration: '0.5s' }}>
+      <div className="bg-white/95 backdrop-blur-sm border border-[#6F4C21]/20 shadow-[0_2px_10px_-3px_rgba(0,0,0,0.1)] rounded-lg p-3 flex items-center space-x-3 transition-all duration-500 ease-in-out">
+        {/* Botón Reservar - solo en página principal */}
+        {pathname === '/' && (
           <Link
             href="/templos"
-            className="bg-[#6F4C21] hover:bg-[#5A3D1A] text-[#F5DC90] px-4 py-2.5 rounded-lg font-sans text-sm font-medium flex items-center space-x-2 transition-all duration-300 relative group"
+            className="bg-[#6F4C21] hover:bg-[#5A3D1A] text-[#F5DC90] px-4 py-2.5 rounded-lg font-sans text-sm font-medium flex items-center space-x-2 transition-all duration-300"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 002 2v12a2 2 0 002 2z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
             </svg>
             <span>Reservar ahora</span>
-            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#F5DC90] transition-all duration-300 group-hover:w-full"></span>
           </Link>
         )}
 
@@ -97,7 +104,7 @@ Me gustaría conocer:
         {/* Botón Cerrar */}
         <button
           onClick={() => setIsVisible(false)}
-          className="text-[#6F4C21] hover:text-[#5A3D1A] p-2 rounded-lg hover:bg-[#F5DC90]/60 transition-all duration-300 relative group"
+          className="text-[#6F4C21] hover:text-[#5A3D1A] p-2 rounded-lg hover:bg-gray-50 transition-all duration-300 relative group"
           title="Cerrar"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

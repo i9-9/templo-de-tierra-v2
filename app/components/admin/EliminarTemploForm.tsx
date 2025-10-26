@@ -58,7 +58,7 @@ export default function EliminarTemploForm({ id, nombre, tieneReservas }: Elimin
       )}
       
       <div className="bg-red-50 border border-red-200 p-4 rounded">
-        <p className="text-red-700 font-medium">¿Estás seguro de que quieres eliminar este templo?</p>
+        <p className="text-red-700 font-medium">¿Estás seguro de que querés eliminar este templo?</p>
         <p className="text-red-600 mt-1">Esta acción no se puede deshacer.</p>
         
         {tieneReservas && (

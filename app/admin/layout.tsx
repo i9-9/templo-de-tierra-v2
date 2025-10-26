@@ -1,6 +1,3 @@
-import { getServerSession } from 'next-auth/next';
-import { authOptions } from '@/lib/auth';
-import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { UserIcon, HomeIcon, CalendarIcon, UsersIcon, ArrowLeftOnRectangleIcon } from '@heroicons/react/24/outline';
@@ -10,17 +7,15 @@ export default async function AdminLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession(authOptions);
-
-  // Verificar que el usuario esté autenticado
-  if (!session) {
-    redirect('/auth/signin');
-  }
-
-  // Verificar que el usuario sea administrador
-  if (!session.user.isAdmin) {
-    redirect('/');
-  }
+  // Mock session (sin conexión a DB)
+  const session = {
+    user: {
+      name: 'Admin',
+      email: 'admin@templodetierra.com',
+      image: null,
+      isAdmin: true
+    }
+  };
 
   return (
     <div className="flex h-screen bg-gray-100">

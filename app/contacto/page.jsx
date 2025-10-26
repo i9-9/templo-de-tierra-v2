@@ -4,7 +4,7 @@ import Button from '@/app/components/ui/Button'
 
 export const metadata = {
   title: 'Contacto | Templo de Tierra',
-  description: 'Contáctanos para solicitar información sobre nuestros templos, disponibilidad, experiencias o cualquier consulta sobre tu estancia en Templo de Tierra.',
+  description: 'Contáctanos para solicitar información sobre nuestros templos, disponibilidad, experiencias o cualquier consulta sobre tu estadía en Templo de Tierra.',
 }
 
 export default function ContactoPage() {
@@ -17,7 +17,7 @@ export default function ContactoPage() {
           </h1>
           <p className="text-[#6F4C21]/80 text-lg">
             Estamos aquí para responder cualquier pregunta sobre nuestros templos, 
-            disponibilidad, experiencias o para ayudarte a planificar tu estancia.
+            disponibilidad, experiencias o para ayudarte a planificar tu estadía.
           </p>
         </div>
       </div>
@@ -40,7 +40,7 @@ export default function ContactoPage() {
             />
           </div>
           
-          <div className="bg-[#F5DC90]/20 p-6 rounded-lg">
+          <div className="bg-white p-6 rounded-lg shadow-sm border border-[#6F4C21]/10">
             <h2 className="text-[1.563rem] font-heading text-[#6F4C21] mb-4">Información de contacto</h2>
             
             <div className="space-y-4">
@@ -51,7 +51,7 @@ export default function ContactoPage() {
               
               <div>
                 <p className="font-medium text-[#6F4C21]">Teléfono</p>
-                <p className="text-[#6F4C21]/80">+54 9 11 3103-2348</p>
+                <p className="text-[#6F4C21]/80">+54 9 11 4075-3025</p>
               </div>
               
               <div>
@@ -64,7 +64,7 @@ export default function ContactoPage() {
             </div>
           </div>
           
-          <div className="bg-[#F5DC90]/20 p-6 rounded-lg">
+          <div className="bg-white p-6 rounded-lg shadow-sm border border-[#6F4C21]/10">
             <h2 className="text-[1.563rem] font-heading text-[#6F4C21] mb-4">Síguenos</h2>
             
             <div className="flex space-x-4">
@@ -76,7 +76,7 @@ export default function ContactoPage() {
                 </svg>
               </a>
               
-              <a href="https://wa.me/5491131032348" className="p-3 bg-white/50 rounded-full" aria-label="WhatsApp">
+              <a href="https://wa.me/5491140753025" className="p-3 bg-white/50 rounded-full" aria-label="WhatsApp">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#6F4C21]">
                   <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
                 </svg>
@@ -94,16 +94,16 @@ export default function ContactoPage() {
           </h2>
           
           <div className="space-y-6">
-            <div className="bg-[#F5DC90]/10 p-6 rounded-lg">
+            <div className="bg-white p-6 rounded-lg shadow-sm border border-[#6F4C21]/10">
               <h3 className="text-[1.25rem] font-heading text-[#6F4C21] mb-2">¿Cómo puedo llegar a Templo de Tierra?</h3>
               <p className="text-[#6F4C21]/80">
                 Después de confirmar tu reserva, te proporcionaremos instrucciones detalladas sobre cómo llegar. 
-                Estamos ubicados en un hermoso entorno natural. Puedes llegar en transporte 
+                Estamos ubicados en un hermoso entorno natural. Podés llegar en transporte 
                 público o privado desde la ciudad más cercana.
               </p>
             </div>
             
-            <div className="bg-[#F5DC90]/10 p-6 rounded-lg">
+            <div className="bg-white p-6 rounded-lg shadow-sm border border-[#6F4C21]/10">
               <h3 className="text-[1.25rem] font-heading text-[#6F4C21] mb-2">¿Qué debo llevar para mi estancia?</h3>
               <p className="text-[#6F4C21]/80">
                 Recomendamos traer ropa cómoda, repelente de insectos natural, protector solar, sombrero, 
@@ -112,7 +112,7 @@ export default function ContactoPage() {
               </p>
             </div>
             
-            <div className="bg-[#F5DC90]/10 p-6 rounded-lg">
+            <div className="bg-white p-6 rounded-lg shadow-sm border border-[#6F4C21]/10">
               <h3 className="text-[1.25rem] font-heading text-[#6F4C21] mb-2">¿Hay acceso a internet?</h3>
               <p className="text-[#6F4C21]/80">
                 Disponemos de Wi-Fi en áreas comunes, aunque la conexión puede ser limitada debido a nuestra 
@@ -121,7 +121,7 @@ export default function ContactoPage() {
               </p>
             </div>
             
-            <div className="bg-[#F5DC90]/10 p-6 rounded-lg">
+            <div className="bg-white p-6 rounded-lg shadow-sm border border-[#6F4C21]/10">
               <h3 className="text-[1.25rem] font-heading text-[#6F4C21] mb-2">¿Ofrecen alimentación?</h3>
               <p className="text-[#6F4C21]/80">
                 Ofrecemos desayunos opcionales con productos locales y orgánicos. Algunos templos cuentan 

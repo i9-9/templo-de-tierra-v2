@@ -103,7 +103,7 @@ export default function SignInForm() {
             <div className="w-full border-t border-[#6F4C21]/20" />
           </div>
           <div className="relative flex justify-center text-sm">
-            <span className="px-2 bg-[#F5DC90]/30 text-[#6F4C21]/70">¿No tienes cuenta?</span>
+            <span className="px-2 bg-[#F5DC90]/30 text-[#6F4C21]/70">¿No tenés cuenta?</span>
           </div>
         </div>
 

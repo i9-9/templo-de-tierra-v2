@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 export const metadata = {
   title: 'Templos | Templo de Tierra',
-  description: 'Descubre nuestros templos de bioconstrucción, cada uno con su propia energía y diseño único, en plena conexión con la naturaleza.',
+  description: 'Descubrí nuestros templos de bioconstrucción, cada uno con su propia energía y diseño único, en plena conexión con la naturaleza.',
 }
 
 export default async function TemplosPage() {
@@ -14,7 +14,7 @@ export default async function TemplosPage() {
     <main className="pt-[140px] pb-16 px-[30px]">
       {/* Encabezado */}
       <div className="grid grid-cols-12 mb-18">
-        <div className="col-span-12 md:col-span-10 md:col-start-2 lg:col-span-8 lg:col-start-3 text-center">
+        <div className="col-span-12 md:col-span-10 md:col-start-2 lg:col-span-8 lg:col-start-3 text-center mb-10">
           <h1 className="text-[2.5rem] md:text-[3.5rem] font-heading text-[#6F4C21] mb-6">
             Nuestros Templos
           </h1>

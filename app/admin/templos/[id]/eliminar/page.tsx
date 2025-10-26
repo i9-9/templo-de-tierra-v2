@@ -1,7 +1,3 @@
-import { getServerSession } from 'next-auth/next';
-import { authOptions } from '@/lib/auth';
-import { redirect, notFound } from 'next/navigation';
-import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
 import Image from 'next/image';
 import EliminarTemploForm from '@/app/components/admin/EliminarTemploForm';
@@ -14,33 +10,17 @@ export default async function EliminarTemplo({
   params,
 }: PageProps) {
   const resolvedParams = await params;
-  const session = await getServerSession(authOptions);
-  
-  // Verificar que el usuario esté autenticado y sea admin
-  if (!session || !session.user.isAdmin) {
-    redirect('/auth/signin');
-  }
 
-  // Obtener el templo por ID
-  const templo = await prisma.templo.findUnique({
-    where: {
-      id: resolvedParams.id
-    },
-    include: {
-      reservas: {
-        select: {
-          id: true
-        }
-      }
-    }
-  });
+  // Templo de ejemplo (sin conexión a DB)
+  const templo = {
+    id: resolvedParams.id,
+    nombre: 'Templo',
+    slug: 'templo',
+    imagenPrincipal: '',
+    reservas: []
+  };
 
-  // Si no existe el templo, mostrar 404
-  if (!templo) {
-    notFound();
-  }
-
-  const tieneReservas = templo.reservas.length > 0;
+  const tieneReservas = false;
 
   return (
     <div className="space-y-6">
