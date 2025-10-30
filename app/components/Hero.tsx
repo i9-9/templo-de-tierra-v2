@@ -38,18 +38,15 @@ export default function Hero() {
 
         {/* Texto y botones centrados sobre la imagen */}
         <div className="absolute inset-0 flex flex-col items-center justify-center px-4 md:px-8">
-          <div className="text-center space-y-6 max-w-4xl animate-fade-up" style={{ animationDuration: '1s', animationDelay: '0.6s' }}>
-            <div className="space-y-4">
-              <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-[#F5DC90] leading-tight drop-shadow-2xl">
-                Un santuario natural donde la sabiduría ancestral se encuentra con el presente
-              </h1>
-              <p className="font-sans text-base md:text-lg lg:text-xl text-[#F5DC90] drop-shadow-xl flex items-center justify-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-                </svg>
-                <span>Punta del Este, Uruguay</span>
-              </p>
+          <div className="text-center space-y-8 max-w-4xl animate-fade-up" style={{ animationDuration: '1s', animationDelay: '0.6s' }}>
+            <h1 className="font-heading text-3xl md:text-4xl lg:text-5xl xl:text-6xl text-[#F5DC90] leading-tight drop-shadow-2xl" style={{ textShadow: '0px 2px 6px rgba(0,0,0,0.25)' }}>
+              Un santuario natural donde la sabiduría ancestral se encuentra con el presente
+            </h1>
+            <div className="flex items-center justify-center gap-2 text-[#F5DC90] text-base md:text-lg -mt-2 -mb-2" style={{ textShadow: '0px 2px 6px rgba(0,0,0,0.25)' }}>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 md:w-6 md:h-6">
+                <path fillRule="evenodd" d="M11.54 22.35a.75.75 0 0 0 .92 0C14.29 20.95 20.5 16.03 20.5 11a8.5 8.5 0 1 0-17 0c0 5.03 6.21 9.95 8.04 11.35ZM12 13.25a2.25 2.25 0 1 0 0-4.5 2.25 2.25 0 0 0 0 4.5Z" clipRule="evenodd" />
+              </svg>
+              <span>Punta del Este, Uruguay</span>
             </div>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-up" style={{ animationDuration: '1s', animationDelay: '0.8s' }}>

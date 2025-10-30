@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate",
-    "vercel-build": "prisma generate && next build"
+    "vercel-build": "prisma generate && next build",
+    "record:hero": "node scripts/record-hero.js",
+    "record:convert": "ffmpeg -y -i recordings/hero.webm -c:v libx264 -pix_fmt yuv420p -profile:v high -level 4.2 -movflags +faststart recordings/hero.mp4"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.9.0",
@@ -37,6 +39,7 @@
     "prisma": "^5.10.0",
     "tailwindcss": "^3.3.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5"
+    "typescript": "^5",
+    "playwright": "^1.48.0"
   }
 }

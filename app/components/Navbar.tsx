@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import MobileMenu from './MobileMenu'
 import { useState, useEffect } from 'react'
+import { useSession, signOut } from 'next-auth/react'
 
 interface Templo {
   id: string;
@@ -16,7 +17,9 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
   const [showTemplosMenu, setShowTemplosMenu] = useState(false)
+  const [showUserMenu, setShowUserMenu] = useState(false)
   const [templos, setTemplos] = useState<Templo[]>([])
+  const { data: session, status } = useSession()
 
   // Cargar templos al montar el componente
   useEffect(() => {
@@ -50,6 +53,10 @@ export default function Navbar() {
       return () => clearTimeout(timer)
     }
   }, [isOpen])
+
+  const handleSignOut = async () => {
+    await signOut({ redirect: true, callbackUrl: '/' });
+  };
 
   return (
     <nav className="fixed top-4 left-4 right-4 md:left-[30px] md:right-[30px] z-50 py-4 rounded-lg border border-[#6F4C21]/20 shadow-[0_2px_10px_-3px_rgba(0,0,0,0.1)] transition-all duration-500 ease-in-out animate-fade-down bg-[#F5DC90]/70 backdrop-blur-md">
@@ -111,7 +118,7 @@ export default function Navbar() {
                   <Link 
                     key={templo.id}
                     href={`/templos/${templo.slug}`} 
-                    className="block px-4 py-2 text-[#6F4C21] hover:bg-[#F5DC90] transition-colors duration-300"
+                    className="block px-4 py-2 text-[#6F4C21] hover:bg-[#F5DC90]/60 transition-colors duration-300"
                     role="menuitem"
                   >
                     {templo.nombre} ({templo.capacidad})
@@ -120,7 +127,7 @@ export default function Navbar() {
                 <div className="border-t border-[#6F4C21]/20 my-1"></div>
                 <Link 
                   href="/templos" 
-                  className="block px-4 py-2 text-[#6F4C21] hover:bg-[#F5DC90] transition-colors duration-300 font-medium"
+                  className="block px-4 py-2 text-[#6F4C21] hover:bg-[#F5DC90]/60 transition-colors duration-300 font-medium"
                   role="menuitem"
                 >
                   Ver todos los templos
@@ -141,6 +148,60 @@ export default function Navbar() {
               Contacto
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-olive-green transition-all duration-300 group-hover:w-full"></span>
             </Link>
+            {status === 'authenticated' && (
+              <div className="relative group">
+                <button 
+                  className="font-sans text-[1rem] text-[#6F4C21] hover:text-olive-green transition-colors duration-300 flex items-center gap-1 relative group"
+                  onMouseEnter={() => setShowUserMenu(true)}
+                  onMouseLeave={() => setShowUserMenu(false)}
+                  aria-expanded={showUserMenu}
+                  aria-haspopup="true"
+                  aria-label="Menú de usuario"
+                >
+                  {session.user?.name}
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    className={`h-4 w-4 transition-transform duration-300 ${showUserMenu ? 'rotate-180' : ''}`} 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-olive-green transition-all duration-300 group-hover:w-full"></span>
+                </button>
+                <div 
+                  className={`absolute top-full right-0 bg-[#F5DC90]/90 backdrop-blur-md rounded-lg shadow-lg py-2 w-48 transition-all duration-300 ${showUserMenu ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'}`}
+                  onMouseEnter={() => setShowUserMenu(true)}
+                  onMouseLeave={() => setShowUserMenu(false)}
+                  role="menu"
+                  aria-orientation="vertical"
+                >
+                  <Link 
+                    href="/reservas" 
+                    className="block px-4 py-2 text-[#6F4C21] hover:bg-[#F5DC90]/60 transition-colors duration-300"
+                    role="menuitem"
+                  >
+                    Mis reservas
+                  </Link>
+                  <Link 
+                    href="/perfil" 
+                    className="block px-4 py-2 text-[#6F4C21] hover:bg-[#F5DC90]/60 transition-colors duration-300"
+                    role="menuitem"
+                  >
+                    Mi perfil
+                  </Link>
+                  <div className="border-t border-[#6F4C21]/20 my-1"></div>
+                  <button 
+                    onClick={handleSignOut}
+                    className="block w-full text-left px-4 py-2 text-[#6F4C21] hover:bg-[#F5DC90]/60 transition-colors duration-300"
+                    role="menuitem"
+                  >
+                    Cerrar sesión
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
           <button 
             className="lg:hidden text-[#6F4C21] focus:outline-none relative w-6 h-6"

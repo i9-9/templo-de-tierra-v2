@@ -28,7 +28,7 @@ export default function ReservaForm({ temploId, capacidad, nombre }: ReservaForm
   const handleWhatsAppClick = () => {
     setError('');
     if (!startDate || !endDate) {
-      setError('Por favor seleccioná las fechas de tu estadía antes de contactar por WhatsApp');
+      setError('Por favor selecciona las fechas de tu estadía antes de contactar por WhatsApp');
       return;
     }
 
@@ -43,7 +43,7 @@ export default function ReservaForm({ temploId, capacidad, nombre }: ReservaForm
 👥 Huéspedes: ${huespedes} ${huespedes === 1 ? 'persona' : 'personas'}
 👥 Capacidad: ${capacidad || 'No especificada'}
 
-¿Podrían confirmarme la disponibilidad y brindarme más información sobre precios?
+¿Podrían confirmarme la disponibilidad y proporcionarme más información sobre precios?
 
 ¡Gracias!`;
 
@@ -74,7 +74,7 @@ export default function ReservaForm({ temploId, capacidad, nombre }: ReservaForm
             endDate={endDate}
             minDate={new Date()}
             className="w-full px-4 py-4 text-lg border-2 border-earth-brown/20 rounded-lg focus:border-earth-brown focus:ring-0 focus:outline-none transition-colors duration-200 bg-white/80 backdrop-blur-sm"
-            placeholderText="Seleccioná fecha de llegada"
+            placeholderText="Selecciona fecha de llegada"
           />
         </div>
 
@@ -90,7 +90,7 @@ export default function ReservaForm({ temploId, capacidad, nombre }: ReservaForm
             endDate={endDate}
             minDate={startDate || new Date()}
             className="w-full px-4 py-4 text-lg border-2 border-earth-brown/20 rounded-lg focus:border-earth-brown focus:ring-0 focus:outline-none transition-colors duration-200 bg-white/80 backdrop-blur-sm"
-            placeholderText="Seleccioná fecha de salida"
+            placeholderText="Selecciona fecha de salida"
           />
         </div>
 

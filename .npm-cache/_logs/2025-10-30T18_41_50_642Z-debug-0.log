@@ -1,0 +1,226 @@
+0 verbose cli /Users/ivan/.nvm/versions/node/v20.15.0/bin/node /Users/ivan/.nvm/versions/node/v20.15.0/bin/npm
+1 info using npm@10.7.0
+2 info using node@v20.15.0
+3 silly config:load:file:/Users/ivan/.nvm/versions/node/v20.15.0/lib/node_modules/npm/npmrc
+4 silly config:load:file:/Users/ivan/Documents/Codigo/templo-de-tierra-v2/.npmrc
+5 silly config:load:file:/Users/ivan/.npmrc
+6 silly config:load:file:/Users/ivan/.nvm/versions/node/v20.15.0/etc/npmrc
+7 verbose title npm install
+8 verbose argv "install" "--no-audit" "--no-fund"
+9 verbose logfile logs-max:10 dir:/Users/ivan/Documents/Codigo/templo-de-tierra-v2/.npm-cache/_logs/2025-10-30T18_41_50_642Z-
+10 verbose logfile /Users/ivan/Documents/Codigo/templo-de-tierra-v2/.npm-cache/_logs/2025-10-30T18_41_50_642Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly idealTree buildDeps
+13 silly fetch manifest playwright@^1.48.0
+14 verbose shrinkwrap failed to load node_modules/.package-lock.json missing from lockfile: node_modules/@napi-rs/wasm-runtime
+15 http fetch GET 200 https://registry.npmjs.org/npm 276ms
+16 http fetch GET 200 https://registry.npmjs.org/playwright 488ms (cache miss)
+17 silly placeDep ROOT playwright@1.56.1 OK for: templo-de-tierra-v2@0.1.0 want: ^1.48.0
+18 silly fetch manifest playwright-core@1.56.1
+19 silly fetch manifest fsevents@2.3.2
+20 http fetch GET 200 https://registry.npmjs.org/fsevents 56ms (cache miss)
+21 http fetch GET 200 https://registry.npmjs.org/playwright-core 245ms (cache miss)
+22 silly placeDep node_modules/playwright fsevents@2.3.2 OK for: playwright@1.56.1 want: 2.3.2
+23 silly placeDep ROOT playwright-core@1.56.1 OK for: playwright@1.56.1 want: 1.56.1
+24 silly reify mark retired [
+24 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@napi-rs/wasm-runtime'
+24 silly reify ]
+25 silly reify moves {
+25 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@napi-rs/wasm-runtime': '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@napi-rs/.wasm-runtime-tqYBMrpf'
+25 silly reify }
+26 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@unrs/resolver-binding-win32-x64-msvc
+27 silly reify mark deleted [
+27 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@unrs/resolver-binding-win32-x64-msvc'
+27 silly reify ]
+28 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@unrs/resolver-binding-win32-ia32-msvc
+29 silly reify mark deleted [
+29 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@unrs/resolver-binding-win32-ia32-msvc'
+29 silly reify ]
+30 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@unrs/resolver-binding-win32-arm64-msvc
+31 silly reify mark deleted [
+31 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@unrs/resolver-binding-win32-arm64-msvc'
+31 silly reify ]
+32 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@unrs/resolver-binding-wasm32-wasi
+33 silly reify mark deleted [
+33 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@unrs/resolver-binding-wasm32-wasi'
+33 silly reify ]
+34 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@napi-rs/wasm-runtime
+35 silly reify mark deleted [
+35 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@napi-rs/wasm-runtime'
+35 silly reify ]
+36 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@emnapi/core
+37 silly reify mark deleted [
+37 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@emnapi/core'
+37 silly reify ]
+38 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@tybys/wasm-util
+39 silly reify mark deleted [
+39 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@tybys/wasm-util'
+39 silly reify ]
+40 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@emnapi/wasi-threads
+41 silly reify mark deleted [
+41 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@emnapi/wasi-threads'
+41 silly reify ]
+42 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@unrs/resolver-binding-linux-x64-musl
+43 silly reify mark deleted [
+43 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@unrs/resolver-binding-linux-x64-musl'
+43 silly reify ]
+44 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@unrs/resolver-binding-linux-x64-gnu
+45 silly reify mark deleted [
+45 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@unrs/resolver-binding-linux-x64-gnu'
+45 silly reify ]
+46 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@unrs/resolver-binding-linux-s390x-gnu
+47 silly reify mark deleted [
+47 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@unrs/resolver-binding-linux-s390x-gnu'
+47 silly reify ]
+48 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@unrs/resolver-binding-linux-riscv64-gnu
+49 silly reify mark deleted [
+49 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@unrs/resolver-binding-linux-riscv64-gnu'
+49 silly reify ]
+50 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@unrs/resolver-binding-linux-ppc64-gnu
+51 silly reify mark deleted [
+51 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@unrs/resolver-binding-linux-ppc64-gnu'
+51 silly reify ]
+52 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@unrs/resolver-binding-linux-arm64-musl
+53 silly reify mark deleted [
+53 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@unrs/resolver-binding-linux-arm64-musl'
+53 silly reify ]
+54 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@unrs/resolver-binding-linux-arm64-gnu
+55 silly reify mark deleted [
+55 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@unrs/resolver-binding-linux-arm64-gnu'
+55 silly reify ]
+56 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@unrs/resolver-binding-linux-arm-musleabihf
+57 silly reify mark deleted [
+57 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@unrs/resolver-binding-linux-arm-musleabihf'
+57 silly reify ]
+58 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@unrs/resolver-binding-linux-arm-gnueabihf
+59 silly reify mark deleted [
+59 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@unrs/resolver-binding-linux-arm-gnueabihf'
+59 silly reify ]
+60 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@unrs/resolver-binding-freebsd-x64
+61 silly reify mark deleted [
+61 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@unrs/resolver-binding-freebsd-x64'
+61 silly reify ]
+62 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@unrs/resolver-binding-darwin-x64
+63 silly reify mark deleted [
+63 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@unrs/resolver-binding-darwin-x64'
+63 silly reify ]
+64 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@next/swc-win32-x64-msvc
+65 silly reify mark deleted [
+65 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@next/swc-win32-x64-msvc'
+65 silly reify ]
+66 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@next/swc-win32-arm64-msvc
+67 silly reify mark deleted [
+67 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@next/swc-win32-arm64-msvc'
+67 silly reify ]
+68 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@next/swc-linux-x64-musl
+69 silly reify mark deleted [
+69 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@next/swc-linux-x64-musl'
+69 silly reify ]
+70 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@next/swc-linux-x64-gnu
+71 silly reify mark deleted [
+71 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@next/swc-linux-x64-gnu'
+71 silly reify ]
+72 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@next/swc-linux-arm64-musl
+73 silly reify mark deleted [
+73 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@next/swc-linux-arm64-musl'
+73 silly reify ]
+74 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@next/swc-linux-arm64-gnu
+75 silly reify mark deleted [
+75 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@next/swc-linux-arm64-gnu'
+75 silly reify ]
+76 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@next/swc-darwin-x64
+77 silly reify mark deleted [
+77 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@next/swc-darwin-x64'
+77 silly reify ]
+78 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-win32-x64
+79 silly reify mark deleted [
+79 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-win32-x64'
+79 silly reify ]
+80 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-win32-ia32
+81 silly reify mark deleted [
+81 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-win32-ia32'
+81 silly reify ]
+82 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-wasm32
+83 silly reify mark deleted [
+83 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-wasm32'
+83 silly reify ]
+84 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-linuxmusl-x64
+85 silly reify mark deleted [
+85 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-linuxmusl-x64'
+85 silly reify ]
+86 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-linuxmusl-arm64
+87 silly reify mark deleted [
+87 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-linuxmusl-arm64'
+87 silly reify ]
+88 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-linux-x64
+89 silly reify mark deleted [
+89 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-linux-x64'
+89 silly reify ]
+90 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-linux-s390x
+91 silly reify mark deleted [
+91 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-linux-s390x'
+91 silly reify ]
+92 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-linux-arm64
+93 silly reify mark deleted [
+93 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-linux-arm64'
+93 silly reify ]
+94 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-linux-arm
+95 silly reify mark deleted [
+95 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-linux-arm'
+95 silly reify ]
+96 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-libvips-linuxmusl-x64
+97 silly reify mark deleted [
+97 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-libvips-linuxmusl-x64'
+97 silly reify ]
+98 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-libvips-linuxmusl-arm64
+99 silly reify mark deleted [
+99 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-libvips-linuxmusl-arm64'
+99 silly reify ]
+100 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-libvips-linux-x64
+101 silly reify mark deleted [
+101 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-libvips-linux-x64'
+101 silly reify ]
+102 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-libvips-linux-s390x
+103 silly reify mark deleted [
+103 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-libvips-linux-s390x'
+103 silly reify ]
+104 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-libvips-linux-ppc64
+105 silly reify mark deleted [
+105 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-libvips-linux-ppc64'
+105 silly reify ]
+106 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-libvips-linux-arm64
+107 silly reify mark deleted [
+107 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-libvips-linux-arm64'
+107 silly reify ]
+108 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-libvips-linux-arm
+109 silly reify mark deleted [
+109 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-libvips-linux-arm'
+109 silly reify ]
+110 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-libvips-darwin-x64
+111 silly reify mark deleted [
+111 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-libvips-darwin-x64'
+111 silly reify ]
+112 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-darwin-x64
+113 silly reify mark deleted [
+113 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/@img/sharp-darwin-x64'
+113 silly reify ]
+114 silly tarball no local data for playwright-core@https://registry.npmjs.org/playwright-core/-/playwright-core-1.56.1.tgz. Extracting by manifest.
+115 silly tarball no local data for @emnapi/wasi-threads@https://registry.npmjs.org/@emnapi/wasi-threads/-/wasi-threads-1.0.2.tgz. Extracting by manifest.
+116 silly tarball no local data for @emnapi/core@https://registry.npmjs.org/@emnapi/core/-/core-1.4.3.tgz. Extracting by manifest.
+117 silly tarball no local data for @napi-rs/wasm-runtime@https://registry.npmjs.org/@napi-rs/wasm-runtime/-/wasm-runtime-0.2.8.tgz. Extracting by manifest.
+118 silly tarball no local data for fsevents@https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz. Extracting by manifest.
+119 silly tarball no local data for @tybys/wasm-util@https://registry.npmjs.org/@tybys/wasm-util/-/wasm-util-0.9.0.tgz. Extracting by manifest.
+120 silly tarball no local data for playwright@https://registry.npmjs.org/playwright/-/playwright-1.56.1.tgz. Extracting by manifest.
+121 http fetch GET 200 https://registry.npmjs.org/@emnapi/wasi-threads/-/wasi-threads-1.0.2.tgz 91ms (cache miss)
+122 http fetch GET 200 https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz 167ms (cache miss)
+123 http fetch GET 200 https://registry.npmjs.org/@tybys/wasm-util/-/wasm-util-0.9.0.tgz 168ms (cache miss)
+124 http fetch GET 200 https://registry.npmjs.org/@emnapi/core/-/core-1.4.3.tgz 229ms (cache miss)
+125 http fetch GET 200 https://registry.npmjs.org/playwright-core/-/playwright-core-1.56.1.tgz 265ms (cache miss)
+126 http fetch GET 200 https://registry.npmjs.org/playwright/-/playwright-1.56.1.tgz 275ms (cache miss)
+127 http fetch GET 200 https://registry.npmjs.org/@napi-rs/wasm-runtime/-/wasm-runtime-0.2.8.tgz 876ms (cache miss)
+128 info run fsevents@2.3.2 install node_modules/playwright/node_modules/fsevents node-gyp rebuild
+129 info run fsevents@2.3.2 install { code: 1, signal: null }
+130 verbose reify failed optional dependency /Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/playwright/node_modules/fsevents
+131 silly reify mark deleted [
+131 silly reify   '/Users/ivan/Documents/Codigo/templo-de-tierra-v2/node_modules/playwright/node_modules/fsevents'
+131 silly reify ]

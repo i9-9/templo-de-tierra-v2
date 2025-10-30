@@ -81,12 +81,13 @@ Me gustaría conocer:
         {pathname === '/' && (
           <Link
             href="/templos"
-            className="bg-[#6F4C21] hover:bg-[#5A3D1A] text-[#F5DC90] px-4 py-2.5 rounded-lg font-sans text-sm font-medium flex items-center space-x-2 transition-all duration-300"
+            className="bg-[#6F4C21] hover:bg-[#5A3D1A] text-[#F5DC90] px-4 py-2.5 rounded-lg font-sans text-sm font-medium flex items-center space-x-2 transition-all duration-300 relative group"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 002 2v12a2 2 0 002 2z" />
             </svg>
             <span>Reservar ahora</span>
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#F5DC90] transition-all duration-300 group-hover:w-full"></span>
           </Link>
         )}
 

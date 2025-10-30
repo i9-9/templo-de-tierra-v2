@@ -4,7 +4,7 @@ import Button from '@/app/components/ui/Button'
 
 export const metadata = {
   title: 'Contacto | Templo de Tierra',
-  description: 'Contáctanos para solicitar información sobre nuestros templos, disponibilidad, experiencias o cualquier consulta sobre tu estadía en Templo de Tierra.',
+  description: 'Contáctanos para solicitar información sobre nuestros templos, disponibilidad, experiencias o cualquier consulta sobre tu estancia en Templo de Tierra.',
 }
 
 export default function ContactoPage() {
@@ -17,7 +17,7 @@ export default function ContactoPage() {
           </h1>
           <p className="text-[#6F4C21]/80 text-lg">
             Estamos aquí para responder cualquier pregunta sobre nuestros templos, 
-            disponibilidad, experiencias o para ayudarte a planificar tu estadía.
+            disponibilidad, experiencias o para ayudarte a planificar tu estancia.
           </p>
         </div>
       </div>
@@ -98,7 +98,7 @@ export default function ContactoPage() {
               <h3 className="text-[1.25rem] font-heading text-[#6F4C21] mb-2">¿Cómo puedo llegar a Templo de Tierra?</h3>
               <p className="text-[#6F4C21]/80">
                 Después de confirmar tu reserva, te proporcionaremos instrucciones detalladas sobre cómo llegar. 
-                Estamos ubicados en un hermoso entorno natural. Podés llegar en transporte 
+                Estamos ubicados en un hermoso entorno natural. Puedes llegar en transporte 
                 público o privado desde la ciudad más cercana.
               </p>
             </div>

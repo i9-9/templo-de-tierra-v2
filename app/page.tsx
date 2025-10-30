@@ -198,10 +198,10 @@ export default async function Home() {
             <AnimateOnScroll animationClass="fadeLeft">
               <div className="flex flex-col justify-center space-y-6">
                 <h2 className="text-[1.8rem] md:text-[2.2rem] font-heading text-[#6F4C21]">
-                  Descubrí Nuestras Experiencias
+                  Descubre Nuestras Experiencias
                 </h2>
                 <p className="text-[#6F4C21]/80 text-lg">
-                  Complementá tu estadía con nuestras experiencias diseñadas para conectarte con la naturaleza, 
+                  Complementa tu estancia con nuestras experiencias diseñadas para conectarte con la naturaleza, 
                   contigo mismo y con técnicas ancestrales de construcción sostenible.
                 </p>
                 
@@ -223,7 +223,7 @@ export default async function Home() {
                 <AnimateOnScroll animationClass="fadeUp" delay={0.4}>
                   <div className="pt-4">
                     <Button variant="primary" href="/experiencias">
-                      Explorá experiencias
+                      Explorar experiencias
                     </Button>
                   </div>
                 </AnimateOnScroll>
@@ -242,7 +242,7 @@ export default async function Home() {
           <div className="relative z-10">
             <AnimateOnScroll animationClass="fadeUp">
               <h2 className="text-[1.8rem] md:text-[2.2rem] font-heading text-[#6F4C21] mb-4">
-                ¿Tenés alguna pregunta?
+                ¿Tienes alguna pregunta?
               </h2>
             </AnimateOnScroll>
             
