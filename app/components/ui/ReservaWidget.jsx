@@ -109,15 +109,34 @@ export default function ReservaWidget({ temploId, temploNombre }) {
       return;
     }
 
-    const fechaInicio = new Date(reservaState.checkIn).toLocaleDateString('es-ES');
-    const fechaFin = new Date(reservaState.checkOut).toLocaleDateString('es-ES');
+    const checkInDate = new Date(reservaState.checkIn);
+    const checkOutDate = new Date(reservaState.checkOut);
+    
+    const formatFechaCompleta = (date) => {
+      const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+      const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+      const diaSemana = diasSemana[date.getDay()];
+      const dia = date.getDate();
+      const mes = meses[date.getMonth()];
+      const año = date.getFullYear();
+      return `${diaSemana} ${dia} de ${mes} de ${año}`;
+    };
+
+    const fechaInicio = formatFechaCompleta(checkInDate);
+    const fechaFin = formatFechaCompleta(checkOutDate);
+    const fechaInicioCorta = checkInDate.toLocaleDateString('es-ES');
+    const fechaFinCorta = checkOutDate.toLocaleDateString('es-ES');
     
     const mensaje = `¡Hola! Me interesa hacer una reserva en ${temploNombre}.
 
-📅 Fechas: ${fechaInicio} - ${fechaFin} (${noches} ${noches === 1 ? 'noche' : 'noches'})
-👥 Huéspedes: ${reservaState.huespedes} ${reservaState.huespedes === 1 ? 'persona' : 'personas'}
+📅 *Fechas de estadía:*
+• Check-in: ${fechaInicio} (${fechaInicioCorta})
+• Check-out: ${fechaFin} (${fechaFinCorta})
+• Duración: ${noches} ${noches === 1 ? 'noche' : 'noches'}
 
-¿Podrían confirmarme la disponibilidad y proporcionarme más información?
+👥 *Huéspedes:* ${reservaState.huespedes} ${reservaState.huespedes === 1 ? 'persona' : 'personas'}
+
+¿Podrían confirmarme la disponibilidad y proporcionarme más información sobre precios?
 
 ¡Gracias!`;
 

@@ -34,14 +34,30 @@ export default function ReservaForm({ temploId, capacidad, nombre }: ReservaForm
 
     const noches = Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
     
-    const fechaInicio = startDate.toLocaleDateString('es-ES');
-    const fechaFin = endDate.toLocaleDateString('es-ES');
+    const formatFechaCompleta = (date: Date) => {
+      const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+      const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+      const diaSemana = diasSemana[date.getDay()];
+      const dia = date.getDate();
+      const mes = meses[date.getMonth()];
+      const año = date.getFullYear();
+      return `${diaSemana} ${dia} de ${mes} de ${año}`;
+    };
+
+    const fechaInicio = formatFechaCompleta(startDate);
+    const fechaFin = formatFechaCompleta(endDate);
+    const fechaInicioCorta = startDate.toLocaleDateString('es-ES');
+    const fechaFinCorta = endDate.toLocaleDateString('es-ES');
     
     const mensaje = `¡Hola! Me interesa hacer una reserva en ${nombre}.
 
-📅 Fechas: ${fechaInicio} - ${fechaFin} (${noches} ${noches === 1 ? 'noche' : 'noches'})
-👥 Huéspedes: ${huespedes} ${huespedes === 1 ? 'persona' : 'personas'}
-👥 Capacidad: ${capacidad || 'No especificada'}
+📅 *Fechas de estadía:*
+• Check-in: ${fechaInicio} (${fechaInicioCorta})
+• Check-out: ${fechaFin} (${fechaFinCorta})
+• Duración: ${noches} ${noches === 1 ? 'noche' : 'noches'}
+
+👥 *Huéspedes:* ${huespedes} ${huespedes === 1 ? 'persona' : 'personas'}
+🏠 *Capacidad:* ${capacidad || 'No especificada'}
 
 ¿Podrían confirmarme la disponibilidad y proporcionarme más información sobre precios?
 
