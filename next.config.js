@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['localhost'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -10,6 +9,8 @@ const nextConfig = {
     ],
     unoptimized: process.env.NODE_ENV === 'development',
   },
+  // Enable Turbopack (default in Next.js 16)
+  turbopack: {},
   webpack: (config, { isServer }) => {
     if (!isServer) {
       // No intentar resolver estos módulos en el cliente

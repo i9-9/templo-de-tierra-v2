@@ -33,12 +33,6 @@ declare module 'next-auth' {
   }
 }
 
-declare module '@auth/core/adapters' {
-  interface AdapterUser {
-    isAdmin: boolean
-  }
-}
-
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma) as any, // Type assertion to bypass the type mismatch
   providers: [
