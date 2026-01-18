@@ -37,11 +37,11 @@ export default async function Home() {
       {/* Templos Destacados */}
       <section className="w-full py-24 mt-8">
         <AnimateOnScroll animationClass="fadeUp" delay={0}>
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 px-4 md:px-6 lg:px-8">
             <h2 className="text-[2.5rem] font-heading text-[#6F4C21] mb-6">
               Templos Destacados
             </h2>
-            <p className="text-[#6F4C21]/80 text-lg">
+            <p className="text-[#6F4C21]/80 text-lg max-w-3xl mx-auto">
               Cada templo tiene su propia esencia y carácter único, diseñado para proporcionar
               una experiencia inolvidable en armonía con la naturaleza.
             </p>
