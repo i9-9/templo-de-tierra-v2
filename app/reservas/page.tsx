@@ -32,7 +32,7 @@ export default function ReservasPage() {
 
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
             <a
-              href="https://wa.me/5491140753025?text=Hola!%20Quiero%20consultar%20por%20una%20reserva%20en%20Templo%20de%20Tierra"
+              href="https://wa.me/5491131032348?text=Hola!%20Quiero%20consultar%20por%20una%20reserva%20en%20Templo%20de%20Tierra"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-green-600 hover:bg-green-700 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 space-x-3"

@@ -20,7 +20,7 @@ Me gustaría conocer:
 
 ¡Gracias!`;
 
-    const whatsappUrl = `https://wa.me/5491140753025?text=${encodeURIComponent(mensaje)}`;
+    const whatsappUrl = `https://wa.me/5491131032348?text=${encodeURIComponent(mensaje)}`;
     window.open(whatsappUrl, '_blank');
   };
   

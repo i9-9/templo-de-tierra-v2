@@ -1,5 +1,5 @@
 export const contactoData = {
-  telefono: "+54 9 11 4075-3025",
+  telefono: "+54 9 11 3103-2348",
   email: "templodetierra.ashram@gmail.com",
   ubicacion: "Punta del Este, Uruguay",
   ubicacionDetalle: "La ubicación exacta se proporciona después de la reserva",
@@ -11,7 +11,7 @@ export const contactoData = {
     },
     {
       nombre: "WhatsApp",
-      url: "https://wa.me/5491140753025",
+      url: "https://wa.me/5491131032348",
       icono: "whatsapp"
     }
   ]
